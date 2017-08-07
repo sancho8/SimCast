@@ -29,7 +29,7 @@ body textarea:required:valid
 
 //Custom Styles Here
 h1
-  font-family: Gilroy
+  font-family: Gilroy 
   font-size: 36px
   color: $basic-purple
 
@@ -54,14 +54,31 @@ header
   display: table-cell
   vertical-align: middle
   text-align: center;
+  height: 64px
+  line-height: 64px
+  div
+    display: inline
 
 .main-btn-text
   font-family: Helvetica
   color: $basic-brown
   font-size: 16px
 
+.report
+  margin-left: 50px
+  a
+    text-decoration: none
+    color: $basic-purple
+    margin-left: 12px
+    height: 19px
+    width: 49px
+    color: #303030
+    font-family: Helvetica
+    font-size: 16px
+    line-height: 19px
+    font-weight: normal
+
 .score-button 
-  height: 33px
   width: 119px
   outline: none
   border: none
@@ -76,32 +93,74 @@ header
     line-height: 17px
     text-align: center
 
+.button-wrapper 
+  display: table-cell
+  vertical-align: middle
+  margin-left: 58px
+  height: 64px;
+  button
+    height: 33px
+    position: relative
+    top: 16px
+    span
+      position: relative
+      top: -18px
+
 .score-button-lg
   @extend .score-button
   height: 52px
   width: 100%
+  span
+    width: 57px
+    height: 19px
+    font-size: 16px
+    letter-spacing: 1.5px
+
+.save-filters-button
+  @extend .score-button-lg
+  margin-top: 30px
+  height: 40px
+  width: 178px
+  border-radius: 4px
+  background-color: #24C6DD
+  box-shadow: 0 4px 8px 0 rgba(36,198,221,0.32)
+
+.green-button-lg
+  @extend .score-button
+  height: 52px
+  width: 262px
+  border-radius: 4px	
+  background-color: #6BBE7A	
+  box-shadow: 0 4px 8px 0 rgba(107,190,122,0.32)
+
+.notification-box
+  margin-right: 25px
 
 .greeting
-  margin-left: 12px
-  color: $basic-brown	
-  font-family: Helvetica	
-  font-size: 16px	
+  margin-left: 10px
+  height: 19px
+  width: 86px
+  color: #3E3E3E
+  font-family: Helvetica
+  font-size: 16px
   line-height: 19px
-  font-weight: bold
+  font-weight: normal
 
 .container
   padding-top: 132px
 
 .score-form
-  width: 320px
+  width: 318px
   div 
     width: 100%
     padding-top: 32px
     &.text-buttons
       padding-top: 16px
-      color: $basic-blue
       a
+        color: $basic-blue
         text-decoration: none
+        &:hover
+          color: $basic-blue
   input
     -webkit-box-sizing: border-box
     -moz-box-sizing: border-box
@@ -112,13 +171,21 @@ header
     border-radius: 4px
     outline: none
     padding: 16px
+    &:first-of-type
+
+/* START Footer with waves section */
+
+footer
+  position: fixed
+  bottom: 0
+  height: 140px
 
 .wave 
   background: url(../img/wave.svg) repeat-x
   position: absolute;
-  top: 0px
+  bottom: 0px
   width: 6400px
-  height: 198px
+  height: 50%
   animation: wave 20s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite
   transform: translate3d(0, 0, 0)
 
@@ -134,13 +201,107 @@ header
   
   50% 
     transform: translate3d(0,5px,0);
-  
+
+/* END Footer with waves section */
 
 
-footer
-  position: fixed
-  bottom: 0
-  height: 140px
+/* START Modal section */
+.modal 
+    display: none 
+    position: fixed
+    z-index: 1
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    overflow: auto
+    background-color: rgb(0,0,0)
+    background-color: rgba(0,0,0,0.4)
+
+.modal-content
+  height: 343px
+  width: 587px
+  border-radius: 4px
+  background-color: #FFFFFF
+  box-shadow: 0 8px 32px 0 rgba(134,134,134,0.32)
+  margin-left: auto
+  margin-right: auto
+  margin-top: 299px
+  padding: 46px 133px 40px 133px
+  h2
+    height: 52px
+    width: 320px
+    color: #2B3D6B
+    font-family: Helvetica
+    font-size: 18px
+    line-height: 26px
+    text-align: center
+  p
+  	width: 262px
+  	color: #3E3E3E
+  	font-family: Helvetica
+  	font-size: 15px
+  	font-weight: 300
+  	line-height: 21px
+  	text-align: center
+  	margin-left: auto;
+  	margin-right: auto;
+  button
+    margin
+  div
+    margin-left: auto
+    margin-right: auto
+    text-align: center
+
+/* END Modal section */
+
+/* START Advanced filters section */
+
+#advanced-filters
+  display: none
+  margin-top: 30px
+  margin-right: 10px
+  height: 262px
+  width: 352px
+  border-radius: 4px
+  background-color: #FFFFFF
+  box-shadow: 0 8px 24px 0 rgba(134,134,134,0.32)
+  &.higher
+    height: 409px
+  h2
+    color: $basic-purple
+    text-align: center
+    font-family: Helvetica
+    font-size: 24px
+    line-height: 29px
+    font-weight: normal
+  .filters-list
+    ul
+      margin: 0
+      list-style-type: none
+    li 
+      padding-left: 50px
+      a
+        color: #3E3E3E
+        font-size: 15px
+        line-height: 18px
+        text-decoration: none
+	
+
+
+  .control
+    padding-left: 75px
+    span
+      color: #3E3E3E
+      font-size: 15px
+    a
+      text-decoration: none
+    img
+      &.rotated
+        transform: rotate(90deg);
+ 
+
+/* END Advanced filters section */
 
 
 //ALWAYS END

@@ -32,38 +32,39 @@
 
 	<!-- Load CSS Compiled without JS -->
 	<noscript>
+		<link rel="stylesheet" type="text/css" href="fonts/Gilroy/gilroy.css">
 		<link rel="stylesheet" href="css/fonts.min.css">
 		<link rel="stylesheet" href="css/main.min.css">
 	</noscript>
 
 </head>
 
-<body>
+<body ng-app="SimCast" ng-controller="mainController">
 	
 	<header class="navbar nav">
 		<div class="navbar-content">
-			<div class="col-lg-2 col-md-2">
-				<div>
-					<img src="img/icons/speaker-icon.svg" alt="speaker">
-					Report
+			<div class="col-lg-4 col-md-4" style="display: inline;">
+				<div class="report">
+					<img height="23px" width="23px" src="img/icons/speaker-icon.svg" alt="speaker">
+					<a href="">Report</a>
+				</div>
+				<div class="button-wrapper">
+					<button class="score-button">
+						<span>NEW SCORE</span>
+					</button>
 				</div>
 			</div>
-			<div class="col-lg-1 col-md-1">
-				<button class="score-button">
-					<span>NEW SCORE</span>
-				</button>
-			</div>
-			<div class="col-lg-2 col-md-2 col-lg-offset-2 col-md-offset-2">
+			<div class="col-lg-2 col-md-2 col-lg-offset-1 col-md-offset-1">
 				<img src="img/header-logo.svg" alt="logo">
 			</div>
-			<div class="col-lg-1 col-md-1 col-lg-offset-2 col-md-offset-2">
-				<img src="img/icons/speaker-icon.svg" alt="speaker">
-			</div>
-			<div class="col-lg- col-md-2">
+			<div class="col-lg-3 col-md-3 col-lg-offset-2 col-md-offset-2">
+				<div class="notification-box">
+					<img src="img/icons/speaker-icon.svg" alt="speaker">
+				</div>
 				<div>
 					<img height="33px" src="img/user-photo.png" alt="user photo">
 					<span class="greeting">Hello, Dillon</span>
-					<span></span>
+					<span><img height="8px" width="8px" src="img/icons/triangle-icon.svg" alt="dropdown"></span>
 				</div>
 			</div>
 		</div>
@@ -71,12 +72,53 @@
 
 	<div class="container">
 		<div align="center">
+			<h1>Welcome to SimCast 1.0,
+				<br />
+				Dillon Hall
+			</h1>
+		</div>
+
+
+		<div id="advanced-filters" class="col-md-3 col-lg-3" ng-class="{ 'higher' : showFilters}">
 			<div>
-				<h1>Welcome to SimCast 1.0,
-					<br />
-					Dillon Hall
-				</h1>
+				<h2>
+					Advanced filters
+				</h2>
 			</div>
+			<div class="control">
+				<a href="" ng-click="showFilters = !showFilters">
+					<img height="12" width="12" id="filter-btn" src="img/icons/triangle-filters-icon.svg" ng-class="{ 'rotated' : showFilters}" alt="dropdown"> 
+					<span>Data Sources</span>
+				</a>
+			</div>
+			<div class="filters-list" ng-show="showFilters">
+				<ul>
+					<li ng-repeat="source in dataSources" ng-click="checked = !checked" ng-init="checked=true">
+						<img height="12" width="12" ng-show="checked"
+						src="img/icons/check-enabled-icon.svg" alt="dropdown">
+						<img height="12" width="12" ng-show="!checked"
+						src="img/icons/check-disabled-icon.svg" alt="dropdown">
+						<a href="">{{source}}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="control">
+				<a href="" ng-click="savedFilters = !savedFilters">
+					<img height="12" width="12" ng-show="savedFilters"
+					src="img/icons/radio-enabled-icon.svg" alt="dropdown">
+					<img height="12" width="12" ng-show="!savedFilters"
+					src="img/icons/radio-disabled-icon.svg" alt="dropdown">
+					<span>Save Search</span>
+				</a> 
+			</div>
+			<div align="center">
+				<button class="save-filters-button" ng-click="saveAndHideAdvancedFilters()">
+					<span>SAVE</span>
+				</button>
+			</div>
+		</div>
+
+		<div align="center">
 			<div class="score-form">
 				<div>
 					<input type="text" name="UPCCode" placeholder="UPC Code">
@@ -85,23 +127,49 @@
 					<input type="text" name="ProductCompany" placeholder="Product Company">
 				</div>
 				<div>
-					<button class="score-button-lg">
+					<button id="openModalBtn" class="score-button-lg">
 						<span>SCORE</span>
 					</button>
 				</div>
 				<div class="text-buttons">
-					<a href="" style="float:left">Advanced filters</a>
-					<a href style="float:right">Saved searches</a>
+					<a href="" ng-click="showAdvancedFilters()" style="float:left">Advanced filters</a>
+					<a href="" style="float:right">Saved searches</a>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<footer>
-		<div class="wave"></div>
-	</footer>
+<footer>
+	<div class="wave"></div>
+</footer>
 
-	<div class="hidden"></div>
+<div id="firstLaunchModal" class="modal">
+
+	<!-- Modal content -->
+	<div class="modal-content">
+		<div>
+			<img src="img/header-logo.svg" alt="logo">
+		</div>
+		<h2>
+			Welcome to SimCast 1.0!
+			We’re glad to have you on board, Dillon.
+		</h2>
+		<p>
+			This is a beta version of our web-app. 
+			Let us know of any rough waters so we can fix the issue asap.
+		</p>
+		<div>
+			<button id="closeModalBtn" class="green-button-lg">
+				<span>I'M READY</span>
+			</button>
+		</div>
+	</div>
+
+</div>
+
+<div class="hidden">
+</div>
 
 	<!--[if lt IE 9]>
 	<script src="libs/html5shiv/es5-shim.min.js"></script>
@@ -111,6 +179,9 @@
 	<![endif]-->
 
 	<!-- Load Scripts Start -->
+	<script type="text/javascript" src="js/animationController.js"></script>
+	<script src="js/angular/angular.min.js"></script>
+	<script type="text/javascript" src="js/mainController.js"></script>
 	<script>var scr = {"scripts":[
 		{"src" : "js/libs.js", "async" : false},
 		{"src" : "js/common.js", "async" : false}
