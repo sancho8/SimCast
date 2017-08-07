@@ -32,6 +32,7 @@ h1
   font-family: Gilroy 
   font-size: 36px
   color: $basic-purple
+  position:relative
 
 h2
   font-family: Helvetica, Bold
@@ -50,6 +51,10 @@ header
   position: absolute
   width: 100%
 
+.heading
+  z-index: -1
+  position: relative
+
 .navbar-content
   display: table-cell
   vertical-align: middle
@@ -66,10 +71,11 @@ header
 
 .report
   margin-left: 50px
+  span
+     margin-left: 12px
   a
     text-decoration: none
     color: $basic-purple
-    margin-left: 12px
     height: 19px
     width: 49px
     color: #303030
@@ -135,6 +141,10 @@ header
 
 .notification-box
   margin-right: 25px
+
+.user-box
+  a
+    text-decoration: none
 
 .greeting
   margin-left: 10px
@@ -205,7 +215,7 @@ footer
 /* END Footer with waves section */
 
 
-/* START Modal section */
+/* START First Login Modal section */
 .modal 
     display: none 
     position: fixed
@@ -253,7 +263,7 @@ footer
     margin-right: auto
     text-align: center
 
-/* END Modal section */
+/* END First Login Modal section */
 
 /* START Advanced filters section */
 
@@ -302,6 +312,104 @@ footer
  
 
 /* END Advanced filters section */
+
+
+/* START User box section */
+
+#UserDropdownModal
+  position: fixed
+  top: 80px
+  right: 60px
+  height: 84px
+  width: 135px
+  border-radius: 4px
+  background-color: #FFFFFF
+  box-shadow: 0 4px 10px 0 rgba(134,134,134,0.32)
+  div
+    height: 42px
+    text-align: center
+    a 
+      color: #3E3E3E
+      font-family: Helvetica
+      font-size: 15px
+      line-height: 42px
+      text-decoration: none
+    &:hover
+      background-color: #CCFCD6
+
+.user-box
+  img
+    &.rotated
+      transform: rotate(180deg)
+
+
+/* END User box section */
+
+/* START Report modal section */
+
+#ReportModal
+  position: fixed
+  top: 80px
+  left: 40px
+  height: 289px
+  width: 380px
+  border-radius: 4px
+  background-color: #FFFFFF
+  box-shadow: 0 4px 10px 0 rgba(134,134,134,0.32)
+  div
+    text-align: center
+    padding-top: 32px
+    padding-bottom: 24px
+    color: #2B3D6B
+    font-size: 24px
+    line-height: 29px
+  textarea
+    margin-left: 32px
+    margin-right: 32px
+    height: 116px
+    width: 316px 
+    border: 1px solid #D9DEE5
+    border-radius: 4px
+    overflow-y: scroll
+    padding: 10px
+    outline: none
+    resize: none
+  button
+    float: right
+    margin-right: 32px
+    margin-top: 16px
+    width: 126px
+    height: 40px
+
+
+/* END Report modal section */
+
+/* START Notification modal section */
+
+#NotificationModal
+  position: absolute
+  top: 70px
+  right: 200px
+  width: 324px
+  border-radius: 4px
+  box-shadow: 0 4px 10px 0 rgba(134,134,134,0.32)
+  div
+    display: inline
+  .notification-image
+    padding: 16px
+    width: 24px
+    height: 24px
+  .notification-content
+    position: relative
+    
+  &>div
+    width: 324px
+    background: #FFFFFF
+    &:hover
+      background: #CCFCD6
+
+
+/* END Notification modal section */
 
 
 //ALWAYS END
