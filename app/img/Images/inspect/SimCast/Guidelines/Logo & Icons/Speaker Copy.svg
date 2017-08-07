@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>Speaker Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Guidelines" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Logo-&amp;-Icons" transform="translate(-541.000000, -831.000000)" stroke="#DCDCDC" fill-rule="nonzero" fill="#DCDCDC">
+            <g id="Speaker-Copy" transform="translate(542.000000, 832.000000)">
+                <path d="M23.8421053,0.157894737 C18.7648421,5.23484211 12.1105263,7.77 5.45778947,7.77 L4.38663158,7.77 C2.05168421,7.77 0.157894737,9.66410526 0.157894737,12 C0.157894737,14.3355789 2.05136842,16.2287368 4.38663158,16.2287368 L5.46884211,16.2287368 C12.6438947,16.2287368 19.14,19.14 23.8421053,23.8421053 L23.8421053,0.157894737 Z" id="Shape"></path>
+                <path d="M5.65578947,16.2341053 L5.65578947,22.5732632 C5.65578947,23.274 6.22326316,23.8421053 6.924,23.8421053 C7.62473684,23.8421053 8.19252632,23.274 8.19252632,22.5732632 L8.19378947,22.5732632 L8.19378947,16.3724211 C7.35884211,16.2852632 6.51157895,16.2397895 5.65578947,16.2341053 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

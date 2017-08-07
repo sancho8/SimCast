@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>Check Black@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Guidelines" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-824.000000, -2478.000000)" id="Check-Black" fill="#3E3E3E">
+            <path d="M834.666667,2479.33333 L834.666667,2488.66667 L825.333333,2488.66667 L825.333333,2479.33333 L834.666667,2479.33333 L834.666667,2479.33333 Z M834.666667,2478 L825.333333,2478 C824.6,2478 824,2478.6 824,2479.33333 L824,2488.66667 C824,2489.4 824.6,2490 825.333333,2490 L834.666667,2490 C835.4,2490 836,2489.4 836,2488.66667 L836,2479.33333 C836,2478.6 835.4,2478 834.666667,2478 L834.666667,2478 L834.666667,2478 Z"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>Dropdown Data Sources hover@1x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Guidelines" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.64">
+        <g id="Logo-&amp;-Icons" transform="translate(-542.000000, -1011.000000)" fill="#24C6DD">
+            <g id="Data-Sources-Hover" transform="translate(542.000000, 1007.000000)">
+                <path d="M5.58639055,15.7229253 L0.0423167462,4.63477773 L0.0423167462,4.63477773 C-0.0564789533,4.43718633 0.0236107855,4.19691712 0.221202184,4.09812142 C0.276744358,4.07035033 0.337989585,4.05589229 0.400087623,4.05589229 L11.4882352,4.05589229 L11.4882352,4.05589229 C11.7091491,4.05589229 11.8882352,4.23497839 11.8882352,4.45589229 C11.8882352,4.51799033 11.8737772,4.57923556 11.8460061,4.63477773 L6.3019323,15.7229253 L6.3019323,15.7229253 C6.2031366,15.9205167 5.96286738,16.0006065 5.76527599,15.9018108 C5.68786502,15.8631053 5.62509603,15.8003363 5.58639055,15.7229253 Z" id="Dropdown-Data-Sources-hover" transform="translate(5.944118, 10.000010) rotate(-90.000000) translate(-5.944118, -10.000010) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -5,19 +5,19 @@
 @import "app/libs/animate/animate.sass"
 
 *::-webkit-input-placeholder
-	color: #666
+	color: #AAADB3;
 	opacity: 1
 
 *:-moz-placeholder
-	color: #666
+	color: #AAADB3
 	opacity: 1
 
 *::-moz-placeholder
-	color: #666
+	color: #AAADB3
 	opacity: 1
 
 *:-ms-input-placeholder
-	color: #666
+	color: #AAADB3
 	opacity: 1
 
 body input:focus:required:invalid,
@@ -28,6 +28,119 @@ body textarea:required:valid
 	color: #666
 
 //Custom Styles Here
+h1
+  font-family: Gilroy
+  font-size: 36px
+  color: $basic-purple
+
+h2
+  font-family: Helvetica, Bold
+  font-size: 20px
+  color: $basic-brown
+
+h3 
+  font-family: Helvetica, Regular
+  font-size: 24px
+  color: $basic-white
+
+header
+  height: 64px
+  box-shadow: 0 2px 6px 0 rgba(134,134,134,0.32)
+  display: table
+  position: absolute
+  width: 100%
+
+.navbar-content
+  display: table-cell
+  vertical-align: middle
+  text-align: center;
+
+.main-btn-text
+  font-family: Helvetica
+  color: $basic-brown
+  font-size: 16px
+
+.score-button 
+  height: 33px
+  width: 119px
+  outline: none
+  border: none
+  border-radius: 4px	
+  background-color: #3D95E9	
+  box-shadow: 0 4px 8px 0 rgba(61,149,233,0.32)
+  span
+    color: #FFFFFF	
+    font-family: Helvetica	
+    font-size: 14px
+    font-weight: bold
+    line-height: 17px
+    text-align: center
+
+.score-button-lg
+  @extend .score-button
+  height: 52px
+  width: 100%
+
+.greeting
+  margin-left: 12px
+  color: $basic-brown	
+  font-family: Helvetica	
+  font-size: 16px	
+  line-height: 19px
+  font-weight: bold
+
+.container
+  padding-top: 132px
+
+.score-form
+  width: 320px
+  div 
+    width: 100%
+    padding-top: 32px
+    &.text-buttons
+      padding-top: 16px
+      color: $basic-blue
+      a
+        text-decoration: none
+  input
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+    width: 100%
+    height: 52px
+    border: 1px solid #D9DEE5
+    border-radius: 4px
+    outline: none
+    padding: 16px
+
+.wave 
+  background: url(../img/wave.svg) repeat-x
+  position: absolute;
+  top: 0px
+  width: 6400px
+  height: 198px
+  animation: wave 20s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite
+  transform: translate3d(0, 0, 0)
+
+@keyframes wave 
+  0% 
+    margin-left: 0;
+  100% 
+    margin-left: -1600px;
+
+@keyframes swell 
+  0%, 100% 
+    transform: translate3d(0,-25px,0);
+  
+  50% 
+    transform: translate3d(0,5px,0);
+  
+
+
+footer
+  position: fixed
+  bottom: 0
+  height: 140px
 
 
 //ALWAYS END
