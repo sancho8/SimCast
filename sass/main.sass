@@ -141,6 +141,8 @@ header
 
 .notification-box
   margin-right: 25px
+  a
+    text-decoration: none
 
 .user-box
   a
@@ -387,26 +389,33 @@ footer
 /* START Notification modal section */
 
 #NotificationModal
-  position: absolute
+  position: fixed
   top: 70px
   right: 200px
   width: 324px
   border-radius: 4px
   box-shadow: 0 4px 10px 0 rgba(134,134,134,0.32)
-  div
-    display: inline
-  .notification-image
-    padding: 16px
-    width: 24px
-    height: 24px
-  .notification-content
-    position: relative
-    
-  &>div
+  background: #ffffff
+  .notification-wave
     width: 324px
-    background: #FFFFFF
-    &:hover
-      background: #CCFCD6
+    padding-bottom: 16px
+    display: block
+    text-align: center
+  .notification-content
+      font-size: 15px
+      padding: 16px
+      color: #3E3E3E;
+      div
+        padding: 0 !important
+      img
+        width: 24px
+        height: 24px
+        margin-left: 16px
+      .signing
+        font-size: 12px
+        color: #8F8F8F;
+      &:hover
+        background-color: #CCFCD6;
 
 
 /* END Notification modal section */

@@ -3,7 +3,7 @@ var app = angular.module("SimCast", [])
 	$scope.dataSources = ["Amazon", "Best Buy", "Facebook", "Pinterest", "Walmart", "YouTube"];
 	$scope.notifications = [
 	{
-		content: "You get an upgrade",
+		content: "You get an upgrade!",
 		author: "SimCast Crew",
 		time: "12h"
 	},
@@ -13,12 +13,12 @@ var app = angular.module("SimCast", [])
 		time: "12h"
 	}];
 	$scope.showAdvancedFilters = function(){
-		$("#advanced-filters").fadeIn('fast', function() {
+		$("#advanced-filters").fadeIn('400', function() {
 			
 		});
 	};
 	$scope.saveAndHideAdvancedFilters = function(){
-		$("#advanced-filters").fadeOut('fast', function() {
+		$("#advanced-filters").fadeOut('400', function() {
 		});
 	}
 });
