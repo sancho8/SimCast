@@ -281,7 +281,7 @@ footer
 .modal-first
     display: none 
     position: fixed 
-    height: 100vh
+    height: 100vh !important
     z-index: 1
     height: 100%
     left: 0
@@ -502,13 +502,16 @@ footer
       animation: btnHover 0.2s 
       transform: translate3d(0, 0, 0)
       margin-top: -3px
-    
+
+#deleteSelectedSearchesModal
+  @extend #deleteAllSearchesModal   
 
 .modal, .modal-backdrop
     position: absolute !important
 
 #savedSearchesModal
   position: fixed
+  display: none
   top: 320px
   left: 50%
   margin-left: -398px; /* Half of the width */
@@ -537,13 +540,13 @@ footer
         border-radius: 4px
         outline: none
         color: #FFFFFF;
-        text-indent: 30px
+        text-indent: 10px
         background-color: #24C6DD
         padding-left: 36px
         font-size: 14px
       img
         position: absolute
-        left: 50px
+        left: 30px
         top: 6px
     .toolbar-heading
       margin-left: 55px
@@ -561,14 +564,20 @@ footer
         text-decoration: none
         outline: none
       img
-       position: absolute
-       top: 21px
-       left: 670px
+        margin-bottom: 4px
     div
       display: inline
   #saved-searches-table
     height: 358px !important
     overflow-y: scroll
+    .no-elements
+      color: #3E3E3E
+      position: absolute
+      font-weight: bold
+      font-size: 20px
+      text-align: center
+      top: 200px
+      left: 240px
     table
       thead
         tr
@@ -584,6 +593,7 @@ footer
           font-weight: bold
           line-height: 17px
           text-decoration: none
+          line-height: 32px
         img
           padding-left: 5px
           &.inverted
@@ -606,6 +616,9 @@ footer
             background-color: #24C6DD !important
             color: #FFFFFF
         td
+          img
+            padding-left: 5px
+            padding-top: 15px
           font-family: Helvetica
           font-size: 15px
           line-height: 18px

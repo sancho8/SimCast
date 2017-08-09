@@ -141,7 +141,7 @@
 				</div>
 				<div class="text-buttons">
 					<a href="" ng-click="showAdvancedFilters()" style="float:left">Advanced filters</a>
-					<a href="" ng-click="showSavedSearchesModal = !showSavedSearchesModal" style="float:right">Saved searches</a>
+					<a href="" ng-click="showSavedSearches()" style="float:right">Saved searches</a>
 				</div>
 			</div>
 		</div>
@@ -219,24 +219,27 @@
 
 </div>
 
-<div id="savedSearchesModal" ng-init="showSavedSearchesModal = true" ng-show="showSavedSearchesModal">
+<div id="savedSearchesModal">
 
 	<div class="toolbar">
-		<div class="exit" ng-click="showSavedSearchesModal = !showSavedSearchesModal">
+		<div class="exit" ng-click="hideSavedSearches()">
 			<a href=""><img src="img/icons/cross-icon.svg" alt="close"></a>
 		</div>
 		<div class="search">
-			<input type="text" value="search" onclick="this.value = '';"">
+			<input type="text" ng-model="searchProp" value="search" onclick="this.value = '';"">
 			<img src="img/icons/search-icon.svg" alt="search">
 		</div>
 		<div>
 			<span class="toolbar-heading">Saved Searches</span>
 		</div>
 		<div class="delete">
-			<a href="" id="deleteAllSearchesModalBtn" ng-click="allSelected = true" data-toggle="modal" data-target="#deleteAllSearchesModal">
+			<a ng-show="!isSearchesSelected" href="" id="deleteAllSearchesModalBtn" ng-click="allSelected = true" data-toggle="modal" data-target="#deleteAllSearchesModal">
 				<img src="img/icons/delete-icon.svg" alt="delete">
 				<span>Delete all</span>
-				<span ng-show="selectedOne">Delete all</span>
+			</a>
+			<a ng-show="isSearchesSelected" href="" id="deleteAllSearchesModalBtn" data-toggle="modal" data-target="#deleteSelectedSearchesModal">
+				<img src="img/icons/delete-icon.svg" alt="delete">
+				<span>Delete selected elements</span>
 			</a>
 		</div>
 	</div>
@@ -311,7 +314,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="s in savedSearches | orderBy : searchProp" ng-click="selected = !selected" ng-class="{ 'selected' : selected || allSelected}">
+					<tr ng-if="savedSearches.length == 0" ng-repeat="i in getNumber(5) track by $index">
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<span class="no-elements" ng-if="savedSearches.length == 0">
+						You don't have any saved searches.
+					</span>
+					<tr ng-repeat="s in savedSearches | orderBy : searchProp | filter : searchProp" ng-click="selected = !selected; checkSelectedSearches(selected, s)" ng-class="{ 'selected' : selected || allSelected}">
 						<td class="checkbox">
 							<a href="">
 								<img ng-show="selected || allSelected" src="img/icons/check-enabled-white-icon.svg" alt="checked">
@@ -338,7 +351,24 @@
 							<p>Are you sure you want to delete all searches?</p>
 						</div>
 						<div >
-							<button ng-click="allSelected = false" type="button" class="btn delete" data-dismiss="modal">Delete</button>
+							<button ng-click="allSelected = false;savedSearches=''" type="button" class="btn delete" data-dismiss="modal">Delete</button>
+							<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="deleteSelectedSearchesModal" role="dialog">
+			<div class="modal-dialog ">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="content-holder">
+						<div class="question">
+							<p>Are you sure you want to delete these searches?</p>
+						</div>
+						<div >
+							<button ng-click="deleteSelectedSearches()" type="button" class="btn delete" data-dismiss="modal">Delete</button>
 							<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
 						</div>
 					</div>

@@ -27,4 +27,8 @@ $(document).ready(function(){
           $('body').css("padding-right","");     
       });
  
+ 	/*$("body").on("focusleave","#searchInput", function(){
+ 		alert("css");
+ 		$("#searchInput").value("search");
+ 	})*/
 });
