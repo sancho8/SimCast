@@ -226,7 +226,7 @@
 			<a href=""><img src="img/icons/cross-icon.svg" alt="close"></a>
 		</div>
 		<div class="search">
-			<input type="text" ng-model="searchProp" value="search" onclick="this.value = '';"">
+			<input type="text" ng-model="findProp" value="search" onclick="this.value = '';"">
 			<img src="img/icons/search-icon.svg" alt="search">
 		</div>
 		<div>
@@ -324,7 +324,7 @@
 					<span class="no-elements" ng-if="savedSearches.length == 0">
 						You don't have any saved searches.
 					</span>
-					<tr ng-repeat="s in savedSearches | orderBy : searchProp | filter : searchProp" ng-click="selected = !selected; checkSelectedSearches(selected, s)" ng-class="{ 'selected' : selected || allSelected}">
+					<tr ng-repeat="s in savedSearches | orderBy : searchProp | filter : findProp" ng-click="selected = !selected; checkSelectedSearches(selected, s)" ng-class="{ 'selected' : selected || allSelected}">
 						<td class="checkbox">
 							<a href="">
 								<img ng-show="selected || allSelected" src="img/icons/check-enabled-white-icon.svg" alt="checked">
