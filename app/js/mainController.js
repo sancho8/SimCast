@@ -57,6 +57,24 @@ var app = angular.module("SimCast", [])
 		}
 	};
 
+	$scope.showSettings = function(){
+		$("#mainPage").fadeOut('slow', function() {
+			
+		});
+		$("#settingsPage").fadeIn('slow', function() {
+			
+		});
+	}
+
+	$scope.showMainPage = function(){
+		$("#settingsPage").fadeOut('slow', function() {
+			
+		});
+		$("#mainPage").fadeIn('slow', function() {
+			
+		});
+	}
+
 	$scope.deleteSelectedSearches = function(){
 		$scope.savedSearches = $scope.savedSearches.filter(function(e){
 			return this.indexOf(e)<0;

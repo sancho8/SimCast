@@ -32,6 +32,7 @@ h1
   font-family: Gilroy 
   font-size: 36px
   color: $basic-purple
+  font-weight: bold
   position:relative
 
 h2
@@ -114,7 +115,7 @@ header
 
 .save-filters-button
   @extend .score-button-lg
-  animation: btnHoverBack 0.3s
+  animation: btnHoverBack 0.4s
   transform: translate3d(0, 0, 0)
   height: 40px
   width: 178px !important
@@ -123,7 +124,7 @@ header
   box-shadow: 0 4px 8px 0 rgba(36,198,221,0.32)
   &:hover
     opacity: 0.8
-    animation: btnHover 0.3s 
+    animation: btnHover 0.4s 
     transform: translate3d(0, 0, 0)
     margin-top: -3px
     margin-bottom: 6px
@@ -136,12 +137,12 @@ header
 
 .green-button-lg
   @extend .score-button
-  animation: btnHoverBack 0.3s
+  animation: btnHoverBack 0.4s
   transform: translate3d(0, 0, 0)
   margin-top: 0
   &:hover
     opacity: 0.8
-    animation: btnHover 0.3s 
+    animation: btnHover 0.4s 
     transform: translate3d(0, 0, 0)
     margin-top: -3px;
   height: 52px
@@ -154,11 +155,11 @@ header
   @extend .score-button
   height: 52px
   width: 100%
-  animation: btnLgHoverBack 0.3s 
+  animation: btnLgHoverBack 0.4s 
   transform: translate3d(0, 0, 0)
   &:hover
     opacity: 0.8
-    animation: btnLgHover 0.3s 
+    animation: btnLgHover 0.4s 
     transform: translate3d(0, 0, 0)
     margin-top: -3px
     margin-bottom: 3px
@@ -167,6 +168,7 @@ header
     height: 19px
     font-size: 16px
     letter-spacing: 1.5px
+    line-height: 52px
 
 /* START Button animation section */
 
@@ -201,8 +203,20 @@ header
 
 .notification-box
   margin-right: 25px
+  img
+    margin-top: -3px;
+    width: 29px
+    height: 29px
   a
     text-decoration: none
+  div
+    position: relative
+  span
+    font-size: 9px
+    color: #FFFFFF
+    position: absolute
+    top: -29px
+    right: 9.5px
 
 .user-box
   a
@@ -254,7 +268,7 @@ footer
 
 .wave 
   background: url(../img/wave.svg) repeat-x
-  position: absolute;
+  position: absolute
   bottom: 0px
   width: 6400px
   height: 50%
@@ -670,6 +684,95 @@ footer
 
 
 /* END Notification modal section */
+
+/* START Settings page section */
+
+#mainPage
+  display: none
+
+#settingsPage
+  margin-top: 48px
+  .heading
+    h2
+      text-align: left
+      color: #2B3D6B
+      font-family: Helvetica
+      font-size: 24px
+      font-weight: bold
+      line-height: 48px
+      margin: 0
+      span
+        color: #24C6DD
+    h3
+      color: #8F8F8F
+      margin: 0
+      font-family: Helvetica
+      font-size: 16px
+      font-weight: bold
+      line-height: 19px
+  .upgrade-account-btn
+    height: 41px
+    width: 225px
+    border-radius: 4px
+    background-color: #3D95E9
+    border: none
+    box-shadow: 0 4px 8px 0 rgba(61,149,233,0.32)
+    animation: btnLgHoverBack 0.3s 
+    transform: translate3d(0, 0, 0)
+    &:hover
+      animation: btnLgHover 0.3s 
+      transform: translate3d(0, 0, 0)
+      margin-top: -3px
+      margin-bottom: 3px
+      opacity: 0.8
+    span
+      color: #FFFFFF
+      font-family: Helvetica
+      font-size: 14px
+      font-weight: bold
+      line-height: 17px
+      text-align: center
+      letter-spacing: 1px
+    img
+      margin-right: 4px
+      margin-top: -3px
+  .main-settings-row
+    margin-top: 48px
+    .back-search-btn
+      @extend .upgrade-account-btn
+      width: 274px
+      height: 48px
+      background-color: #24C6DD
+      letter-spacing: 0.5px
+    .settings-menu
+      list-style-type: none
+      width: 274px
+      padding: 0
+      padding-top: 32px
+      li
+        &:first-child
+          border-radius: 4px 4px 0 0
+        &:last-child
+          border-radius: 0 0 4px 4px
+        &.active
+          background-color: #24C6DD
+          a
+            color: #FFFFFF
+        border: 1px solid #24C6DD
+        height: 48px
+        line-height: 48px
+        padding-left: 24px
+        a
+          &:hover
+            font-weight: bold
+          text-decoration: none
+          font-size: 15px
+          color: #3E3E3E
+        img
+          margin-top: -5px
+          margin-right: 8px
+
+/* END Settings page section */
 
 //ALWAYS END
 @import "media"

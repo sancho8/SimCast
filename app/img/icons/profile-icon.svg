@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="16px" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>Profile ico@1x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Guidelines" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo-&amp;-Icons" transform="translate(-436.000000, -1266.000000)" fill-rule="nonzero" fill="#3E3E3E">
+            <g id="Profile-ico" transform="translate(436.000000, 1266.000000)">
+                <path d="M6,7.66666667 C8.08888889,7.66666667 9.77777778,5.97777778 9.77777778,3.88888889 C9.77777778,1.8 8.08888889,0.111111111 6,0.111111111 C3.91111111,0.111111111 2.22222222,1.8 2.22222222,3.88888889 C2.22222222,5.97777778 3.91111111,7.66666667 6,7.66666667 Z" id="Shape"></path>
+                <path d="M6,8.11111111 C2.68888889,8.11111111 0,10.8 0,14.1111111 L0,15.4444444 C0,15.6888889 0.2,15.8888889 0.444444444,15.8888889 L11.5555556,15.8888889 C11.8,15.8888889 12,15.6888889 12,15.4444444 L12,14.1111111 C12,10.8 9.31111111,8.11111111 6,8.11111111 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

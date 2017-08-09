@@ -64,7 +64,10 @@
 			<div class="col-lg-3 col-md-3 col-lg-offset-2 col-md-offset-2">
 				<div class="notification-box">
 					<a href="" ng-click="showNotificationModal = !showNotificationModal">
-						<img src="img/icons/speaker-icon.svg" alt="speaker">
+						<div>
+							<img src="img/icons/notification-exist-icon.svg" alt="notifications">
+							<span>{{2}}</span>
+						</div>
 					</a>
 				</div>
 				<div class="user-box">
@@ -78,7 +81,7 @@
 		</div>
 	</header>
 
-	<div class="container">
+	<div class="container" id="mainPage">
 		<div align="center" class="heading">
 			<h1>Welcome to SimCast 1.0,
 				<br />
@@ -146,236 +149,307 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<footer>
-	<div class="wave"></div>
-</footer>
+	<footer>
+		<div class="wave"></div>
+	</footer>
 
-<div id="UserDropdownModal" ng-show="showUserDropdownModal">
-	<div>
-		<a href="">Admin Settings</a>
+	<div id="UserDropdownModal" ng-show="showUserDropdownModal">
+		<div>
+			<a href="" ng-click="showSettings()">Admin Settings</a>
+		</div>
+		<div>
+			<a href="">Logout</a>
+		</div>
 	</div>
-	<div>
-		<a href="">Logout</a>
-	</div>
-</div>
 
-<div id="NotificationModal" ng-show="showNotificationModal">
-	<div class="notification-content" ng-repeat="note in notifications">
+	<div id="NotificationModal" ng-show="showNotificationModal">
+		<div class="notification-content" ng-repeat="note in notifications">
+			<div class="row">
+				<div class="col-md-2 col-lg-2">
+					<img src="img/icons/notification-icon.svg" alt="notification icon">
+				</div>
+				<div class="col-md-10 col-lg-10">
+					{{note.content}}
+				</div>
+			</div>
+			<div class="row signing">
+				<div class="col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+					{{note.author}}
+				</div>
+				<div class="col-md-2 col-lg-2">
+					{{note.time}}
+				</div>
+			</div>
+		</div>
+		<div class="notification-wave">
+			<a href="">
+				<img src="img/icons/blue-wave-icon.svg" alt="wave icon">
+			</a>
+		</div>
+	</div>
+
+	<div id="ReportModal" ng-show="showReportModal">
+		<div>Report Problem</div>
+		<textarea name="" id="" cols="30" rows="10" placeholder="How can we help?"></textarea>
+		<button class="submit-report-button">
+			<span>SUBMIT</span>
+		</button>
+	</div>
+
+	<div id="firstLaunchModal" class="modal-first modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div>
+				<img src="img/header-logo.svg" alt="logo">
+			</div>
+			<h2>
+				Welcome to SimCast 1.0!
+				We’re glad to have you on board, Dillon.
+			</h2>
+			<p>
+				This is a beta version of our web-app. 
+				Let us know of any rough waters so we can fix the issue asap.
+			</p>
+			<div>
+				<button id="closeStartModalBtn" class="green-button-lg">
+					<span>I'M READY</span>
+				</button>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="savedSearchesModal">
+
+		<div class="toolbar">
+			<div class="exit" ng-click="hideSavedSearches()">
+				<a href=""><img src="img/icons/cross-icon.svg" alt="close"></a>
+			</div>
+			<div class="search">
+				<input type="text" ng-model="findProp" value="search" onclick="this.value = '';"">
+				<img src="img/icons/search-icon.svg" alt="search">
+			</div>
+			<div>
+				<span class="toolbar-heading">Saved Searches</span>
+			</div>
+			<div class="delete">
+				<a ng-show="!isSearchesSelected" href="" id="deleteAllSearchesModalBtn" ng-click="allSelected = true" data-toggle="modal" data-target="#deleteAllSearchesModal">
+					<img src="img/icons/delete-icon.svg" alt="delete">
+					<span>Delete all</span>
+				</a>
+				<a ng-show="isSearchesSelected" href="" id="deleteAllSearchesModalBtn" data-toggle="modal" data-target="#deleteSelectedSearchesModal">
+					<img src="img/icons/delete-icon.svg" alt="delete">
+					<span>Delete selected elements</span>
+				</a>
+			</div>
+		</div>
+
+		<div id="saved-searches-table">
+			<div class="table-container">
+				<table>
+					<thead>
+						<tr>
+							<th class="checkbox">
+								<a href="" ng-click="allSelected = !allSelected">
+									<img ng-show="!allSelected" src="img/icons/check-disabled-icon.svg" alt="check all">
+									<img ng-show="allSelected" src="img/icons/check-enabled-icon.svg" alt="check all">
+								</a>
+							</th>
+							<th>
+								<a href="">
+									<span>Name</span>
+								</a>
+								<a href="" ng-click="searchProp = 'name'">
+									<img ng-show="searchProp !='name' && searchProp!='-name'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+								</a>
+								<a href="" ng-click="searchProp = '-name'">
+									<img ng-show="searchProp == 'name'" class="sorted" src="img/icons/triangle-icon.svg"/>
+								</a>
+								<a href="" ng-click="searchProp = false">
+									<img ng-show="searchProp == '-name'" class="inverted" src="img/icons/triangle-icon.svg"/>
+								</a>
+							</th>
+							<th>
+								<a href="">
+									<span>UPC</span>
+								</a>
+								<a href="" ng-click="searchProp = 'upc'">
+									<img ng-show="searchProp !='upc' && searchProp!='-upc'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+								</a>
+								<a href="" ng-click="searchProp = '-upc'">
+									<img ng-show="searchProp == 'upc'" class="sorted" src="img/icons/triangle-icon.svg"/>
+								</a>
+								<a href="" ng-click="searchProp = false">
+									<img ng-show="searchProp == '-upc'" class="inverted" src="img/icons/triangle-icon.svg"/>
+								</a>
+							</th>
+							<th>
+								<a href="">
+									<span>Company</span>
+								</a>
+								<a href="" ng-click="searchProp = 'company'">
+									<img ng-show="searchProp !='company' && searchProp!='-company'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+								</a>
+								<a href="" ng-click="searchProp = '-company'">
+									<img ng-show="searchProp == 'company'" class="sorted" src="img/icons/triangle-icon.svg"/>
+								</a>
+								<a href="" ng-click="searchProp = false">
+									<img ng-show="searchProp == '-company'" class="inverted" src="img/icons/triangle-icon.svg"/>
+								</a>
+							</th>
+							<th>
+								<a href="" ng-click="sortedByDate = !sortedByDate">
+									<span>Date</span>
+								</a>
+								<a href="" ng-click="searchProp = 'date'">
+									<img ng-show="searchProp !='date' && searchProp!='-date'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+								</a>
+								<a href="" ng-click="searchProp = '-date'">
+									<img ng-show="searchProp == 'date'" class="sorted" src="img/icons/triangle-icon.svg"/>
+								</a>
+								<a href="" ng-click="searchProp = false">
+									<img ng-show="searchProp == '-date'" class="inverted" src="img/icons/triangle-icon.svg"/>
+								</a>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-if="savedSearches.length == 0" ng-repeat="i in getNumber(5) track by $index">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<span class="no-elements" ng-if="savedSearches.length == 0">
+							You don't have any saved searches.
+						</span>
+						<tr ng-repeat="s in savedSearches | orderBy : searchProp | filter : findProp" ng-click="selected = !selected; checkSelectedSearches(selected, s)" ng-class="{ 'selected' : selected || allSelected}">
+							<td class="checkbox">
+								<a href="">
+									<img ng-show="selected || allSelected" src="img/icons/check-enabled-white-icon.svg" alt="checked">
+									<img ng-show="!selected" src="img/icons/check-disabled-icon.svg" alt="unchecked">
+								</a>
+							</td>
+							<td class="name">
+								<span>{{s.name}}</span>
+							</td>
+							<td class="upc">{{s.upc}}</td>
+							<td class="company">{{s.company}}</td>
+							<td class="date">{{s.date}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal fade" id="deleteAllSearchesModal" role="dialog">
+				<div class="modal-dialog ">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="content-holder">
+							<div class="question">
+								<p>Are you sure you want to delete all searches?</p>
+							</div>
+							<div >
+								<button ng-click="allSelected = false;savedSearches=''" type="button" class="btn delete" data-dismiss="modal">Delete</button>
+								<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="deleteSelectedSearchesModal" role="dialog">
+				<div class="modal-dialog ">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="content-holder">
+							<div class="question">
+								<p>Are you sure you want to delete these searches?</p>
+							</div>
+							<div >
+								<button ng-click="deleteSelectedSearches()" type="button" class="btn delete" data-dismiss="modal">Delete</button>
+								<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="settingsPage">
 		<div class="row">
-			<div class="col-md-2 col-lg-2">
-				<img src="img/icons/notification-icon.svg" alt="notification icon">
-			</div>
-			<div class="col-md-10 col-lg-10">
-				{{note.content}}
-			</div>
-		</div>
-		<div class="row signing">
-			<div class="col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
-				{{note.author}}
-			</div>
-			<div class="col-md-2 col-lg-2">
-				{{note.time}}
-			</div>
-		</div>
-	</div>
-	<div class="notification-wave">
-		<a href="">
-			<img src="img/icons/blue-wave-icon.svg" alt="wave icon">
-		</a>
-	</div>
-</div>
-
-<div id="ReportModal" ng-show="showReportModal">
-	<div>Report Problem</div>
-	<textarea name="" id="" cols="30" rows="10" placeholder="How can we help?"></textarea>
-	<button class="submit-report-button">
-		<span>SUBMIT</span>
-	</button>
-</div>
-
-<div id="firstLaunchModal" class="modal-first modal">
-
-	<!-- Modal content -->
-	<div class="modal-content">
-		<div>
-			<img src="img/header-logo.svg" alt="logo">
-		</div>
-		<h2>
-			Welcome to SimCast 1.0!
-			We’re glad to have you on board, Dillon.
-		</h2>
-		<p>
-			This is a beta version of our web-app. 
-			Let us know of any rough waters so we can fix the issue asap.
-		</p>
-		<div>
-			<button id="closeStartModalBtn" class="green-button-lg">
-				<span>I'M READY</span>
-			</button>
-		</div>
-	</div>
-
-</div>
-
-<div id="savedSearchesModal">
-
-	<div class="toolbar">
-		<div class="exit" ng-click="hideSavedSearches()">
-			<a href=""><img src="img/icons/cross-icon.svg" alt="close"></a>
-		</div>
-		<div class="search">
-			<input type="text" ng-model="findProp" value="search" onclick="this.value = '';"">
-			<img src="img/icons/search-icon.svg" alt="search">
-		</div>
-		<div>
-			<span class="toolbar-heading">Saved Searches</span>
-		</div>
-		<div class="delete">
-			<a ng-show="!isSearchesSelected" href="" id="deleteAllSearchesModalBtn" ng-click="allSelected = true" data-toggle="modal" data-target="#deleteAllSearchesModal">
-				<img src="img/icons/delete-icon.svg" alt="delete">
-				<span>Delete all</span>
-			</a>
-			<a ng-show="isSearchesSelected" href="" id="deleteAllSearchesModalBtn" data-toggle="modal" data-target="#deleteSelectedSearchesModal">
-				<img src="img/icons/delete-icon.svg" alt="delete">
-				<span>Delete selected elements</span>
-			</a>
-		</div>
-	</div>
-
-	<div id="saved-searches-table">
-		<div class="table-container">
-			<table>
-				<thead>
-					<tr>
-						<th class="checkbox">
-							<a href="" ng-click="allSelected = !allSelected">
-								<img ng-show="!allSelected" src="img/icons/check-disabled-icon.svg" alt="check all">
-								<img ng-show="allSelected" src="img/icons/check-enabled-icon.svg" alt="check all">
-							</a>
-						</th>
-						<th>
-							<a href="">
-								<span>Name</span>
-							</a>
-							<a href="" ng-click="searchProp = 'name'">
-								<img ng-show="searchProp !='name' && searchProp!='-name'" class="unsorted" src="img/icons/double-triangle-icon.png"/>
-							</a>
-							<a href="" ng-click="searchProp = '-name'">
-								<img ng-show="searchProp == 'name'" class="sorted" src="img/icons/triangle-icon.svg"/>
-							</a>
-							<a href="" ng-click="searchProp = false">
-								<img ng-show="searchProp == '-name'" class="inverted" src="img/icons/triangle-icon.svg"/>
-							</a>
-						</th>
-						<th>
-							<a href="">
-								<span>UPC</span>
-							</a>
-							<a href="" ng-click="searchProp = 'upc'">
-								<img ng-show="searchProp !='upc' && searchProp!='-upc'" class="unsorted" src="img/icons/double-triangle-icon.png"/>
-							</a>
-							<a href="" ng-click="searchProp = '-upc'">
-								<img ng-show="searchProp == 'upc'" class="sorted" src="img/icons/triangle-icon.svg"/>
-							</a>
-							<a href="" ng-click="searchProp = false">
-								<img ng-show="searchProp == '-upc'" class="inverted" src="img/icons/triangle-icon.svg"/>
-							</a>
-						</th>
-						<th>
-							<a href="">
-								<span>Company</span>
-							</a>
-							<a href="" ng-click="searchProp = 'company'">
-								<img ng-show="searchProp !='company' && searchProp!='-company'" class="unsorted" src="img/icons/double-triangle-icon.png"/>
-							</a>
-							<a href="" ng-click="searchProp = '-company'">
-								<img ng-show="searchProp == 'company'" class="sorted" src="img/icons/triangle-icon.svg"/>
-							</a>
-							<a href="" ng-click="searchProp = false">
-								<img ng-show="searchProp == '-company'" class="inverted" src="img/icons/triangle-icon.svg"/>
-							</a>
-						</th>
-						<th>
-							<a href="" ng-click="sortedByDate = !sortedByDate">
-								<span>Date</span>
-							</a>
-							<a href="" ng-click="searchProp = 'date'">
-								<img ng-show="searchProp !='date' && searchProp!='-date'" class="unsorted" src="img/icons/double-triangle-icon.png"/>
-							</a>
-							<a href="" ng-click="searchProp = '-date'">
-								<img ng-show="searchProp == 'date'" class="sorted" src="img/icons/triangle-icon.svg"/>
-							</a>
-							<a href="" ng-click="searchProp = false">
-								<img ng-show="searchProp == '-date'" class="inverted" src="img/icons/triangle-icon.svg"/>
-							</a>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-if="savedSearches.length == 0" ng-repeat="i in getNumber(5) track by $index">
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<span class="no-elements" ng-if="savedSearches.length == 0">
-						You don't have any saved searches.
-					</span>
-					<tr ng-repeat="s in savedSearches | orderBy : searchProp | filter : findProp" ng-click="selected = !selected; checkSelectedSearches(selected, s)" ng-class="{ 'selected' : selected || allSelected}">
-						<td class="checkbox">
-							<a href="">
-								<img ng-show="selected || allSelected" src="img/icons/check-enabled-white-icon.svg" alt="checked">
-								<img ng-show="!selected" src="img/icons/check-disabled-icon.svg" alt="unchecked">
-							</a>
-						</td>
-						<td class="name">
-							<span>{{s.name}}</span>
-						</td>
-						<td class="upc">{{s.upc}}</td>
-						<td class="company">{{s.company}}</td>
-						<td class="date">{{s.date}}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="modal fade" id="deleteAllSearchesModal" role="dialog">
-			<div class="modal-dialog ">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="content-holder">
-						<div class="question">
-							<p>Are you sure you want to delete all searches?</p>
-						</div>
-						<div >
-							<button ng-click="allSelected = false;savedSearches=''" type="button" class="btn delete" data-dismiss="modal">Delete</button>
-							<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
-						</div>
-					</div>
+			<div class="col-md-3 col-lg-3 col-md-offset-2 col-lg-offset-2">
+				<div class="heading">
+					<h2>Admin Settings, <span>Dillon Hall</span></h2>
+					<h3>Edit your name, email, avatar</h3>
 				</div>
 			</div>
+			<div class="col-md-2 col-lg-2 col-md-offset-3 col-lg-offset-3">
+				<button class="upgrade-account-btn">
+					<img src="img/icons/upgrade-account-icon.svg" alt="upgrade account">
+					<span>UPGRADE ACCOUNT</span>
+				</button>
+			</div>
 		</div>
-		<div class="modal fade" id="deleteSelectedSearchesModal" role="dialog">
-			<div class="modal-dialog ">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="content-holder">
-						<div class="question">
-							<p>Are you sure you want to delete these searches?</p>
-						</div>
-						<div >
-							<button ng-click="deleteSelectedSearches()" type="button" class="btn delete" data-dismiss="modal">Delete</button>
-							<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
+		<div class="row main-settings-row">
+			<div class="col-md-2 col-lg-2 col-md-offset-2 col-lg-offset-2">
+				<button class="back-search-btn" ng-click="showMainPage()">
+					<img src="img/icons/back-icon.svg" alt="back to search page">
+					<span>BACK TO THE SEARCH PAGE</span>
+				</button>
+				<ul class="settings-menu" ng-init="activeSection = 'profile'">
+					<li ng-click="activeSection = 'profile'" ng-class="{'active' : activeSection == 'profile'}">
+						<a href="">
+							<img src="img/icons/profile-icon-white.svg" ng-show="activeSection=='profile'" alt="profile">
+							<img src="img/icons/profile-icon.svg" ng-show="activeSection!='profile'" alt="profile">
+							My Profile
+						</a>
+					</li>
+					<li ng-click="activeSection = 'password'" ng-class="{'active' : activeSection == 'password'}">
+						<a href="">
+							<img src="img/icons/password-icon-white.svg" ng-show="activeSection=='password'" alt="password">
+							<img src="img/icons/password-icon.svg" ng-show="activeSection!='password'" alt="password">
+							Password
+						</a>
+					</li>
+					<li ng-click="activeSection = 'users'" ng-class="{'active' : activeSection == 'users'}">
+						<a href="">
+							<img src="img/icons/users-icon-white.svg" ng-show="activeSection=='users'" alt="users">
+							<img src="img/icons/users-icon.svg" ng-show="activeSection!='users'" alt="users">
+							Users
+						</a>
+					</li>
+					<li ng-click="activeSection = 'billing'" ng-class="{'active' : activeSection == 'billing'}">
+						<a href="">
+							<img src="img/icons/billing-history-icon-white.svg" ng-show="activeSection=='billing'" alt="billing">
+							<img src="img/icons/billing-history-icon.svg" ng-show="activeSection!='billing'" alt="billing">
+							Billing History
+						</a>
+					</li>
+					<li ng-click="activeSection = 'searches'" ng-class="{'active' : activeSection == 'searches'}">
+						<a href="">
+							<img src="img/icons/searches-remaining-icon-white.svg" ng-show="activeSection=='searches'" alt="billing">
+							<img src="img/icons/searches-remaining-icon.svg" ng-show="activeSection!='searches'" alt="searches">
+							Searches Remaining
+						</a>
+					</li>
+					<li ng-click="activeSection = 'subscription'" ng-class="{'active' : activeSection == 'subscription'}">
+						<a href="">
+							<img src="img/icons/subscription-icon-white.svg" ng-show="activeSection=='subscription'" alt="subscription">
+							<img src="img/icons/subscription-icon.svg" ng-show="activeSection!='subscription'" alt="searches">
+							Your Subscription
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
+
+
 </div>
 
 <div class="hidden">

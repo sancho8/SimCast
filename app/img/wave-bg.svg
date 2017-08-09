@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1443px" height="140px" viewBox="0 0 1443 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46 (44423) - http://www.bohemiancoding.com/sketch -->
+    <title>Wave Blue Light@3x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#4AE5F0" stop-opacity="0.64" offset="0%"></stop>
+            <stop stop-color="#24C6DD" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="BG-with-wave" transform="translate(0.000000, -760.000000)" fill="url(#linearGradient-1)">
+            <path d="M0,804.484919 C68.3333333,794.024502 130.5,798.291251 186.5,817.285167 C270.5,845.776042 331.942022,840.810427 438.5,810.265677 C499,792.923405 571,812.743144 594,817.285167 C617,821.827191 718.5,846.672036 792.5,817.526709 C866.5,788.381381 922,763.193797 1030,781.361891 C1138,799.529985 1209.5,801.18163 1274,776.819867 C1338.5,752.458105 1426.5,760.303418 1442.5,765.258353 C1442.5,765.258353 1442.5,810.128039 1442.5,899.867413 L0,899.867413 L0,804.484919 Z" id="Wave-Blue-Light"></path>
+        </g>
+    </g>
+</svg>
