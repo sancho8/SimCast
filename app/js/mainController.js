@@ -75,6 +75,26 @@ var app = angular.module("SimCast", [])
 		});
 	}
 
+
+	$scope.selectedUsers = [];
+
+	$scope.checkSelectedUsers = function(selected, elem){
+		console.log(elem);
+		if(selected){
+			$scope.selectedUsers.push(elem);
+		}
+		else{
+			$scope.selectedUsers.pop(elem);
+		}
+		console.log($scope.selectedUsers);
+		if($scope.selectedUsers.length == 0){
+			$scope.isUsersSelected = false;
+		}
+		else{
+			$scope.isUsersSelected = true;
+		}
+	};
+
 	$scope.deleteSelectedSearches = function(){
 		$scope.savedSearches = $scope.savedSearches.filter(function(e){
 			return this.indexOf(e)<0;
@@ -82,6 +102,15 @@ var app = angular.module("SimCast", [])
 		$scope.isSearchesSelected = false;
 		$scope.searchProp = undefined;
 	}
+
+	$scope.deleteSelectedUsers = function(){
+		$scope.users = $scope.users.filter(function(e){
+			return this.indexOf(e)<0;
+		}, $scope.selectedUsers);
+		$scope.isUsersSelected = false;
+		$scope.searchUsersProp = undefined;
+	}
+
 
 	$scope.savedSearches = [
 	{
@@ -145,6 +174,51 @@ var app = angular.module("SimCast", [])
 		upc: '12345',
 		company: 'company name',
 		date: "08.08",
+		checked: false
+	},
+	];
+
+	$scope.users = [
+	{
+		name: 'Dillon Roberts',
+		lastActive: '07.23.17',
+		searchesNum: '32',
+		isAdmin: true,
+		checked: false
+	},
+	{
+		name: 'Julia Jones',
+		lastActive: '07.22.17',
+		searchesNum: '12',
+		isAdmin: false,
+		checked: false
+	},
+	{
+		name: 'Murray Stone',
+		lastActive: '06.13.17',
+		searchesNum: '65',
+		isAdmin: false,
+		checked: false
+	},
+	{
+		name: 'Julia Jones',
+		lastActive: '07.22.17',
+		searchesNum: '12',
+		isAdmin: false,
+		checked: false
+	},
+	{
+		name: 'Julia Jones',
+		lastActive: '07.22.17',
+		searchesNum: '12',
+		isAdmin: false,
+		checked: false
+	},
+	{
+		name: 'Julia Jones',
+		lastActive: '07.22.17',
+		searchesNum: '12',
+		isAdmin: false,
 		checked: false
 	},
 	];
