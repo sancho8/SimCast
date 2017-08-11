@@ -27,6 +27,9 @@ body input:required:valid,
 body textarea:required:valid
 	color: #666
 
+body
+  min-height: 850px
+
 //Custom Styles Here
 h1
   font-family: Gilroy 
@@ -757,18 +760,20 @@ footer
       padding: 0
       padding-top: 32px
       li
+        border: 1px solid #24C6DD
+        border-bottom: none
+        height: 48px
+        line-height: 48px
+        padding-left: 24px
         &:first-child
           border-radius: 4px 4px 0 0
         &:last-child
           border-radius: 0 0 4px 4px
+          border-bottom: 1px solid #24C6DD
         &.active
           background-color: #24C6DD
           a
             color: #FFFFFF
-        border: 1px solid #24C6DD
-        height: 48px
-        line-height: 48px
-        padding-left: 24px
         a
           &:hover
             font-weight: bold
@@ -780,6 +785,7 @@ footer
           margin-right: 8px
   .settings-frame
     color: #111111
+    height: 100vh
     .settings-form
       div
         margin-top: 40px
@@ -857,6 +863,157 @@ footer
 .text-aligned
   padding-left: 40px
 
+
+.searches-frame
+  .purchase
+    padding-top: 20px
+  button
+    @extend .score-button
+    height: 41px; width: 216px
+    border-radius: 4px
+    background-color: #6BBE7A
+    width: 214px
+    margin-right: 32px
+    &:hover
+      opacity: 0.8
+    &.yellow
+      background: linear-gradient(180deg, #F5DC4F 0%, #F4AF53 100%)
+  .heading
+    width: 516px
+    color: #3E3E3E
+    font-family: Helvetica
+    font-size: 20px
+    font-weight: bold  
+    line-height: 28px
+    padding-top: 10px
+  .progress-bar-holder
+    padding-top: 24px
+    padding-right: 50px
+    .progress-bar
+      background-color: #24C6DD
+    .progress
+      height: 12px
+      background-color: #3D95E9
+      margin-top: 5px
+      span
+        height: 12px
+    span
+      font-size: 15px
+      color: #3E3E3E
+    .left
+      float: left
+    .right
+      float: right
+
+.subscription-frame
+  div
+    padding-left: 0
+    padding-right: 0
+  button
+    padding-left: 20px
+    padding-right: 20px
+    width: auto
+    line-height: 100%
+    margin-left: 0px
+    span
+      font-size: 14px
+    @extend .score-button-lg
+  .button-holder
+    margin-top: 52px
+  .price
+    color: #3E3E3E
+    font-family: Helvetica
+    font-size: 28px
+    font-weight: 300
+    line-height: 34px
+    text-align: center
+    margin-top: 18px
+  .configuration
+    margin-top: 17px
+    height: 22px
+    color: #3E3E3E
+    font-family: Helvetica
+    font-size: 18px
+    font-weight: bold
+    line-height: 22px
+  .heading
+    height: 56px
+    width: 516px
+    color: #3E3E3E
+    font-family: Helvetica
+    font-size: 20px
+    font-weight: bold  
+    line-height: 28px
+  .description
+    text-align: center
+    div
+  .ship-image
+    margin-top: 20px
+    padding-left: 0px
+    img
+      width: 172px
+      height: 172px
+  .subscription-name
+    text-align: center
+    margin-top: 5px
+    div
+      padding-bottom: 5px
+
+.subscription-details
+  .heading
+    span
+      color: #24C6DD
+  .description
+    width: 600px
+    img
+      float: left
+      padding-left: 80px
+      padding-top: 20px
+      padding-bottom: 50px
+    .text-content
+      width: 300px
+      display: inline
+    .period
+      font-size: 16px
+    .price
+       font-size: 32px
+       color: #3E3E3E
+    .details
+      font-size: 16px
+      font-weight: bold
+      padding-top: 16px
+      line-height: 30px
+      span
+        margin-bottom: 10px
+  .button-holder
+    button
+      width: 233px
+      height: 41px
+      animation: none !important
+      &.green
+        background-color: #6BBE7A
+      &.blue
+        margin-left: 24px
+        border: 1px solid #24C6DD
+        background-color: #FFFFFF
+        &:hover
+          span
+            color: #FFFFFF 
+        span
+          color: #3E3E3E
+        &:hover
+          background-color: #24C6DD
+          color: #FFFFFF
+      span
+        line-height: 41px
+        letter-spacing: 1px
+      &:hover
+        opacity: 0.8
+        margin-top: 0px
+
+
+
+
 #deleteSelectedUsersModal
   @extend #deleteSelectedSearchesModal
   width: 340px
@@ -879,6 +1036,91 @@ footer
     border-radius: 4px
     padding: 10px
     outline: none
+
+#monthlySubscriptionsPage
+  display: none
+  padding-top: 50px
+  @extend .subscription-frame
+  .back-settings-btn
+    @extend .score-button-lg
+    height: 48px
+    width: 274px
+    border-radius: 4px
+    background-color: #24C6DD
+    box-shadow: 0 4px 8px 0 rgba(36,198,221,0.32)
+    border: none
+    font-size: 14px
+    padding: 0
+    span
+      line-height: 48px
+      padding-left: 5px
+    img
+      margin-top: -3px
+  .head
+    text-align: center
+    color: #2B3D6B
+    font-family: Gilroy
+    font-size: 36px
+    font-weight: 800
+    line-height: 44px
+    margin-top: 30px
+  button
+    height: 41px
+    span
+      line-height: 41px
+  .configuration
+    line-height: 40px
+  .button-holder
+    padding-top: 30px
+
+#endSubscriptionModal
+  .modal-content
+    height: 306px
+    margin-top: 130px
+    border: none
+    border-radius: 4px
+  .modal-backdrop
+    opacity: 0
+  .question
+    color: #3E3E3E
+    font-family: Helvetica
+    font-size: 16px
+    line-height: 19px
+    text-align: center
+    margin-bottom: 24px
+  .delete
+    border: 1px solid #24C6DD
+    border-radius: 4px
+    font-size: 16px
+    background-color: #FFFFFF
+    width: 84px
+    height: 32px 
+    line-height: 12px
+    margin-right: 16px
+    animation: btnHoverBack 0.2s 
+    transform: translate3d(0, 0, 0)
+    &:hover 
+      animation: btnHover 0.2s 
+      transform: translate3d(0, 0, 0)
+      background-color: #24C6DD
+      color: #FFFFFF
+      opacity: 0.8
+      margin-top: -3px
+  .cancel
+    border-radius: 4px
+    background-color: #6BBE7A
+    color: #FFFFFF
+    font-size: 16px
+    width: 84px
+    height: 32px 
+    line-height: 12px
+    animation: btnHoverBack 0.2s 
+    transform: translate3d(0, 0, 0)
+    &:hover
+      opacity: 0.8
+      animation: btnHover 0.2s 
+      transform: translate3d(0, 0, 0)
+      margin-top: -3px
 
 @keyframes changeColor
   0%  

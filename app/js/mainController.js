@@ -75,6 +75,71 @@ var app = angular.module("SimCast", [])
 		});
 	}
 
+	$scope.subsctiptionUpgraded = function(){
+		$("#monthlySubscriptionsPage").fadeOut('slow', function() {
+			
+		});
+		$("#settingsPage").fadeIn('slow', function() {
+			
+		});
+		$(document).scrollTop(1000);
+	}
+
+	$scope.hasSubscription = false
+
+	$scope.endSubscription = function(){
+		$scope.hasSubscription = false;
+	}
+
+	$scope.addSubscription = function(type){
+		switch(type){
+			case "bronze": $scope.currentSubscription = $scope.subscriptions[0]; break;
+			case "silver": $scope.currentSubscription = $scope.subscriptions[1]; break;
+			case "gold": $scope.currentSubscription = $scope.subscriptions[2]; break;
+		}
+		$scope.hasSubscription = true;
+	}
+
+	$scope.showMonthlySubscriptions = function() {
+		$("#settingsPage").fadeOut('400', function() {
+			$("#monthlySubscriptionsPage").fadeIn('400', function() {
+
+			});
+		});
+	}
+
+	$scope.backToSettingsPage = function(hidePageId){
+		$(hidePageId).fadeOut('400', function() {
+			$("#settingsPage").fadeIn('400', function() {
+
+			});
+		});
+	}
+
+	$scope.subscriptions = [
+	{
+		type: "Bronze",
+		price: "$68.95",
+		details1: "2 users",
+		details2: "100 product queries",
+		imageUrl: "img/ship-bronze.svg"
+	},
+	{
+		type: "Silver",
+		price: "$248.95",
+		details1: "10 users",
+		details2: "500 product queries",
+		imageUrl: "img/ship-silver.svg"
+	},
+	{
+		type: "Gold",
+		price: "Custom Pricing",
+		details1: "Enterprise Users",
+		details2: "",
+		imageUrl: "img/ship-gold.svg"
+	},
+	]
+
 
 	$scope.selectedUsers = [];
 
