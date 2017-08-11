@@ -1074,27 +1074,53 @@ footer
     padding-top: 30px
 
 #endSubscriptionModal
+  position: relative
+  z-index: 1
+  p
+    margin: 0
+    text-align: center
+    width: 100%
+    color: #3E3E3E
+    font-family: Helvetica
+    font-size: 18px
+    line-height: 24px
+  textarea
+    margin-top: 24px
+    height: 134px
+    width: 387px
+    border: 1px solid #D9DEE5
+    border-radius: 4px
+    padding: 15px
   .modal-content
-    height: 306px
+    height: 338px
+    width: 484px
     margin-top: 130px
     border: none
     border-radius: 4px
+    padding: 34px
+    margin-left: 10px !important
+    -webkit-box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
+    -moz-box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
+    -o-box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
+    box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
+  .modal-dialog
+    margin: 0
+    margin-top: -50px
   .modal-backdrop
     opacity: 0
-  .question
-    color: #3E3E3E
-    font-family: Helvetica
-    font-size: 16px
-    line-height: 19px
-    text-align: center
-    margin-bottom: 24px
+  .button-holder
+    margin:0 !important
+    padding-top: 20px
   .delete
+    float: left
+    margin-left: 15px
     border: 1px solid #24C6DD
     border-radius: 4px
     font-size: 16px
     background-color: #FFFFFF
-    width: 84px
-    height: 32px 
+    height: 39px
+    width: 232px
+    outline: none
     line-height: 12px
     margin-right: 16px
     animation: btnHoverBack 0.2s 
@@ -1107,12 +1133,14 @@ footer
       opacity: 0.8
       margin-top: -3px
   .cancel
+    margin-right: 15px
     border-radius: 4px
     background-color: #6BBE7A
     color: #FFFFFF
     font-size: 16px
-    width: 84px
-    height: 32px 
+    height: 39px
+    width: 120px
+    float: right
     line-height: 12px
     animation: btnHoverBack 0.2s 
     transform: translate3d(0, 0, 0)
