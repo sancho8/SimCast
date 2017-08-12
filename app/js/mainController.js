@@ -91,6 +91,12 @@ var app = angular.module("SimCast", [])
 		$scope.hasSubscription = false;
 	}
 
+	$scope.hideSubscriptionDetails = function(){
+		$(".subscription-details").fadeOut('fast', function() {
+			
+		});
+	}
+
 	$scope.addSubscription = function(type){
 		switch(type){
 			case "bronze": $scope.currentSubscription = $scope.subscriptions[0]; break;

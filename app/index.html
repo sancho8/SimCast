@@ -59,7 +59,9 @@
 				</div>
 			</div>
 			<div class="col-lg-2 col-md-2 col-lg-offset-1 col-md-offset-1">
-				<img src="img/header-logo.svg" alt="logo">
+				<a href="" ng-click="showMainPage()">
+					<img src="img/header-logo.svg" alt="logo">
+				</a>
 			</div>
 			<div class="col-lg-3 col-md-3 col-lg-offset-2 col-md-offset-2">
 				<div class="notification-box">
@@ -385,7 +387,12 @@
 			<div class="col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
 				<div class="heading">
 					<h2>Admin Settings, <span>Dillon Hall</span></h2>
-					<h3>Edit your name, email, avatar</h3>
+					<h3 ng-show="activeSection=='profile'">Edit your name, email, avatar</h3>
+					<h3 ng-show="activeSection=='password'">Change your password</h3>
+					<h3 ng-show="activeSection=='users'">Manage your users</h3>
+					<h3 ng-show="activeSection=='billing'">Your Billing history</h3>
+					<h3 ng-show="activeSection=='searches'">Your Searches Remaining</h3>
+					<h3 ng-show="activeSection=='subscription'">Manage your subscription</h3>
 				</div>
 			</div>
 			<div class="col-md-2 col-lg-2 col-md-offset-2 col-lg-offset-2">
@@ -451,7 +458,7 @@
 			</div>
 
 			<div class="col-md-8 col-lg-8 col-md-offset-1 col-lg-offset-1 settings-frame">
-				<div class="profile-frame" ng-if="activeSection=='profile'">
+				<div class="profile-frame slowDown" ng-if="activeSection=='profile'">
 					<div class="profile-top-section">
 						<img src="img/user-photo.png" alt="user photo">
 						<button class="btn upload-button">Upload New Photo</button>
@@ -472,7 +479,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="password-frame" ng-if="activeSection=='password'">
+				<div class="password-frame slowDown" ng-if="activeSection=='password'">
 					<div class="settings-form">
 						<div class="top">
 							<input type="text" class="settings-form-input" placeholder="Current Password">
@@ -488,7 +495,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="users-frame" ng-if="activeSection=='users'">
+				<div class="users-frame slowDown" ng-if="activeSection=='users'">
 					<div class="toolbar">
 						<div class="search">
 							<input type="text" ng-model="findPropUsers" value="search" onclick="this.value = '';"">
@@ -630,10 +637,10 @@
 					</div>
 
 				</div>
-				<div class="billing-frame" ng-if="activeSection=='billing'">
+				<div class="billing-frame slowDown" ng-if="activeSection=='billing'">
 					Billing
 				</div>
-				<div class="searches-frame" ng-if="activeSection=='searches'">
+				<div class="searches-frame slowDown" ng-if="activeSection=='searches'">
 					<div class="heading">
 						You have 323 searches left
 					</div>
@@ -660,7 +667,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="subscription-frame" ng-if="activeSection=='subscription'">
+				<div class="subscription-frame slowDown" ng-if="activeSection=='subscription'">
 					<div ng-if="!hasSubscription">
 						<div class="heading">
 							It looks like you do not have a subscription right now. 
@@ -770,7 +777,7 @@
 											<textarea name="" placeholder="Your comment here" cols="30" rows="5"></textarea>
 										</div>
 										<div class="button-holder">
-										<button type="button" class="btn delete" data-toggle="modal" data-target="#subscriptionEndedModal"data-dismiss="modal">End Subscription</button>
+										<button type="button" class="btn delete" ng-click="hideSubscriptionDetails()"  data-toggle="modal" data-target="#subscriptionEndedModal" data-dismiss="modal">End Subscription</button>
 											<button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
@@ -815,7 +822,7 @@
 			<div class="row">
 				<div class="col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
 					<div align="center">
-						<div class="col-md-4 col-lg-4">
+						<div class="col-md-4 col-lg-4 subscription first">
 							<div class="ship-image">
 								<img src="img/ship-bronze.svg" alt="bronze ship">
 							</div>
@@ -837,7 +844,7 @@
 								</button>
 							</div>
 						</div>
-						<div class="col-md-4 col-lg-4">
+						<div class="col-md-4 col-lg-4 subscription second">
 							<div class="ship-image">
 								<img src="img/ship-silver.svg" alt="bronze ship">
 							</div>
@@ -859,7 +866,7 @@
 								</button>
 							</div>
 						</div>
-						<div class="col-md-4 col-lg-4">
+						<div class="col-md-4 col-lg-4 subscription third">
 							<div class="ship-image">
 								<img src="img/ship-gold.svg" alt="gold ship">
 							</div>

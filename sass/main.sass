@@ -411,7 +411,7 @@ footer
   z-index: 1
   div
     height: 42px
-    text-align: center
+    padding-left: 10px
     a 
       color: #3E3E3E
       font-family: Helvetica
@@ -746,6 +746,8 @@ footer
       margin-top: -3px
   .main-settings-row
     margin-top: 48px
+    .menu-holder
+      padding-left: 220px
     .back-search-btn
       @extend .upgrade-account-btn
       width: 274px
@@ -774,12 +776,19 @@ footer
           background-color: #24C6DD
           a
             color: #FFFFFF
-        a
           &:hover
-            font-weight: bold
+            a
+              color: #FFFFFF
+        a
           text-decoration: none
           font-size: 15px
           color: #3E3E3E
+        &:hover
+          a
+            font-weight: bold
+            text-decoration: none
+            font-size: 15px
+            color: #3E3E3E
         img
           margin-top: -5px
           margin-right: 8px
@@ -904,6 +913,10 @@ footer
       float: left
     .right
       float: right
+
+.slowDown
+  animation: SlowDown 0.5s ease
+  transform: translate3d(0, 0, 0)
 
 .subscription-frame
   div
@@ -1040,6 +1053,15 @@ footer
 #monthlySubscriptionsPage
   display: none
   padding-top: 50px
+  .subscription
+    animation: SlowDown 1s
+    transform: translate3d(0, 0, 0)
+    &.first
+      animation-delay: 0s
+    &.second
+      animation-delay: 0.1s
+    &.third 
+      animation-delay: 0.2s
   @extend .subscription-frame
   .back-settings-btn
     @extend .score-button-lg
@@ -1066,10 +1088,12 @@ footer
     margin-top: 30px
   button
     height: 41px
+    margin-left: 5px
     span
       line-height: 41px
   .configuration
     line-height: 40px
+    padding-left: 10px
   .button-holder
     padding-top: 30px
 
@@ -1174,7 +1198,12 @@ footer
   100% 
     background-color: #FFFFFF
 
-
+@keyframes SlowDown
+  0% 
+    margin-top: -180px
+    display: none
+  100% 
+    margin-top: 0
 
 /* END Settings page section */
 
