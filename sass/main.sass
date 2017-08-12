@@ -4,6 +4,10 @@
 //Load Libs SASS
 @import "app/libs/animate/animate.sass"
 
+@mixin child($n)
+  &:nth-child(#{$n})
+    animation-delay: $n+"s"
+
 *::-webkit-input-placeholder
 	color: #AAADB3;
 	opacity: 1
@@ -715,9 +719,9 @@ footer
 /* START Settings page section */
 
 #mainPage
-  display: none
 
 #settingsPage
+  display: none
   margin-top: 48px
   .heading
     h2
@@ -1208,6 +1212,99 @@ footer
   .cancel
     margin: 0 
     float: none
+
+#searchModal
+  align-content: center
+  background-color: rgba(255, 255, 255, 0)
+  display: visible
+  .modal-content
+    padding: 0
+    margin-top: 220px
+    width: 1200px
+    height: 420px
+    border: none
+    border-radius: 4px
+    -webkit-box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
+    -moz-box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
+    -o-box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
+    box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
+    .exit
+      text-align: left
+      img 
+        float: left
+        padding: 15px
+    .signing
+      text-align: center
+      font-family: Gilroy
+      font-size: 24px
+      font-weight: bold
+      color: #2b3d6b
+      padding-top: 30px
+    .loading
+      .round
+        content-align: center
+        width: 80px
+        height: 80px
+        border: 8px solid #2B3D6B
+        border-radius: 40px
+  .loading-progress
+    width: 1200px
+    padding-top: 40px
+    .loading-item
+      position: relative
+      top: 0
+      width: 130px
+      display: inline-block
+      padding-bottom: 30px
+    .text
+      color: #65a9e8
+      font-size: 15px
+      height: 50px
+      animation: Opacity 3.8s
+      transform: translate3d(0, 0, 0)
+      padding-top: 5px
+    .rect
+      width: 94px
+      height: 16px
+      border-radius: 4px
+      border: 1px solid #65a9e8
+      .fill
+        animation: Fill 3s
+        transform: translate3d(0, 0, 0)
+        background-color:#65a9e8
+        width: 94px
+        margin-left: -1px
+        height: 14px
+        border-radius: 4px
+        border: 1px solid #65a9e8
+  .button 
+    button
+      background-color: #24c6dd
+      width: 210px
+      height: 41px
+      span
+        letter-spacing: 1px
+  .modal-dialog
+  .modal-backdrop
+    opacity: 0
+
+@keyframes Opacity
+  0%
+    opacity: 0
+  80%
+    opacity: 0
+    margin-top: -40px
+    margin-bottom: 40px
+  100%
+    opacity: 1
+    margin-top: 0
+    margin-bottom: 0
+
+@keyframes Fill
+  0%
+    width: 0
+  100
+    width: inherit
 
 @keyframes changeColor
   0%  

@@ -140,7 +140,7 @@
 					<input type="text" name="ProductCompany" placeholder="Product Company">
 				</div>
 				<div>
-					<button id="openStartModalBtn" class="score-button-lg">
+					<button data-toggle="modal" data-target="#searchModal" class="score-button-lg">
 						<span>SCORE</span>
 					</button>
 				</div>
@@ -200,7 +200,6 @@
 	</div>
 
 	<div id="firstLaunchModal" class="modal-first modal">
-
 		<!-- Modal content -->
 		<div class="modal-content">
 			<div>
@@ -220,7 +219,39 @@
 				</button>
 			</div>
 		</div>
+	</div>
 
+	<div id="searchModal" class="modal-first modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="exit" data-dismiss="modal">
+				<img src="img/icons/cross-icon-hover.svg" alt="exit">
+				<a href="">X</a>
+			</div>
+			<div class="signing">
+				Searching
+			</div>
+			<div class="loading">
+				<img src="img/icons/load-icon.svg" alt="loaded">
+			</div>
+			<div class="loading-progress">
+				<div class="loading-item" ng-repeat="loadItem in loadItems">
+					<div class="rect">
+						<div class="fill"></div>
+					</div>
+					<div class="text">
+						{{loadItem.firstLine}}
+						<br/>
+						{{loadItem.secondLine}}
+					</div>
+				</div>
+			</div>
+			<div class="button" data-dismiss="modal">
+				<button class="green-button-lg">
+					<span>CANCEL SEARCH</span>
+				</button>
+			</div>
+		</div>
 	</div>
 
 	<div id="savedSearchesModal">
@@ -498,7 +529,7 @@
 				<div class="users-frame slowDown" ng-if="activeSection=='users'">
 					<div class="toolbar">
 						<div class="search">
-							<input type="text" ng-model="findPropUsers" value="search" onclick="this.value = '';"">
+							<input type="text" ng-model="findPropUsers" value="search" onclick="this.value = ''">
 							<img src="img/icons/search-icon.svg" alt="search">
 						</div>
 						<div>
@@ -777,7 +808,7 @@
 											<textarea name="" placeholder="Your comment here" cols="30" rows="5"></textarea>
 										</div>
 										<div class="button-holder">
-										<button type="button" class="btn delete" ng-click="hideSubscriptionDetails()"  data-toggle="modal" data-target="#subscriptionEndedModal" data-dismiss="modal">End Subscription</button>
+											<button type="button" class="btn delete" ng-click="hideSubscriptionDetails()"  data-toggle="modal" data-target="#subscriptionEndedModal" data-dismiss="modal">End Subscription</button>
 											<button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>

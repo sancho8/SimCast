@@ -1,7 +1,7 @@
 
-var modal = document.getElementById('firstLaunchModal');
+//var modal = document.getElementById('firstLaunchModal');
 
-var openModalBtn = document.getElementById("openStartModalBtn");
+/*var openModalBtn = document.getElementById("openStartModalBtn");
 
 var closeModalBtn = document.getElementById("closeStartModalBtn");
 
@@ -11,7 +11,7 @@ closeModalBtn.onclick = function() {
 
 openModalBtn.onclick = function() {
 	modal.style.display = "block";
-}
+}*/
 
 $(document).ready(function(){
      

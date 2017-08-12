@@ -42,7 +42,6 @@ var app = angular.module("SimCast", [])
 	};
 
 	$scope.checkSelectedSearches = function(selected, elem){
-		console.log(elem);
 		if(selected){
 			$scope.selectedSearches.push(elem);
 		}
@@ -68,7 +67,7 @@ var app = angular.module("SimCast", [])
 	$scope.showMainPage = function(){
 		$("#settingsPage").fadeOut('slow', function() {
 			$("#mainPage").fadeIn('slow', function() {
-				
+
 			});
 		});
 	}
@@ -291,4 +290,43 @@ var app = angular.module("SimCast", [])
 		checked: false
 	},
 	];
+
+	$scope.loadItems = [
+	    {
+	    	firstLine: "Authenticating",
+	    	secondLine: "Data Accessibility"
+	    },
+	    {
+	    	firstLine: "Translating",
+	    	secondLine: "UPC Code"
+	    },
+	    {
+	    	firstLine: "Scoring",
+	    	secondLine: "Amazon"
+	    },
+	    {
+	    	firstLine: "Scoring",
+	    	secondLine: "Facebook"
+	    },
+	    {
+	    	firstLine: "Scoring",
+	    	secondLine: "YouTube"
+	    },
+	    {
+	    	firstLine: "Scoring",
+	    	secondLine: "BestBuy"
+	    },
+	    {
+	    	firstLine: "Scoring",
+	    	secondLine: "Pinterest"
+	    },
+	    {
+	    	firstLine: "Scoring",
+	    	secondLine: "Walmart"
+	    },
+	    {
+	    	firstLine: "Totalling",
+	    	secondLine: "Score"
+	    }
+	]
 });
