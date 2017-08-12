@@ -367,6 +367,8 @@ footer
     line-height: 29px
     font-weight: normal
   .filters-list
+    animation: slowRight 0.7s
+    transform: translate3d(0, 0, 0)
     ul
       margin: 0
       list-style-type: none
@@ -379,7 +381,6 @@ footer
         text-decoration: none
 	
 
-
   .control
     padding-left: 75px
     &.last
@@ -391,8 +392,23 @@ footer
       text-decoration: none
     img
       &.rotated
+        animation: rotateRight 0.5s
+        transform: translate3d(0, 0, 0)
         transform: rotate(90deg);
- 
+
+@keyframes slowRight
+  0%
+    display: none
+    margin-left: -100px
+    opacity: 0
+  100%
+    margin-left: 0
+
+@keyframes rotateRight
+  0% 
+    transform: rotate(0deg)
+  100% 
+    transform: rotate(90deg)
 
 /* END Advanced filters section */
 
@@ -400,8 +416,10 @@ footer
 /* START User box section */
 
 #UserDropdownModal
+  animation: modalSlowDown 0.5s
+  transform: translate3d(0, 0, 0)
   position: fixed
-  top: 80px
+  top: 75px
   right: 60px
   height: 84px
   width: 135px
@@ -432,9 +450,11 @@ footer
 /* START Report modal section */
 
 #ReportModal
+  animation: modalSlowDown 0.5s
+  transform: translate3d(0, 0, 0)
   position: fixed
   z-index: 1
-  top: 80px
+  top: 75px
   left: 40px
   height: 289px
   width: 380px
@@ -658,8 +678,10 @@ footer
 /* START Notification modal section */
 
 #NotificationModal
+  animation: modalSlowDown 0.5s
+  transform: translate3d(0, 0, 0)
   position: fixed
-  top: 70px
+  top: 75px
   right: 200px
   width: 324px
   border-radius: 4px
@@ -919,6 +941,7 @@ footer
   transform: translate3d(0, 0, 0)
 
 .subscription-frame
+  height: 500px
   div
     padding-left: 0
     padding-right: 0
@@ -1204,6 +1227,14 @@ footer
     display: none
   100% 
     margin-top: 0
+
+@keyframes modalSlowDown
+  0% 
+    display: none
+    opacity: 0
+    top: 0px
+  100%
+    top: 75px
 
 /* END Settings page section */
 
