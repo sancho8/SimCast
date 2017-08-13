@@ -66,7 +66,7 @@
 			<div class="col-lg-3 col-md-3 col-lg-offset-2 col-md-offset-2">
 				<div class="notification-box">
 					<a href="" ng-click="showNotificationModal = !showNotificationModal">
-						<div>
+						<div class="notification-toggler">
 							<img src="img/icons/notification-exist-icon.svg" alt="notifications">
 							<span>{{2}}</span>
 						</div>
@@ -140,9 +140,12 @@
 					<input type="text" name="ProductCompany" placeholder="Product Company">
 				</div>
 				<div>
-					<button data-toggle="modal" data-target="#searchModal" class="score-button-lg">
+					<button data-toggle="modal" ng-click="animateSearchModal()" data-target="#searchModal" class="score-button-lg">
 						<span>SCORE</span>
 					</button>
+					<!--<button ng-click="showSearchResultPage()" class="score-button-lg">
+						<span>SCORE</span>
+					</button>-->
 				</div>
 				<div class="text-buttons">
 					<a href="" ng-click="showAdvancedFilters()" style="float:left">Advanced filters</a>
@@ -153,7 +156,8 @@
 	</div>
 
 	<footer>
-		<div class="wave"></div>
+		<div class="wave-bg"></div>
+		<!--<div class="wave"></div>-->
 	</footer>
 
 	<div id="UserDropdownModal" ng-show="showUserDropdownModal">
@@ -225,17 +229,18 @@
 		<!-- Modal content -->
 		<div class="modal-content">
 			<div class="exit" data-dismiss="modal">
-				<img src="img/icons/cross-icon-hover.svg" alt="exit">
-				<a href="">X</a>
+				<a href="">
+					<img src="img/icons/cross-icon-dark.svg" alt="exit">
+				</a>
 			</div>
 			<div class="signing">
 				Searching
 			</div>
 			<div class="loading">
-				<img src="img/icons/load-icon.svg" alt="loaded">
+				<img ng-src="{{searchEnded ? 'img/icons/load-icon-complete.svg' : 'img/icons/load-icon.svg'}}" alt="loaded">
 			</div>
 			<div class="loading-progress">
-				<div class="loading-item" ng-repeat="loadItem in loadItems">
+				<div class="loading-item" ng-repeat="loadItem in loadItems" ng-class="{{'item'+$index}}">
 					<div class="rect">
 						<div class="fill"></div>
 					</div>
@@ -246,16 +251,20 @@
 					</div>
 				</div>
 			</div>
-			<div class="button" data-dismiss="modal">
-				<button class="green-button-lg">
+			<div ng-if="!searchEnded" class="button" data-dismiss="modal">
+				<button class="searchButton">
 					<span>CANCEL SEARCH</span>
+				</button>
+			</div>
+			<div ng-if="searchEnded" ng-click="showSearchResultPage()" class="button" data-dismiss="modal">
+				<button class="searchButton ended">
+					<span>SHOW RESULTS</span>
 				</button>
 			</div>
 		</div>
 	</div>
 
 	<div id="savedSearchesModal">
-
 		<div class="toolbar">
 			<div class="exit" ng-click="hideSavedSearches()">
 				<a href=""><img src="img/icons/cross-icon.svg" alt="close"></a>
@@ -438,7 +447,7 @@
 		<div class="row main-settings-row">
 
 			<div class="col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-				<button class="back-search-btn" ng-click="showMainPage()">
+				<button class="back-search-btn" ng-click="showMainPage('#settingsPage')">
 					<img src="img/icons/back-icon.svg" alt="back to search page">
 					<span>BACK TO THE SEARCH PAGE</span>
 				</button>
@@ -922,9 +931,83 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
+	<div id="searchResultPage">
+		<div class="heading">
+			Score Page
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-lg-4">
+				<button class="back-search-btn" ng-click="showMainPage('#searchResultPage')">
+					<img src="img/icons/back-icon.svg" alt="back to search page">
+					<span>BACK TO THE SEARCH PAGE</span>
+				</button>
+				<div class="details">
+					<div class="details-item">
+						<div class="head">Product</div>
+						<div class="content">
+							34" Class 21:9 UltraWide Full HD IPS Curved Gaming Monitor (34" Diagonal)
+						</div>
+						<div class="head">UPC Code</div>
+						<div class="content">
+							719192606715
+						</div>
+						<div class="head">Company</div>
+						<div class="content">
+							LG
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5 col-lg-5">
+				<div class="speedometer">
+					<div>
+						<img src="img/speedometer.svg" alt="">
+						<div class="arrow">
+							<img src="img/speed-arrow.svg" alt="">
+						</div>
+					</div>
+					<div class="score-desc">
+						<div class="number">642</div>
+						<div> Total Score </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-lg-3">
+				<div class="buttons">
+					<div>
+						<button class="download" >
+							<img src="img/icons/download-icon.svg" alt="download score">
+							<span>DOWNLOAD SCORE</span>
+						</button>
+					</div>
+					<div>
+						<button class="email" >
+							<img src="img/icons/download-icon.svg" alt="email score">
+							<span>EMAIL SCORE</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="result-message green">
+			Good. Product may have better than average rate of sale
+		</div>
+		<div class="heading">
+			Individual Score Breakdown
+		</div>
+		<div class="scores">
+			<div class="score-item" ng-class="{'exclamation': scoreItem.score=='N/A'}" ng-repeat="scoreItem in scores">
+				<img src="img/score-circle.svg" alt="score circle">
+				<div class="desc">
+					<span>{{scoreItem.score}}</span>
+					<br/>
+					{{scoreItem.name}}
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 

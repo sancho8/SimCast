@@ -64,8 +64,8 @@ var app = angular.module("SimCast", [])
 		});
 	}
 
-	$scope.showMainPage = function(){
-		$("#settingsPage").fadeOut('slow', function() {
+	$scope.showMainPage = function(elemId){
+		$(elemId).fadeOut('slow', function() {
 			$("#mainPage").fadeIn('slow', function() {
 
 			});
@@ -179,6 +179,32 @@ var app = angular.module("SimCast", [])
 		$scope.searchUsersProp = undefined;
 	}
 
+	$scope.searchEnded = false;
+
+	$scope.animateSearchModal = function(){
+		$scope.searchEnded = false;
+		$(".fill").css("display", "none");
+		$(".text").css("display", "none");
+		$(".loading-item").each(function(index, elem){
+			var data = $(this);
+			setTimeout( function () {
+				data.find(".text").css("display", "block");
+				data.find(".fill").css("display", "block");
+			},index*1000);
+		});
+		setTimeout(function(){
+			$scope.searchEnded = true;
+			$scope.$apply();
+		}, 10*970);
+	}
+
+	$scope.showSearchResultPage = function(){
+		$("#mainPage").fadeOut('0', function() {
+			$("#searchResultPage").fadeIn("400", function() {
+
+			});
+		});
+	}
 
 	$scope.savedSearches = [
 	{
@@ -292,41 +318,68 @@ var app = angular.module("SimCast", [])
 	];
 
 	$scope.loadItems = [
-	    {
-	    	firstLine: "Authenticating",
-	    	secondLine: "Data Accessibility"
-	    },
-	    {
-	    	firstLine: "Translating",
-	    	secondLine: "UPC Code"
-	    },
-	    {
-	    	firstLine: "Scoring",
-	    	secondLine: "Amazon"
-	    },
-	    {
-	    	firstLine: "Scoring",
-	    	secondLine: "Facebook"
-	    },
-	    {
-	    	firstLine: "Scoring",
-	    	secondLine: "YouTube"
-	    },
-	    {
-	    	firstLine: "Scoring",
-	    	secondLine: "BestBuy"
-	    },
-	    {
-	    	firstLine: "Scoring",
-	    	secondLine: "Pinterest"
-	    },
-	    {
-	    	firstLine: "Scoring",
-	    	secondLine: "Walmart"
-	    },
-	    {
-	    	firstLine: "Totalling",
-	    	secondLine: "Score"
-	    }
+	{
+		firstLine: "Authenticating",
+		secondLine: "Data Accessibility"
+	},
+	{
+		firstLine: "Translating",
+		secondLine: "UPC Code"
+	},
+	{
+		firstLine: "Scoring",
+		secondLine: "Amazon"
+	},
+	{
+		firstLine: "Scoring",
+		secondLine: "Facebook"
+	},
+	{
+		firstLine: "Scoring",
+		secondLine: "YouTube"
+	},
+	{
+		firstLine: "Scoring",
+		secondLine: "BestBuy"
+	},
+	{
+		firstLine: "Scoring",
+		secondLine: "Pinterest"
+	},
+	{
+		firstLine: "Scoring",
+		secondLine: "Walmart"
+	},
+	{
+		firstLine: "Totalling",
+		secondLine: "Score"
+	}
+	];
+
+	$scope.scores = [
+	{
+		name: "Amazon",
+		score: "644"
+	},
+	{
+		name: "BestBuy",
+		score: "639"
+	},
+	{
+		name: "Facebook",
+		score: "648"
+	},
+	{
+		name: "Pinterest",
+		score: "630"
+	},
+	{
+		name: "Walmart",
+		score: "642"
+	},
+	{
+		name: "YouTube",
+		score: "N/A"
+	}
 	]
 });

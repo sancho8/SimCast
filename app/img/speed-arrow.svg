@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="6px" height="132px" viewBox="0 0 6 132" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>Speed Arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Speedometer" transform="translate(-179.000000, -83.000000)" fill-rule="nonzero">
+            <g id="Speed_2">
+                <g id="Speed-Arrow" transform="translate(182.146807, 148.734856) rotate(-250.000000) translate(-182.146807, -148.734856) translate(118.646807, 123.234856)">
+                    <path d="M64.9805225,-39.4071 C65.0376434,-39.7639993 64.8312097,-40.1150948 64.4508027,-40.3080298 C64.0703957,-40.5009647 63.5845796,-40.5009647 63.2041727,-40.3080298 C62.8237657,-40.1150948 62.617332,-39.7639993 62.6744529,-39.4071 L60.7995996,89.1224653 C60.789573,89.7627946 61.1011869,90.3796575 61.6648424,90.8352778 C62.228498,91.2908982 62.9972381,91.5473191 63.7993649,91.547269 L63.7993649,91.547269 C64.6014917,91.5473191 65.3702318,91.2908982 65.9338874,90.8352778 C66.4975429,90.3796575 66.8091568,89.7627946 66.7991302,89.1224653 L64.9805225,-39.4071 Z" fill="#2B3D6B" transform="translate(63.799365, 25.547269) rotate(250.000000) translate(-63.799365, -25.547269) "></path>
+                    <circle id="Oval" fill="#FFFFFF" cx="123" cy="4" r="1"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
