@@ -72,6 +72,42 @@ var app = angular.module("SimCast", [])
 		});
 	}
 
+	$scope.slideImage = function(imgSelector){
+		$( selector ).animate({
+			opacity: 0,
+			left: "+=50",
+			height: "toggle"
+		}, 1000, function() {
+			// Animation complete.
+		});
+	}
+
+	$scope.goToMainPage = function(){
+		$("#monthlySubscriptionsPage").fadeOut('slow', function(){});
+		$("#settingsPage").fadeOut('slow', function(){});
+		$("#mainPage").fadeIn('slow', function() {
+
+		});
+	}
+
+	$scope.showLoginPage = function(){
+		$("#mainPage").fadeOut('slow', function() {
+			$("#loginPage").fadeIn("slow", function() {
+
+			});
+		});
+		$("#monthlySubscriptionPage").fadeOut('slow', function(){});
+		$("#settingsPage").fadeOut('slow', function(){});
+		$("header").fadeOut('slow', function() {
+		});
+	}
+
+	$scope.showHeader = function(){
+		$("header").fadeIn('slow', function() {
+
+		});
+	}
+
 	$scope.subsctiptionUpgraded = function(){
 		$("#monthlySubscriptionsPage").fadeOut('slow', function() {
 			
@@ -79,7 +115,6 @@ var app = angular.module("SimCast", [])
 		$("#settingsPage").fadeIn('slow', function() {
 			
 		});
-		$(document).scrollTop(1000);
 	}
 
 	$scope.hasSubscription = false
@@ -183,19 +218,21 @@ var app = angular.module("SimCast", [])
 
 	$scope.animateSearchModal = function(){
 		$scope.searchEnded = false;
-		$(".fill").css("display", "none");
-		$(".text").css("display", "none");
-		$(".loading-item").each(function(index, elem){
-			var data = $(this);
-			setTimeout( function () {
-				data.find(".text").css("display", "block");
-				data.find(".fill").css("display", "block");
-			},index*1000);
+		$("#mainPage").fadeOut('fast', function() {
+			$(".fill").css("display", "none");
+			$(".text").css("display", "none");
+			$(".loading-item").each(function(index, elem){
+				var data = $(this);
+				setTimeout( function () {
+					data.find(".text").css("display", "block");
+					data.find(".fill").css("display", "block");
+				},index*1000);
+			});
+			setTimeout(function(){
+				$scope.searchEnded = true;
+				$scope.$apply();
+			}, 10*970);
 		});
-		setTimeout(function(){
-			$scope.searchEnded = true;
-			$scope.$apply();
-		}, 10*970);
 	}
 
 	$scope.showSearchResultPage = function(){
@@ -274,7 +311,7 @@ var app = angular.module("SimCast", [])
 
 	$scope.users = [
 	{
-		name: 'Dillon Roberts',
+		name: 'Dillon Roberts(Admin)',
 		lastActive: '07.23.17',
 		searchesNum: '32',
 		isAdmin: true,

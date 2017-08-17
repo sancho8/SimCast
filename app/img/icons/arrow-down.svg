@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="8px" viewBox="0 0 10 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>Arrow EQ 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Arrow-EQ-ico-Down" fill="#8F8F8F">
+            <g id="Arrow-EQ-ico">
+                <path d="M4.6546952,7.80175565 L1.0077571,1.56115974 L1.0077571,1.56115974 C0.896294737,1.3704267 0.960556314,1.12544892 1.15128935,1.01398655 C1.21252792,0.978199386 1.2821811,0.959339272 1.35310982,0.959339272 L8.64695303,0.959339272 L8.64695303,0.959339272 C8.86786693,0.959339272 9.04695303,1.13842537 9.04695303,1.35933927 C9.04695303,1.43026746 9.0280932,1.49992013 8.99230655,1.56115838 L5.34540143,7.80175429 L5.34540143,7.80175429 C5.23393981,7.99248777 4.98896229,8.05675031 4.79822881,7.94528869 C4.73883851,7.91058195 4.68940218,7.86114581 4.6546952,7.80175565 Z" id="Arrow-EQ-2" transform="translate(4.999999, 4.479670) rotate(-360.000000) translate(-4.999999, -4.479670) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

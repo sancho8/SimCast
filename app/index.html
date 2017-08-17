@@ -51,9 +51,16 @@
 						<img height="23px" width="23px" src="img/icons/speaker-icon.svg" alt="speaker">
 						<span>Report</span>
 					</a>
+					<div id="ReportModal" ng-show="showReportModal">
+						<div>Report Problem</div>
+						<textarea name="" id="" cols="30" rows="10" placeholder="How can we help?"></textarea>
+						<button class="submit-report-button">
+							<span>SUBMIT</span>
+						</button>
+					</div>
 				</div>
 				<div class="button-wrapper">
-					<button class="score-button">
+					<button class="score-button" ng-click="goToMainPage()">
 						<span>NEW SCORE</span>
 					</button>
 				</div>
@@ -76,9 +83,18 @@
 					<img height="33px" src="img/user-photo.png" alt="user photo">
 					<a href="" ng-click="showUserDropdownModal = !showUserDropdownModal"> 
 						<span class="greeting">Hello, Dillon</span>
-						<span><img height="8px" width="8px" src="img/icons/triangle-icon.svg" alt="dropdown" ng-class="{'rotated' : showUserDropdownModal}"></span>
+						<span><img height="8px" width="8px" src="img/icons/arrow-down.svg" alt="dropdown" ng-class="{'rotated' : showUserDropdownModal}"></span>
 					</a>
 				</div>
+			</div>
+
+		</div>
+		<div id="UserDropdownModal" ng-show="showUserDropdownModal">
+			<div>
+				<a href="" ng-click="showSettings(); showUserDropdownModal = false">Admin Settings</a>
+			</div>
+			<div>
+				<a href="" ng-click="showUserDropdownModal=false; showLoginPage()">Logout</a>
 			</div>
 		</div>
 	</header>
@@ -125,7 +141,7 @@
 				</a> 
 			</div>
 			<div align="center">
-				<button class="save-filters-button btn-anim" ng-click="saveAndHideAdvancedFilters()">
+				<button class="save-filters-button filters-save btn-anim" ng-click="saveAndHideAdvancedFilters()">
 					<span>SAVE</span>
 				</button>
 			</div>
@@ -153,21 +169,12 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<footer>
-		<div class="wave-bg"></div>
-		<!--<div class="wave"></div>-->
+		<div class="wave"></div>
 	</footer>
-
-	<div id="UserDropdownModal" ng-show="showUserDropdownModal">
-		<div>
-			<a href="" ng-click="showSettings(); showUserDropdownModal = false">Admin Settings</a>
-		</div>
-		<div>
-			<a href="" ng-click="showUserDropdownModal=false">Logout</a>
-		</div>
-	</div>
 
 	<div id="NotificationModal" ng-show="showNotificationModal">
 		<div class="notification-content" ng-repeat="note in notifications">
@@ -193,14 +200,6 @@
 				<img src="img/icons/blue-wave-icon.svg" alt="wave icon">
 			</a>
 		</div>
-	</div>
-
-	<div id="ReportModal" ng-show="showReportModal">
-		<div>Report Problem</div>
-		<textarea name="" id="" cols="30" rows="10" placeholder="How can we help?"></textarea>
-		<button class="submit-report-button">
-			<span>SUBMIT</span>
-		</button>
 	</div>
 
 	<div id="firstLaunchModal" class="modal-first modal">
@@ -252,7 +251,7 @@
 				</div>
 			</div>
 			<div ng-if="!searchEnded" class="button" data-dismiss="modal">
-				<button class="searchButton">
+				<button class="searchButton" ng-click="goToMainPage()">
 					<span>CANCEL SEARCH</span>
 				</button>
 			</div>
@@ -307,10 +306,10 @@
 									<img ng-show="searchProp !='name' && searchProp!='-name'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 								</a>
 								<a href="" ng-click="searchProp = '-name'">
-									<img ng-show="searchProp == 'name'" class="sorted" src="img/icons/triangle-icon.svg"/>
+									<img ng-show="searchProp == 'name'" class="sorted" src="img/icons/arrow-down.svg"/>
 								</a>
 								<a href="" ng-click="searchProp = false">
-									<img ng-show="searchProp == '-name'" class="inverted" src="img/icons/triangle-icon.svg"/>
+									<img ng-show="searchProp == '-name'" class="inverted" src="img/icons/arrow-down.svg"/>
 								</a>
 							</th>
 							<th>
@@ -321,10 +320,10 @@
 									<img ng-show="searchProp !='upc' && searchProp!='-upc'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 								</a>
 								<a href="" ng-click="searchProp = '-upc'">
-									<img ng-show="searchProp == 'upc'" class="sorted" src="img/icons/triangle-icon.svg"/>
+									<img ng-show="searchProp == 'upc'" class="sorted" src="img/icons/arrow-down.svg"/>
 								</a>
 								<a href="" ng-click="searchProp = false">
-									<img ng-show="searchProp == '-upc'" class="inverted" src="img/icons/triangle-icon.svg"/>
+									<img ng-show="searchProp == '-upc'" class="inverted" src="img/icons/arrow-down.svg"/>
 								</a>
 							</th>
 							<th>
@@ -335,10 +334,10 @@
 									<img ng-show="searchProp !='company' && searchProp!='-company'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 								</a>
 								<a href="" ng-click="searchProp = '-company'">
-									<img ng-show="searchProp == 'company'" class="sorted" src="img/icons/triangle-icon.svg"/>
+									<img ng-show="searchProp == 'company'" class="sorted" src="img/icons/arrow-down.svg"/>
 								</a>
 								<a href="" ng-click="searchProp = false">
-									<img ng-show="searchProp == '-company'" class="inverted" src="img/icons/triangle-icon.svg"/>
+									<img ng-show="searchProp == '-company'" class="inverted" src="img/icons/arrow-down.svg"/>
 								</a>
 							</th>
 							<th>
@@ -349,10 +348,10 @@
 									<img ng-show="searchProp !='date' && searchProp!='-date'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 								</a>
 								<a href="" ng-click="searchProp = '-date'">
-									<img ng-show="searchProp == 'date'" class="sorted" src="img/icons/triangle-icon.svg"/>
+									<img ng-show="searchProp == 'date'" class="sorted" src="img/icons/arrow-down.svg"/>
 								</a>
 								<a href="" ng-click="searchProp = false">
-									<img ng-show="searchProp == '-date'" class="inverted" src="img/icons/triangle-icon.svg"/>
+									<img ng-show="searchProp == '-date'" class="inverted" src="img/icons/arrow-down.svg"/>
 								</a>
 							</th>
 						</tr>
@@ -423,509 +422,511 @@
 	</div>
 
 	<div id="settingsPage">
-		<div class="row">
-			<div class="col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
-				<div class="heading">
-					<h2>Admin Settings, <span>Dillon Hall</span></h2>
-					<h3 ng-show="activeSection=='profile'">Edit your name, email, avatar</h3>
-					<h3 ng-show="activeSection=='password'">Change your password</h3>
-					<h3 ng-show="activeSection=='users'">Manage your users</h3>
-					<h3 ng-show="activeSection=='billing'">Your Billing history</h3>
-					<h3 ng-show="activeSection=='searches'">Your Searches Remaining</h3>
-					<h3 ng-show="activeSection=='subscription'">Manage your subscription</h3>
+		<div class="wrapper">
+			<div class="row">
+				<div class="col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+					<div class="heading">
+						<h2>Admin Settings, <span>Dillon Hall</span></h2>
+						<h3 ng-show="activeSection=='profile'">Edit your name, email, avatar</h3>
+						<h3 ng-show="activeSection=='password'">Change your password</h3>
+						<h3 ng-show="activeSection=='users'">Manage your users</h3>
+						<h3 ng-show="activeSection=='billing'">Your Billing history</h3>
+						<h3 ng-show="activeSection=='searches'">Your Searches Remaining</h3>
+						<h3 ng-show="activeSection=='subscription'">Manage your subscription</h3>
+					</div>
+				</div>
+				<div class="col-md-2 col-lg-2 col-md-offset-2 col-lg-offset-2">
+					<div class="upgrade-btn-holder">
+						<button class="upgrade-account-btn">
+							<img src="img/icons/upgrade-account-icon.svg" alt="upgrade account">
+							<span>UPGRADE ACCOUNT</span>
+						</button>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-2 col-lg-2 col-md-offset-2 col-lg-offset-2">
-				<div class="upgrade-btn-holder">
-					<button class="upgrade-account-btn">
-						<img src="img/icons/upgrade-account-icon.svg" alt="upgrade account">
-						<span>UPGRADE ACCOUNT</span>
+			<div class="row main-settings-row">
+
+				<div class="col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
+					<button class="back-search-btn" ng-click="showMainPage('#settingsPage')">
+						<img src="img/icons/back-icon.svg" alt="back to search page">
+						<span>BACK TO THE SEARCH PAGE</span>
 					</button>
+					<ul class="settings-menu" ng-init="activeSection = 'profile'">
+						<li ng-click="activeSection = 'profile'" ng-class="{'active' : activeSection == 'profile'}">
+							<a href="">
+								<img src="img/icons/profile-icon-white.svg" ng-show="activeSection=='profile'" alt="profile">
+								<img src="img/icons/profile-icon.svg" ng-show="activeSection!='profile'" alt="profile">
+								My Profile
+							</a>
+						</li>
+						<li ng-click="activeSection = 'password'" ng-class="{'active' : activeSection == 'password'}">
+							<a href="">
+								<img src="img/icons/password-icon-white.svg" ng-show="activeSection=='password'" alt="password">
+								<img src="img/icons/password-icon.svg" ng-show="activeSection!='password'" alt="password">
+								Password
+							</a>
+						</li>
+						<li ng-click="activeSection = 'users'" ng-class="{'active' : activeSection == 'users'}">
+							<a href="">
+								<img src="img/icons/users-icon-white.svg" ng-show="activeSection=='users'" alt="users">
+								<img src="img/icons/users-icon.svg" ng-show="activeSection!='users'" alt="users">
+								Users
+							</a>
+						</li>
+						<li ng-click="activeSection = 'billing'" ng-class="{'active' : activeSection == 'billing'}">
+							<a href="">
+								<img src="img/icons/billing-history-icon-white.svg" ng-show="activeSection=='billing'" alt="billing">
+								<img src="img/icons/billing-history-icon.svg" ng-show="activeSection!='billing'" alt="billing">
+								Billing History
+							</a>
+						</li>
+						<li ng-click="activeSection = 'searches'" ng-class="{'active' : activeSection == 'searches'}">
+							<a href="">
+								<img src="img/icons/searches-remaining-icon-white.svg" ng-show="activeSection=='searches'" alt="billing">
+								<img src="img/icons/searches-remaining-icon.svg" ng-show="activeSection!='searches'" alt="searches">
+								Searches Remaining
+							</a>
+						</li>
+						<li ng-click="activeSection = 'subscription'" ng-class="{'active' : activeSection == 'subscription'}">
+							<a href="">
+								<img src="img/icons/subscription-icon-white.svg" ng-show="activeSection=='subscription'" alt="subscription">
+								<img src="img/icons/subscription-icon.svg" ng-show="activeSection!='subscription'" alt="searches">
+								Your Subscription
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-md-8 col-lg-8 col-md-offset-1 col-lg-offset-1 settings-frame">
+					<div class="profile-frame slowDown" ng-if="activeSection=='profile'">
+						<div class="profile-top-section">
+							<img src="img/user-photo.png" alt="user photo">
+							<button class="btn upload-button">Upload New Photo</button>
+							<button class="btn delete-photo">Delete</button>
+						</div>
+						<div class="settings-form">
+							<div>
+								<input type="text" class="settings-form-input" placeholder="First Name">
+							</div>
+							<div>
+								<input type="text" class="settings-form-input" placeholder="Last Name">
+							</div>
+							<div>
+								<input type="email" class="settings-form-input" placeholder="Email">
+							</div>
+							<div>
+								<button class="save-filters-button"><span>SAVE</span></button>
+							</div>
+						</div>
+					</div>
+					<div class="password-frame slowDown" ng-if="activeSection=='password'">
+						<div class="settings-form">
+							<div class="top">
+								<input type="text" class="settings-form-input" placeholder="Current Password">
+							</div>
+							<div>
+								<input type="text" class="settings-form-input" placeholder="New Password">
+							</div>
+							<div>
+								<input type="email" class="settings-form-input" placeholder="Email">
+							</div>
+							<div>
+								<button class="save-filters-button"><span>SAVE</span></button>
+							</div>
+						</div>
+					</div>
+					<div class="users-frame slowDown" ng-if="activeSection=='users'">
+						<div class="toolbar">
+							<div class="search">
+								<input type="text" ng-model="findPropUsers" value="search" onclick="this.value = ''">
+								<img src="img/icons/search-icon.svg" alt="search">
+							</div>
+							<div>
+								<span class="toolbar-heading">Users</span>
+							</div>
+							<div class="delete">
+								<a ng-show="!isUsersSelected" href="" data-toggle="modal" data-target="#addUserModal">
+									<img src="img/icons/add-user-icon.svg" alt="delete">
+									<span>Add User</span>
+								</a>
+								<a ng-show="isUsersSelected" href="" data-toggle="modal" data-target="#deleteSelectedUsersModal">
+									<img src="img/icons/delete-icon.svg" alt="delete">
+									<span>Remove User</span>
+								</a>
+							</div>
+						</div>
+						<div class="users-table">
+
+							<div class="table-container">
+								<table>
+									<thead>
+										<tr>
+											<th class="checkbox">
+												<a href="" ng-click="allUsersSelected = !allUsersSelected">
+													<img ng-show="!allUsersSelected" src="img/icons/check-disabled-icon.svg" alt="check all">
+													<img ng-show="allUsersSelected" src="img/icons/check-enabled-icon.svg" alt="check all">
+												</a>
+											</th>
+											<th>
+												<a href="">
+													<span>Name</span>
+												</a>
+												<a href="" ng-click="searchPropUsers = 'name'">
+													<img ng-show="searchPropUsers !='name' && searchPropUsers!='-name'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+												</a>
+												<a href="" ng-click="searchPropUsers = '-name'">
+													<img ng-show="searchPropUsers == 'name'" class="sorted" src="img/icons/arrow-down.svg"/>
+												</a>
+												<a href="" ng-click="searchPropUsers = false">
+													<img ng-show="searchPropUsers == '-name'" class="inverted" src="img/icons/arrow-down.svg"/>
+												</a>
+											</th>
+											<th>
+												<a href="">
+													<span>Last Active</span>
+												</a>
+												<a href="" ng-click="searchPropUsers = 'lastActive'">
+													<img ng-show="searchPropUsers !='lastActive' && searchPropUsers!='-lastActive'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+												</a>
+												<a href="" ng-click="searchPropUsers = '-lastActive'">
+													<img ng-show="searchPropUsers == 'lastActive'" class="sorted" src="img/icons/arrow-down.svg"/>
+												</a>
+												<a href="" ng-click="searchPropUsers = false">
+													<img ng-show="searchPropUsers == '-lastActive'" class="inverted" src="img/icons/arrow-down.svg"/>
+												</a>
+											</th>
+											<th class="text-aligned">
+												<a href="">
+													<span>Searches This Month</span>
+												</a>
+												<a href="" ng-click="searchPropUsers = 'searchesNum'">
+													<img ng-show="searchPropUsers !='searchesNum' && searchPropUsers!='-searchesNum'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+												</a>
+												<a href="" ng-click="searchPropUsers = '-searchesNum'">
+													<img ng-show="searchPropUsers == 'searchesNum'" class="sorted" src="img/icons/arrow-down.svg"/>
+												</a>
+												<a href="" ng-click="searchPropUsers = false">
+													<img ng-show="searchPropUsers == '-searchesNum'" class="inverted" src="img/icons/arrow-down.svg"/>
+												</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-if="savedSearches.length == 0" ng-repeat="i in getNumber(5) track by $index">
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<span class="no-elements" ng-if="savedSearches.length == 0">
+											You don't have any saved searches.
+										</span>
+										<tr ng-repeat="s in users | orderBy : searchPropUsers | filter : findPropUsers" ng-click="selected = !selected; checkSelectedUsers(selected, s)" ng-class="{ 'selected' : selected || allUsersSelected && s.isAdmin != true}">
+											<td class="checkbox">
+												<a href="" ng-if="s.isAdmin != true">
+													<img ng-show="selected || allUsersSelected" src="img/icons/check-enabled-white-icon.svg" alt="checked">
+													<img ng-show="!selected" src="img/icons/check-disabled-icon.svg" alt="unchecked">
+												</a>
+											</td>
+											<td class="username">
+												<span>{{s.name}}</span>
+											</td>
+											<td class="lastActive">{{s.lastActive}}</td>
+											<td class="searchesNum">{{s.searchesNum}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="modal fade" id="deleteSelectedUsersModal" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="content-holder">
+											<div class="question">
+												<p>Are you sure you want to delete this user?</p>
+											</div>
+											<div >
+												<button ng-click="deleteSelectedUsers()" type="button" class="btn delete" data-dismiss="modal">Delete</button>
+												<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal fade" id="addUserModal" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="content-holder">
+											<div class="question">
+												<p>Add User</p>
+											</div>
+											<div>
+												<input type="text" placeholder="User's Email">
+											</div>
+											<div>
+												<button ng-click="addUser()" type="button" class="btn delete" data-dismiss="modal">Add</button>
+												<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
+					<div class="billing-frame slowDown" ng-if="activeSection=='billing'">
+						Billing
+					</div>
+					<div class="searches-frame slowDown" ng-if="activeSection=='searches'">
+						<div class="heading">
+							You have 323 searches left
+						</div>
+						<div class="row">
+							<div class="progress-bar-holder col-md-10 col-lg-10">
+								<span class="left">0 searches</span>
+								<span class="right">500 searches</span>
+								<br />
+								<div class="progress">
+									<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="heading">
+							You can purchase extra searches in this month
+						</div>
+						<div class="purchase">
+							<button>
+								<span>PURCHASE 10 — $5</span>
+							</button>
+							<button class="yellow">
+								<span>PURCHASE 50 — $20</span>
+							</button>
+						</div>
+					</div>
+					<div class="subscription-frame slowDown" ng-if="activeSection=='subscription'">
+						<div ng-if="!hasSubscription">
+							<div class="heading">
+								It looks like you do not have a subscription right now. 
+								Click an option below to upgrade.
+							</div>
+							<div class="row description">
+								<div class="col-md-3 col-lg-3">
+									<div class="ship-image">
+										<img src="img/ship-bronze.svg" alt="bronze ship">
+									</div>
+									<div class="subscription-name">
+										<div><img src="img/bronze-heading.svg" alt="bronze"></div>
+										<div><img src="img/wave-bronze.svg" alt="wave bronze"></div>
+									</div>
+									<div class="price">
+										$68.95
+									</div>
+									<div class="configuration">
+										2 users
+										<br/ >
+										100 product queries
+									</div>
+									<div class="button-holder">
+										<button ng-click="addSubscription('bronze')">
+											<span>BUY NOW</span>
+										</button>
+									</div>
+								</div>
+								<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
+									<div class="ship-image">
+										<img src="img/ship-silver.svg" alt="bronze ship">
+									</div>
+									<div class="subscription-name">
+										<div><img src="img/silver-heading.svg" alt="silver"></div>
+										<div><img src="img/wave-silver.svg" alt="wave silver"></div>
+									</div>
+									<div class="price">
+										$248.95
+									</div>
+									<div class="configuration">
+										10 users
+										<br/ >
+										500 product queries
+									</div>
+									<div class="button-holder">
+										<button ng-click="addSubscription('silver')">
+											<span>BUY NOW</span>
+										</button>
+									</div>
+								</div>
+								<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
+									<div class="ship-image">
+										<img src="img/ship-gold.svg" alt="bronze ship">
+									</div>
+									<div class="subscription-name">
+										<div><img src="img/gold-heading.svg" alt="gold"></div>
+										<div><img src="img/wave-gold.svg" alt="wave gold"></div>
+									</div>
+									<div class="price">
+										Custom Pricing
+									</div>
+									<div class="configuration">
+										Enterprise Users
+									</div>
+									<div class="button-holder">
+										<button ng-click="addSubscription('gold')">
+											<span>CONTACT US</span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="subscription-details" ng-if="hasSubscription">
+							<div class="heading">
+								Currently, you have a <span>{{currentSubscription.type}}</span> subscription.
+							</div>
+							<div class="description">
+								<div>
+									<img ng-src="{{currentSubscription.imageUrl}}" alt="ship silver">
+								</div>
+								<div class="text-content">
+									<div class="period">Monthly</div>
+									<div class="price">{{currentSubscription.price}}</div>
+									<div class="details">
+										<span>{{currentSubscription.details1}}</span>
+										<br/>
+										<span>{{currentSubscription.details2}}</span>
+									</div>
+								</div>
+							</div>
+							<div class="button-holder">
+								<button class="green" ng-click="showMonthlySubscriptions()"><span>UPGRADE NOW</span></button>
+								<button class="blue" data-toggle="modal" data-target="#endSubscriptionModal"><span>END SUBSCRIPTION</span></button>
+							</div>
+						</div>
+
+						<div class="modal fade" id="endSubscriptionModal" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="content-holder">
+										<div class="question">
+											<p>Let us know how we can improve SimCast 
+												<br/>
+												based on your experience</p>
+											</div>
+											<div class="textarea">
+												<textarea name="" placeholder="Your comment here" cols="30" rows="5"></textarea>
+											</div>
+											<div class="button-holder">
+												<button type="button" class="btn delete" ng-click="hideSubscriptionDetails()"  data-toggle="modal" data-target="#subscriptionEndedModal" data-dismiss="modal">End Subscription</button>
+												<button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal fade" id="subscriptionEndedModal" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="content-holder">
+											<div class="question">
+												<p>Your subscription has been ended</p>
+											</div>
+											<div class="button-holder">
+												<button ng-click="endSubscription()" type="button" class="btn cancel" data-dismiss="modal">OK</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row main-settings-row">
+	</div>
 
-			<div class="col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-				<button class="back-search-btn" ng-click="showMainPage('#settingsPage')">
+	<div id="monthlySubscriptionsPage">
+		<div class="row">
+			<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
+				<button class="back-settings-btn" ng-click="backToSettingsPage('#monthlySubscriptionsPage')">
 					<img src="img/icons/back-icon.svg" alt="back to search page">
-					<span>BACK TO THE SEARCH PAGE</span>
+					<span>BACK TO THE SETTINGS</span>
 				</button>
-				<ul class="settings-menu" ng-init="activeSection = 'profile'">
-					<li ng-click="activeSection = 'profile'" ng-class="{'active' : activeSection == 'profile'}">
-						<a href="">
-							<img src="img/icons/profile-icon-white.svg" ng-show="activeSection=='profile'" alt="profile">
-							<img src="img/icons/profile-icon.svg" ng-show="activeSection!='profile'" alt="profile">
-							My Profile
-						</a>
-					</li>
-					<li ng-click="activeSection = 'password'" ng-class="{'active' : activeSection == 'password'}">
-						<a href="">
-							<img src="img/icons/password-icon-white.svg" ng-show="activeSection=='password'" alt="password">
-							<img src="img/icons/password-icon.svg" ng-show="activeSection!='password'" alt="password">
-							Password
-						</a>
-					</li>
-					<li ng-click="activeSection = 'users'" ng-class="{'active' : activeSection == 'users'}">
-						<a href="">
-							<img src="img/icons/users-icon-white.svg" ng-show="activeSection=='users'" alt="users">
-							<img src="img/icons/users-icon.svg" ng-show="activeSection!='users'" alt="users">
-							Users
-						</a>
-					</li>
-					<li ng-click="activeSection = 'billing'" ng-class="{'active' : activeSection == 'billing'}">
-						<a href="">
-							<img src="img/icons/billing-history-icon-white.svg" ng-show="activeSection=='billing'" alt="billing">
-							<img src="img/icons/billing-history-icon.svg" ng-show="activeSection!='billing'" alt="billing">
-							Billing History
-						</a>
-					</li>
-					<li ng-click="activeSection = 'searches'" ng-class="{'active' : activeSection == 'searches'}">
-						<a href="">
-							<img src="img/icons/searches-remaining-icon-white.svg" ng-show="activeSection=='searches'" alt="billing">
-							<img src="img/icons/searches-remaining-icon.svg" ng-show="activeSection!='searches'" alt="searches">
-							Searches Remaining
-						</a>
-					</li>
-					<li ng-click="activeSection = 'subscription'" ng-class="{'active' : activeSection == 'subscription'}">
-						<a href="">
-							<img src="img/icons/subscription-icon-white.svg" ng-show="activeSection=='subscription'" alt="subscription">
-							<img src="img/icons/subscription-icon.svg" ng-show="activeSection!='subscription'" alt="searches">
-							Your Subscription
-						</a>
-					</li>
-				</ul>
 			</div>
-
-			<div class="col-md-8 col-lg-8 col-md-offset-1 col-lg-offset-1 settings-frame">
-				<div class="profile-frame slowDown" ng-if="activeSection=='profile'">
-					<div class="profile-top-section">
-						<img src="img/user-photo.png" alt="user photo">
-						<button class="btn upload-button">Upload New Photo</button>
-						<button class="btn delete-photo">Delete</button>
-					</div>
-					<div class="settings-form">
-						<div>
-							<input type="text" class="settings-form-input" placeholder="First Name">
+		</div>
+		<div class="row">
+			<div class="head">
+				SimCast Monthly Subscriptions
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+				<div align="center">
+					<div class="col-md-4 col-lg-4 subscription first">
+						<div class="ship-image">
+							<img src="img/ship-bronze.svg" alt="bronze ship">
 						</div>
-						<div>
-							<input type="text" class="settings-form-input" placeholder="Last Name">
+						<div class="subscription-name">
+							<div><img src="img/bronze-heading.svg" alt="bronze"></div>
+							<div><img src="img/wave-bronze.svg" alt="wave bronze"></div>
 						</div>
-						<div>
-							<input type="email" class="settings-form-input" placeholder="Email">
+						<div class="price">
+							$68.95
 						</div>
-						<div>
-							<button class="save-filters-button"><span>SAVE</span></button>
-						</div>
-					</div>
-				</div>
-				<div class="password-frame slowDown" ng-if="activeSection=='password'">
-					<div class="settings-form">
-						<div class="top">
-							<input type="text" class="settings-form-input" placeholder="Current Password">
-						</div>
-						<div>
-							<input type="text" class="settings-form-input" placeholder="New Password">
-						</div>
-						<div>
-							<input type="email" class="settings-form-input" placeholder="Email">
-						</div>
-						<div>
-							<button class="save-filters-button"><span>SAVE</span></button>
-						</div>
-					</div>
-				</div>
-				<div class="users-frame slowDown" ng-if="activeSection=='users'">
-					<div class="toolbar">
-						<div class="search">
-							<input type="text" ng-model="findPropUsers" value="search" onclick="this.value = ''">
-							<img src="img/icons/search-icon.svg" alt="search">
-						</div>
-						<div>
-							<span class="toolbar-heading">Users</span>
-						</div>
-						<div class="delete">
-							<a ng-show="!isUsersSelected" href="" data-toggle="modal" data-target="#addUserModal">
-								<img src="img/icons/add-user-icon.svg" alt="delete">
-								<span>Add User</span>
-							</a>
-							<a ng-show="isUsersSelected" href="" data-toggle="modal" data-target="#deleteSelectedUsersModal">
-								<img src="img/icons/delete-icon.svg" alt="delete">
-								<span>Remove User</span>
-							</a>
-						</div>
-					</div>
-					<div class="users-table">
-
-						<div class="table-container">
-							<table>
-								<thead>
-									<tr>
-										<th class="checkbox">
-											<a href="" ng-click="allUsersSelected = !allUsersSelected">
-												<img ng-show="!allUsersSelected" src="img/icons/check-disabled-icon.svg" alt="check all">
-												<img ng-show="allUsersSelected" src="img/icons/check-enabled-icon.svg" alt="check all">
-											</a>
-										</th>
-										<th>
-											<a href="">
-												<span>Name</span>
-											</a>
-											<a href="" ng-click="searchPropUsers = 'name'">
-												<img ng-show="searchPropUsers !='name' && searchPropUsers!='-name'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
-											</a>
-											<a href="" ng-click="searchPropUsers = '-name'">
-												<img ng-show="searchPropUsers == 'name'" class="sorted" src="img/icons/triangle-icon.svg"/>
-											</a>
-											<a href="" ng-click="searchPropUsers = false">
-												<img ng-show="searchPropUsers == '-name'" class="inverted" src="img/icons/triangle-icon.svg"/>
-											</a>
-										</th>
-										<th>
-											<a href="">
-												<span>Last Active</span>
-											</a>
-											<a href="" ng-click="searchPropUsers = 'lastActive'">
-												<img ng-show="searchPropUsers !='lastActive' && searchPropUsers!='-lastActive'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
-											</a>
-											<a href="" ng-click="searchPropUsers = '-lastActive'">
-												<img ng-show="searchPropUsers == 'lastActive'" class="sorted" src="img/icons/triangle-icon.svg"/>
-											</a>
-											<a href="" ng-click="searchPropUsers = false">
-												<img ng-show="searchPropUsers == '-lastActive'" class="inverted" src="img/icons/triangle-icon.svg"/>
-											</a>
-										</th>
-										<th class="text-aligned">
-											<a href="">
-												<span>Searches This Month</span>
-											</a>
-											<a href="" ng-click="searchPropUsers = 'searchesNum'">
-												<img ng-show="searchPropUsers !='searchesNum' && searchPropUsers!='-searchesNum'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
-											</a>
-											<a href="" ng-click="searchPropUsers = '-searchesNum'">
-												<img ng-show="searchPropUsers == 'searchesNum'" class="sorted" src="img/icons/triangle-icon.svg"/>
-											</a>
-											<a href="" ng-click="searchPropUsers = false">
-												<img ng-show="searchPropUsers == '-searchesNum'" class="inverted" src="img/icons/triangle-icon.svg"/>
-											</a>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-if="savedSearches.length == 0" ng-repeat="i in getNumber(5) track by $index">
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-									<span class="no-elements" ng-if="savedSearches.length == 0">
-										You don't have any saved searches.
-									</span>
-									<tr ng-repeat="s in users | orderBy : searchPropUsers | filter : findPropUsers" ng-click="selected = !selected; checkSelectedUsers(selected, s)" ng-class="{ 'selected' : selected || allUsersSelected && s.isAdmin != true}">
-										<td class="checkbox">
-											<a href="" ng-if="s.isAdmin != true">
-												<img ng-show="selected || allUsersSelected" src="img/icons/check-enabled-white-icon.svg" alt="checked">
-												<img ng-show="!selected" src="img/icons/check-disabled-icon.svg" alt="unchecked">
-											</a>
-										</td>
-										<td class="username">
-											<span>{{s.name}}</span>
-										</td>
-										<td class="lastActive">{{s.lastActive}}</td>
-										<td class="searchesNum">{{s.searchesNum}}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-						<div class="modal fade" id="deleteSelectedUsersModal" role="dialog">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="content-holder">
-										<div class="question">
-											<p>Are you sure you want to delete this user?</p>
-										</div>
-										<div >
-											<button ng-click="deleteSelectedUsers()" type="button" class="btn delete" data-dismiss="modal">Delete</button>
-											<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="modal fade" id="addUserModal" role="dialog">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="content-holder">
-										<div class="question">
-											<p>Add User</p>
-										</div>
-										<div>
-											<input type="text" placeholder="User's Email">
-										</div>
-										<div>
-											<button ng-click="addUser()" type="button" class="btn delete" data-dismiss="modal">Add</button>
-											<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-					</div>
-
-				</div>
-				<div class="billing-frame slowDown" ng-if="activeSection=='billing'">
-					Billing
-				</div>
-				<div class="searches-frame slowDown" ng-if="activeSection=='searches'">
-					<div class="heading">
-						You have 323 searches left
-					</div>
-					<div class="row">
-						<div class="progress-bar-holder col-md-10 col-lg-10">
-							<span class="left">0 searches</span>
-							<span class="right">500 searches</span>
-							<br />
-							<div class="progress">
-								<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="heading">
-						You can purchase extra searches in this month
-					</div>
-					<div class="purchase">
-						<button>
-							<span>PURCHASE 10 — $5</span>
-						</button>
-						<button class="yellow">
-							<span>PURCHASE 50 — $20</span>
-						</button>
-					</div>
-				</div>
-				<div class="subscription-frame slowDown" ng-if="activeSection=='subscription'">
-					<div ng-if="!hasSubscription">
-						<div class="heading">
-							It looks like you do not have a subscription right now. 
-							Click an option below to upgrade.
-						</div>
-						<div class="row description">
-							<div class="col-md-3 col-lg-3">
-								<div class="ship-image">
-									<img src="img/ship-bronze.svg" alt="bronze ship">
-								</div>
-								<div class="subscription-name">
-									<div><img src="img/bronze-heading.svg" alt="bronze"></div>
-									<div><img src="img/wave-bronze.svg" alt="wave bronze"></div>
-								</div>
-								<div class="price">
-									$68.95
-								</div>
-								<div class="configuration">
-									2 users
-									<br/ >
-									100 product queries
-								</div>
-								<div class="button-holder">
-									<button ng-click="addSubscription('bronze')">
-										<span>BUY NOW</span>
-									</button>
-								</div>
-							</div>
-							<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
-								<div class="ship-image">
-									<img src="img/ship-silver.svg" alt="bronze ship">
-								</div>
-								<div class="subscription-name">
-									<div><img src="img/silver-heading.svg" alt="silver"></div>
-									<div><img src="img/wave-silver.svg" alt="wave silver"></div>
-								</div>
-								<div class="price">
-									$248.95
-								</div>
-								<div class="configuration">
-									10 users
-									<br/ >
-									500 product queries
-								</div>
-								<div class="button-holder">
-									<button ng-click="addSubscription('silver')">
-										<span>BUY NOW</span>
-									</button>
-								</div>
-							</div>
-							<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
-								<div class="ship-image">
-									<img src="img/ship-gold.svg" alt="bronze ship">
-								</div>
-								<div class="subscription-name">
-									<div><img src="img/gold-heading.svg" alt="gold"></div>
-									<div><img src="img/wave-gold.svg" alt="wave gold"></div>
-								</div>
-								<div class="price">
-									Custom Pricing
-								</div>
-								<div class="configuration">
-									Enterprise Users
-								</div>
-								<div class="button-holder">
-									<button ng-click="addSubscription('gold')">
-										<span>CONTACT US</span>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="subscription-details" ng-if="hasSubscription">
-						<div class="heading">
-							Currently, you have a <span>{{currentSubscription.type}}</span> subscription.
-						</div>
-						<div class="description">
-							<div>
-								<img ng-src="{{currentSubscription.imageUrl}}" alt="ship silver">
-							</div>
-							<div class="text-content">
-								<div class="period">Monthly</div>
-								<div class="price">{{currentSubscription.price}}</div>
-								<div class="details">
-									<span>{{currentSubscription.details1}}</span>
-									<br/>
-									<span>{{currentSubscription.details2}}</span>
-								</div>
-							</div>
+						<div class="configuration">
+							2 users
+							<br/ >
+							100 product queries
 						</div>
 						<div class="button-holder">
-							<button class="green" ng-click="showMonthlySubscriptions()"><span>UPGADE NOW</span></button>
-							<button class="blue" data-toggle="modal" data-target="#endSubscriptionModal"><span>END SUBSCRIPTION</span></button>
+							<button ng-click="addSubscription('bronze');subsctiptionUpgraded()">
+								<span>BUY NOW</span>
+							</button>
 						</div>
 					</div>
-
-					<div class="modal fade" id="endSubscriptionModal" role="dialog">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="content-holder">
-									<div class="question">
-										<p>Let us know how we can improve SimCast 
-											<br/>
-											based on your experience</p>
-										</div>
-										<div class="textarea">
-											<textarea name="" placeholder="Your comment here" cols="30" rows="5"></textarea>
-										</div>
-										<div class="button-holder">
-											<button type="button" class="btn delete" ng-click="hideSubscriptionDetails()"  data-toggle="modal" data-target="#subscriptionEndedModal" data-dismiss="modal">End Subscription</button>
-											<button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="col-md-4 col-lg-4 subscription second">
+						<div class="ship-image">
+							<img src="img/ship-silver.svg" alt="bronze ship">
 						</div>
-
-						<div class="modal fade" id="subscriptionEndedModal" role="dialog">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="content-holder">
-										<div class="question">
-											<p>Your subscription has been ended</p>
-										</div>
-										<div class="button-holder">
-											<button ng-click="endSubscription()" type="button" class="btn cancel" data-dismiss="modal">OK</button>
-										</div>
-									</div>
-								</div>
-							</div>
+						<div class="subscription-name">
+							<div><img src="img/silver-heading.svg" alt="silver"></div>
+							<div><img src="img/wave-silver.svg" alt="wave silver"></div>
 						</div>
-
+						<div class="price">
+							$248.95
+						</div>
+						<div class="configuration">
+							10 users
+							<br/ >
+							500 product queries
+						</div>
+						<div class="button-holder">
+							<button ng-click="addSubscription('silver');subsctiptionUpgraded()">
+								<span>BUY NOW</span>
+							</button>
+						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="monthlySubscriptionsPage">
-			<div class="row">
-				<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
-					<button class="back-settings-btn" ng-click="backToSettingsPage('#monthlySubscriptionsPage')">
-						<img src="img/icons/back-icon.svg" alt="back to search page">
-						<span>BACK TO THE SETTINGS</span>
-					</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="head">
-					SimCast Monthly Subscriptions
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
-					<div align="center">
-						<div class="col-md-4 col-lg-4 subscription first">
-							<div class="ship-image">
-								<img src="img/ship-bronze.svg" alt="bronze ship">
-							</div>
-							<div class="subscription-name">
-								<div><img src="img/bronze-heading.svg" alt="bronze"></div>
-								<div><img src="img/wave-bronze.svg" alt="wave bronze"></div>
-							</div>
-							<div class="price">
-								$68.95
-							</div>
-							<div class="configuration">
-								2 users
-								<br/ >
-								100 product queries
-							</div>
-							<div class="button-holder">
-								<button ng-click="addSubscription('bronze');subsctiptionUpgraded()">
-									<span>BUY NOW</span>
-								</button>
-							</div>
+					<div class="col-md-4 col-lg-4 subscription third">
+						<div class="ship-image">
+							<img src="img/ship-gold.svg" alt="gold ship">
 						</div>
-						<div class="col-md-4 col-lg-4 subscription second">
-							<div class="ship-image">
-								<img src="img/ship-silver.svg" alt="bronze ship">
-							</div>
-							<div class="subscription-name">
-								<div><img src="img/silver-heading.svg" alt="silver"></div>
-								<div><img src="img/wave-silver.svg" alt="wave silver"></div>
-							</div>
-							<div class="price">
-								$248.95
-							</div>
-							<div class="configuration">
-								10 users
-								<br/ >
-								500 product queries
-							</div>
-							<div class="button-holder">
-								<button ng-click="addSubscription('silver');subsctiptionUpgraded()">
-									<span>BUY NOW</span>
-								</button>
-							</div>
+						<div class="subscription-name">
+							<div><img src="img/gold-heading.svg" alt="gold"></div>
+							<div><img src="img/wave-gold.svg" alt="wave gold"></div>
 						</div>
-						<div class="col-md-4 col-lg-4 subscription third">
-							<div class="ship-image">
-								<img src="img/ship-gold.svg" alt="gold ship">
-							</div>
-							<div class="subscription-name">
-								<div><img src="img/gold-heading.svg" alt="gold"></div>
-								<div><img src="img/wave-gold.svg" alt="wave gold"></div>
-							</div>
-							<div class="price">
-								Custom pricing
-							</div>
-							<div class="configuration">
-								Enterprise user
-								<br/ >
-							</div>
-							<div class="button-holder">
-								<button ng-click="addSubscription('gold');subsctiptionUpgraded()">
-									<span>CONTACT US</span>
-								</button>
-							</div>
+						<div class="price">
+							Custom pricing
+						</div>
+						<div class="configuration">
+							Enterprise user
+							<br/ >
+						</div>
+						<div class="button-holder">
+							<button ng-click="addSubscription('gold');subsctiptionUpgraded()">
+								<span>CONTACT US</span>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -984,7 +985,7 @@
 					</div>
 					<div>
 						<button class="email" >
-							<img src="img/icons/download-icon.svg" alt="email score">
+							<img src="img/icons/email-icon.svg" alt="email score">
 							<span>EMAIL SCORE</span>
 						</button>
 					</div>
@@ -999,16 +1000,64 @@
 		</div>
 		<div class="scores">
 			<div class="score-item" ng-class="{'exclamation': scoreItem.score=='N/A'}" ng-repeat="scoreItem in scores">
-				<img src="img/score-circle.svg" alt="score circle">
+				<img ng-src="img/score-circle.svg" alt="score circle">
 				<div class="desc">
 					<span>{{scoreItem.score}}</span>
 					<br/>
 					{{scoreItem.name}}
 				</div>
+				<img class="exclamation-img" ng-src="img/exclamation.svg" alt="score circle" ng-click="showTooltip =! showTooltip">
 			</div>
 		</div>
 	</div>
 
+</div>
+
+<div id="loginPage" ng-init="showLoginPage(); isSignUp = !isSignUp">
+	<div class="wrapper">
+		<div class="row">
+			<div class="col-md-6 col-lg-6">
+				<div class="image-holder">
+					<img src="img/login-bg.svg" alt="login background">
+					<img class="ship" ng-class="{'slide' : isSignUp}" src="img/login-ship.svg" alt="ship">
+					<img class="ship second" ng-class="{'slide' : !isSignUp}" src="img/sign-up-ship.svg" alt="ship">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-4 col-md-offset-2 col-lg-offset-2">
+				<div class="login-form">
+					<div class="form-logo">
+						<img src="img/header-logo.svg" alt="header">
+					</div>
+					<div ng-show="isSignUp" class="signing">Sign Up</div>
+					<div ng-show="!isSignUp" class="signing">Sign In</div>
+					<div class="input-holder">
+						<div class="input-row">
+							<input type="text" placeholder="Your Email Address">
+						</div>
+						<div class="input-row">
+							<input type="text" placeholder="Your Full Name">
+						</div>
+						<div class="input-row" ng-show="isSignUp">
+							<input type="text" placeholder="Your Phone Number (1-222-333-4444)">
+						</div>
+						<div class="input-row" ng-show="isSignUp" ng-click="showMainPage('#loginPage'); showHeader()">
+							<button><span>SIGN UP</span></button>
+						</div>
+						<div class="input-row" ng-show="!isSignUp" ng-click="showMainPage('#loginPage'); showHeader()">
+							<button><span>SIGN IN</span></button>
+						</div>
+						<div class="input-row" ng-show="isSignUp">
+							<a ng-click="isSignUp = !isSignUp" href="">Already signed up? Log in</a>
+						</div>
+						<div class="input-row" ng-show="!isSignUp">
+							<a class="left" href="">Forgot your Password?</a>
+							<a class="right" href="" ng-click="isSignUp = !isSignUp">Don't Have an Account?</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="hidden">
