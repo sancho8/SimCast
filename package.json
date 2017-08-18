@@ -2,8 +2,9 @@
   "name": "gulp-project",
   "version": "1.0.0",
   "description": "First Gulp Project",
-  "scripts": {
-  "start": "node gulpfile.js"
+ "scripts": {
+  "build": "gulp",
+  "start": "node app.js"
 },
   "devDependencies": {
     "browser-sync": "^2.12.5",
