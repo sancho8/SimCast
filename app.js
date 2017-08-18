@@ -4,7 +4,7 @@ var express = require('express'),
     path = require('path');
 
 app.use('/app', express.static('app'));
-app.use('/', function (req, res) {
+app.use('/app', function (req, res) {
     res.sendfile(path.join(__dirname + '/index.html'));
 });
 app.listen(port);
