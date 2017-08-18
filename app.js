@@ -11,4 +11,9 @@ http.createServer(function(req, res){
         res.write(data);
         res.end();
     });
+	fs.readFile('app/css/main.min.css',function (err, data){
+        res.writeHead(200, {'Content-Type': 'text/css','Content-Length':data.length});
+        res.write(data);
+        res.end();
+    });
 }).listen(process.env.PORT || 5000);
