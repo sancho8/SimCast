@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "First Gulp Project",
   "scripts": {
-  "start": "node index.html"
+  "start": "node gulpfile.js"
 },
   "devDependencies": {
     "browser-sync": "^2.12.5",
