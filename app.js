@@ -9,6 +9,4 @@ http.createServer(function(req, res){
         res.write(data);
         res.end();
     });
-}).listen(8000, function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-});
+}).listen(8000);
