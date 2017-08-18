@@ -62,6 +62,14 @@ var app = angular.module("SimCast", [])
 
 			});
 		});
+		$("#mainPage").fadeOut('slow', function() {
+			$("#settingsPage").fadeIn('slow', function() {
+
+			});
+		});
+		$("#savedSearchesModal").fadeOut('0', function() {
+			
+		});
 	}
 
 	$scope.showMainPage = function(elemId){
@@ -82,11 +90,39 @@ var app = angular.module("SimCast", [])
 		});
 	}
 
+	$scope.showUserDropdownModal = false;
+	$scope.showReportModal = false;
+	$scope.showNotificationModal = false;
+
+	$scope.$watch('showUserDropdownModal', function() {
+		if($scope.showUserDropdownModal){
+			$scope.showReportModal = false;
+			$scope.showNotificationModal = false;
+		}
+	});
+
+	$scope.$watch('showReportModal', function() {
+		if($scope.showReportModal){
+			$scope.showUserDropdownModal = false;
+			$scope.showNotificationModal = false;
+		}
+	});
+
+	$scope.$watch('showNotificationModal', function() {
+		if($scope.showNotificationModal){
+			$scope.showUserDropdownModal = false;
+			$scope.showReportModal = false;
+		}
+	});
+
 	$scope.goToMainPage = function(){
 		$("#monthlySubscriptionsPage").fadeOut('slow', function(){});
+		$("#searchResultPage").fadeOut('slow', function(){});
 		$("#settingsPage").fadeOut('slow', function(){});
+		$("#savedSearchesModal").fadeOut('400', function() {
+			
+		});
 		$("#mainPage").fadeIn('slow', function() {
-
 		});
 	}
 
@@ -96,6 +132,7 @@ var app = angular.module("SimCast", [])
 
 			});
 		});
+		$("#searchResultPage").fadeOut('slow', function(){});
 		$("#monthlySubscriptionPage").fadeOut('slow', function(){});
 		$("#settingsPage").fadeOut('slow', function(){});
 		$("header").fadeOut('slow', function() {
@@ -236,7 +273,7 @@ var app = angular.module("SimCast", [])
 	}
 
 	$scope.showSearchResultPage = function(){
-		$("#mainPage").fadeOut('0', function() {
+		$("#mainPage").fadeOut('400', function() {
 			$("#searchResultPage").fadeIn("400", function() {
 
 			});

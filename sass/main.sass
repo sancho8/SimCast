@@ -55,9 +55,7 @@ h3
 
 header
   height: 64px
-  box-shadow: 0 2px 6px 0 rgba(134,134,134,0.32)
   display: table
-  position: relative
   width: 100%
 
 .heading
@@ -65,11 +63,18 @@ header
   position: relative
 
 .navbar-content
+  box-shadow: 0 2px 6px 0 rgba(134,134,134,0.32)
+  position: fixed
   display: table-cell
   vertical-align: middle
   text-align: center;
   height: 64px
   line-height: 64px
+  width: 100%
+  left: 0
+  top: 0
+  z-index: 1
+  background: #FFFFFF
   div
     display: inline
 
@@ -472,7 +477,6 @@ footer
   background-color: #FFFFFF
   box-shadow: 0 8px 24px 0 rgba(134,134,134,0.32)
   &.higher
-    height: 409px
   h2
     padding: 0
     margin: 0
@@ -539,7 +543,7 @@ footer
 #UserDropdownModal
   animation: modalSlowDown 0.5s
   transform: translate3d(0, 0, 0)
-  position: absolute
+  position: fixed
   top: 75px
   left: 86%
   height: 84px
@@ -573,7 +577,7 @@ footer
 #ReportModal
   animation: modalSlowDown 0.5s
   transform: translate3d(0, 0, 0)
-  position: absolute
+  position: fixed
   z-index: 1
   top: 75px
   left: 0px
@@ -716,9 +720,9 @@ footer
       padding-left: 36px
       font-size: 14px
     img
-      position: absolute
-      left: 30px
-      top: 6px
+      position: relative
+      left: -150px
+      top: 0px
   .toolbar-heading
     margin-left: 55px
     width: 179px
@@ -755,7 +759,6 @@ footer
     thead
       tr
         height: 54px
-        box-shadow: 0 36px 54px 0 rgba(134,134,134,0.32) !important
     th
       a
         float: left
@@ -815,7 +818,7 @@ footer
 #NotificationModal
   animation: modalSlowDown 0.5s
   transform: translate3d(0, 0, 0)
-  position: absolute
+  position: fixed
   top: 75px
   right: 8%
   width: 324px
@@ -917,6 +920,9 @@ footer
       height: 48px
       background-color: #24C6DD
       letter-spacing: 0.5px
+      box-shadow: 0 4px 8px 0 rgba(36,198,221,0.32)
+      &:hover
+        box-shadow: 0 6px 10px 0 rgba(36,198,221,0.32)
       span
         line-height: 48px
     .settings-menu
@@ -1047,11 +1053,15 @@ footer
     background-color: #6BBE7A
     width: 214px
     margin-right: 32px
+    box-shadow: 0 4px 8px 0 rgba(107,190,122,0.32)
     &:hover
       opacity: 0.8
       box-shadow: 0 6px 10px 0 rgba(107,190,122,0.32)
     &.yellow
       background: linear-gradient(180deg, #F5DC4F 0%, #F4AF53 100%)
+      box-shadow: 0 6px 8px 0 rgba(255,190,0,0.32)
+      &:hover 
+        box-shadow: 0 8px 10px 0 rgba(255,190,0,0.32)
   .heading
     width: 516px
     color: #3E3E3E
@@ -1171,10 +1181,14 @@ footer
       animation: none !important
       &.green
         background-color: #6BBE7A
+        box-shadow: 0 4px 8px 0 rgba(107,190,122,0.32)
+        &:hover 
+          box-shadow: 0 6px 10px 0 rgba(107,190,122,0.32)
       &.blue
         margin-left: 24px
         border: 1px solid #24C6DD
         background-color: #FFFFFF
+        box-shadow: none
         &:hover
           box-shadow: 0 6px 10px 0 rgba(61,149,233,0.32)
           span
@@ -1199,7 +1213,7 @@ footer
   width: 340px
   margin-left: 120px
   .modal-content
-    margin-left: -120px
+    margin-left: -25px
     height: 176px
 
 #addUserModal
@@ -1246,6 +1260,7 @@ footer
     span
       line-height: 48px
       padding-left: 5px
+      font-size: 14px
     img
       margin-top: -3px
   .head
@@ -1436,6 +1451,34 @@ footer
   .modal-backdrop
     opacity: 0
 
+#emailModal
+  display: none
+  @extend #deleteSelectedUsersModal
+  position: absolute
+  left: 30%
+  .modal-content
+    box-shadow: 0 8px 32px 0 rgba(134,134,134,0.32)
+    box-sizing: border-box
+  .question
+    font-size: 18px
+    margin-top: -25px
+  input
+    margin-top: -5px
+    margin-bottom: 15px
+    height: 40px
+    width: 190px
+    border: 1px solid #D9DEE5
+    border-radius: 4px
+    padding: 10px
+    outline: none
+
+#emailModalOK
+  @extend #emailModal
+  height: 300px
+  .modal-content
+    padding-top: 70px
+    height: 200px
+
 #searchResultPage
   width: 1100px
   height: 900px
@@ -1510,6 +1553,9 @@ footer
         line-height: 41px
     .download
       background-color: #66A9E8
+      box-shadow: 0 4px 8px 0 rgba(134,134,134,0.32)
+      &:hover
+        box-shadow: 0 8px 10px 0 rgba(134,134,134,0.32)
   .details
     padding: 24px
     border: 2px solid #24C6DD

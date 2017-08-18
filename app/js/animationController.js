@@ -14,21 +14,21 @@ openModalBtn.onclick = function() {
 }*/
 
 $(document).ready(function(){
-     
-     $("body").on("click","#deleteAllSearchesModalBtn",function(){
-             
+
+  $("body").on("click","#deleteAllSearchesModalBtn",function(){
+
           //$("#deleteAllSearchesModal").modal("show");
-       
+
           //appending modal background inside the blue div
           $('.modal-backdrop').appendTo('.table-container');   
-     
+
           //remove the padding right and modal-open class from the body tag which bootstrap adds when a modal is shown
           $('body').removeClass("modal-open")
           $('body').css("padding-right","");     
-      });
- 
+        });
+
  	/*$("body").on("focusleave","#searchInput", function(){
  		alert("css");
  		$("#searchInput").value("search");
  	})*/
-});
+ });

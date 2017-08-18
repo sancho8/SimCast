@@ -227,7 +227,7 @@
 	<div id="searchModal" class="modal-first modal">
 		<!-- Modal content -->
 		<div class="modal-content">
-			<div class="exit" data-dismiss="modal">
+			<div class="exit" data-dismiss="modal" data-backdrop="false">
 				<a href="">
 					<img src="img/icons/cross-icon-dark.svg" alt="exit">
 				</a>
@@ -299,59 +299,59 @@
 								</a>
 							</th>
 							<th>
-								<a href="">
+								<a href="" ng-show="searchProp !='name' && searchProp!='-name'" ng-click="searchProp = 'name'">
 									<span>Name</span>
+									<img class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 								</a>
-								<a href="" ng-click="searchProp = 'name'">
-									<img ng-show="searchProp !='name' && searchProp!='-name'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+								<a href="" ng-show="searchProp == 'name'" ng-click="searchProp = '-name'">
+									<span>Name</span>
+									<img class="sorted" src="img/icons/arrow-down.svg"/>
 								</a>
-								<a href="" ng-click="searchProp = '-name'">
-									<img ng-show="searchProp == 'name'" class="sorted" src="img/icons/arrow-down.svg"/>
-								</a>
-								<a href="" ng-click="searchProp = false">
-									<img ng-show="searchProp == '-name'" class="inverted" src="img/icons/arrow-down.svg"/>
+								<a href="" ng-show="searchProp == '-name'" ng-click="searchProp = false">
+									<span>Name</span>
+									<img class="inverted" src="img/icons/arrow-down.svg"/>
 								</a>
 							</th>
 							<th>
-								<a href="">
+								<a ng-show="searchProp !='upc' && searchProp!='-upc'" href="" ng-click="searchProp = 'upc'">
 									<span>UPC</span>
+									<img class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 								</a>
-								<a href="" ng-click="searchProp = 'upc'">
-									<img ng-show="searchProp !='upc' && searchProp!='-upc'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+								<a ng-show="searchProp == 'upc'" href="" ng-click="searchProp = '-upc'">
+									<span>UPC</span>
+									<img class="sorted" src="img/icons/arrow-down.svg"/>
 								</a>
-								<a href="" ng-click="searchProp = '-upc'">
-									<img ng-show="searchProp == 'upc'" class="sorted" src="img/icons/arrow-down.svg"/>
-								</a>
-								<a href="" ng-click="searchProp = false">
-									<img ng-show="searchProp == '-upc'" class="inverted" src="img/icons/arrow-down.svg"/>
+								<a ng-show="searchProp == '-upc'" href="" ng-click="searchProp = false">
+									<span>UPC</span>
+									<img class="inverted" src="img/icons/arrow-down.svg"/>
 								</a>
 							</th>
 							<th>
-								<a href="">
+								<a ng-show="searchProp !='company' && searchProp!='-company'"  href="" ng-click="searchProp = 'company'">
 									<span>Company</span>
+									<img class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 								</a>
-								<a href="" ng-click="searchProp = 'company'">
-									<img ng-show="searchProp !='company' && searchProp!='-company'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+								<a ng-show="searchProp == 'company'" href="" ng-click="searchProp = '-company'">
+									<span>Company</span>
+									<img class="sorted" src="img/icons/arrow-down.svg"/>
 								</a>
-								<a href="" ng-click="searchProp = '-company'">
-									<img ng-show="searchProp == 'company'" class="sorted" src="img/icons/arrow-down.svg"/>
-								</a>
-								<a href="" ng-click="searchProp = false">
-									<img ng-show="searchProp == '-company'" class="inverted" src="img/icons/arrow-down.svg"/>
+								<a ng-show="searchProp == '-company'" href="" ng-click="searchProp = false">
+									<span>Company</span>
+									<img class="inverted" src="img/icons/arrow-down.svg"/>
 								</a>
 							</th>
 							<th>
-								<a href="" ng-click="sortedByDate = !sortedByDate">
+								<a ng-show="searchProp !='date' && searchProp!='-date'" href="" ng-click="searchProp = 'date'">
 									<span>Date</span>
+									<img class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 								</a>
-								<a href="" ng-click="searchProp = 'date'">
-									<img ng-show="searchProp !='date' && searchProp!='-date'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+								<a ng-show="searchProp == 'date'" href="" ng-click="searchProp = '-date'">
+									<span>Date</span>
+									<img class="sorted" src="img/icons/arrow-down.svg"/>
 								</a>
-								<a href="" ng-click="searchProp = '-date'">
-									<img ng-show="searchProp == 'date'" class="sorted" src="img/icons/arrow-down.svg"/>
-								</a>
-								<a href="" ng-click="searchProp = false">
-									<img ng-show="searchProp == '-date'" class="inverted" src="img/icons/arrow-down.svg"/>
+								<a ng-show="searchProp == '-date'" href="" ng-click="searchProp = false">
+									<span>Date</span>
+									<img class="inverted" src="img/icons/arrow-down.svg"/>
 								</a>
 							</th>
 						</tr>
@@ -568,45 +568,45 @@
 												</a>
 											</th>
 											<th>
-												<a href="">
+												<a ng-show="searchPropUsers !='name' && searchPropUsers!='-name'" href="" ng-click="searchPropUsers = 'name'">
 													<span>Name</span>
+													<img class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 												</a>
-												<a href="" ng-click="searchPropUsers = 'name'">
-													<img ng-show="searchPropUsers !='name' && searchPropUsers!='-name'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+												<a ng-show="searchPropUsers == 'name'" href="" ng-click="searchPropUsers = '-name'">
+													<span>Name</span>
+													<img class="sorted" src="img/icons/arrow-down.svg"/>
 												</a>
-												<a href="" ng-click="searchPropUsers = '-name'">
-													<img ng-show="searchPropUsers == 'name'" class="sorted" src="img/icons/arrow-down.svg"/>
-												</a>
-												<a href="" ng-click="searchPropUsers = false">
-													<img ng-show="searchPropUsers == '-name'" class="inverted" src="img/icons/arrow-down.svg"/>
+												<a ng-show="searchPropUsers == '-name'" href="" ng-click="searchPropUsers = false">
+													<span>Name</span>
+													<img class="inverted" src="img/icons/arrow-down.svg"/>
 												</a>
 											</th>
 											<th>
-												<a href="">
+												<a ng-show="searchPropUsers !='lastActive' && searchPropUsers!='-lastActive'" href="" ng-click="searchPropUsers = 'lastActive'">
 													<span>Last Active</span>
+													<img class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 												</a>
-												<a href="" ng-click="searchPropUsers = 'lastActive'">
-													<img ng-show="searchPropUsers !='lastActive' && searchPropUsers!='-lastActive'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+												<a ng-show="searchPropUsers == 'lastActive'"  href="" ng-click="searchPropUsers = '-lastActive'">
+													<span>Last Active</span>
+													<img class="sorted" src="img/icons/arrow-down.svg"/>
 												</a>
-												<a href="" ng-click="searchPropUsers = '-lastActive'">
-													<img ng-show="searchPropUsers == 'lastActive'" class="sorted" src="img/icons/arrow-down.svg"/>
-												</a>
-												<a href="" ng-click="searchPropUsers = false">
-													<img ng-show="searchPropUsers == '-lastActive'" class="inverted" src="img/icons/arrow-down.svg"/>
+												<a href="" ng-show="searchPropUsers == '-lastActive'" ng-click="searchPropUsers = false">
+													<span>Last Active</span>
+													<img class="inverted" src="img/icons/arrow-down.svg"/>
 												</a>
 											</th>
 											<th class="text-aligned">
-												<a href="">
+												<a ng-show="searchPropUsers !='searchesNum' && searchPropUsers!='-searchesNum'" href="" ng-click="searchPropUsers = 'searchesNum'">
 													<span>Searches This Month</span>
+													<img class="unsorted" src="img/icons/double-triangle-icon.svg"/>
 												</a>
-												<a href="" ng-click="searchPropUsers = 'searchesNum'">
-													<img ng-show="searchPropUsers !='searchesNum' && searchPropUsers!='-searchesNum'" class="unsorted" src="img/icons/double-triangle-icon.svg"/>
+												<a ng-show="searchPropUsers == 'searchesNum'" href="" ng-click="searchPropUsers = '-searchesNum'">
+													<span>Searches This Month</span>
+													<img class="sorted" src="img/icons/arrow-down.svg"/>
 												</a>
-												<a href="" ng-click="searchPropUsers = '-searchesNum'">
-													<img ng-show="searchPropUsers == 'searchesNum'" class="sorted" src="img/icons/arrow-down.svg"/>
-												</a>
-												<a href="" ng-click="searchPropUsers = false">
-													<img ng-show="searchPropUsers == '-searchesNum'" class="inverted" src="img/icons/arrow-down.svg"/>
+												<a  ng-show="searchPropUsers == '-searchesNum'"  href="" ng-click="searchPropUsers = false">
+													<span>Searches This Month</span>
+													<img class="inverted" src="img/icons/arrow-down.svg"/>
 												</a>
 											</th>
 										</tr>
@@ -934,7 +934,7 @@
 		</div>
 	</div>
 
-	<div id="searchResultPage">
+	<div id="searchResultPage" ng-init="showSearchResultPage()">
 		<div class="heading">
 			Score Page
 		</div>
@@ -984,10 +984,44 @@
 						</button>
 					</div>
 					<div>
-						<button class="email" >
+						<button class="email" data-toggle="modal" data-target="#emailModal">
 							<img src="img/icons/email-icon.svg" alt="email score">
 							<span>EMAIL SCORE</span>
 						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="emailModal" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="content-holder">
+							<div class="question">
+								<p>Send Result</p>
+							</div>
+							<div>
+								<input type="text" placeholder="Your Email">
+							</div>
+							<div>
+								<button data-toggle="modal" data-target="#emailModalOK" type="button" class="btn delete" data-dismiss="modal">Send</button>
+								<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="emailModalOK" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="content-holder">
+							<div class="question">
+								<p>Email has been sent!</p>
+							</div>
+							<div>
+								<button ng-click="addUser()" type="button" class="btn delete" data-dismiss="modal">OK</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
