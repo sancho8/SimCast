@@ -24,6 +24,12 @@
 	color: #AAADB3
 	opacity: 1
 
+body
+  zoom : 75%
+  margin-left: auto
+  margin-right: auto
+  text-align:center
+
 body input:focus:required:invalid,
 body textarea:focus:required:invalid
 	color: #666
@@ -124,7 +130,7 @@ header
   button
     height: 33px
     position: relative
-    top: 16px
+    top: 12px
     span
       position: relative
       top: -18px
@@ -859,7 +865,7 @@ footer
   margin-top: 48px
   .wrapper
     width: 1200px
-    height: 800px
+    height: 700px
     margin-left: auto
     margin-right: auto
   .heading
@@ -1327,6 +1333,7 @@ footer
     border-radius: 4px
     font-size: 16px
     background-color: #FFFFFF
+    box-shadow:  0 2px 4px 0 rgba(107,190,122,0.32)
     height: 39px
     width: 232px
     outline: none
@@ -1353,11 +1360,13 @@ footer
     line-height: 12px
     animation: btnHoverBack 0.2s 
     transform: translate3d(0, 0, 0)
+    box-shadow: 0 2px 4px 0 rgba(107,190,122,0.32)
     &:hover
       opacity: 0.8
       animation: btnHover 0.2s 
       transform: translate3d(0, 0, 0)
       margin-top: -3px
+      box-shadow: 0 4px 6px 0 rgba(107,190,122,0.32)
 
 #subscriptionEndedModal
   @extend #endSubscriptionModal

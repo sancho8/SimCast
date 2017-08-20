@@ -93,6 +93,7 @@ var app = angular.module("SimCast", [])
 	$scope.showUserDropdownModal = false;
 	$scope.showReportModal = false;
 	$scope.showNotificationModal = false;
+	$scope.searchEnded = false;
 
 	$scope.$watch('showUserDropdownModal', function() {
 		if($scope.showUserDropdownModal){
@@ -114,6 +115,13 @@ var app = angular.module("SimCast", [])
 			$scope.showReportModal = false;
 		}
 	});
+
+	/*$scope.$watch('searchEnded', function() {
+		if($scope.searchEnded){
+			$scope.showUserDropdownModal = false;
+			$scope.showReportModal = false;
+		}
+	});*/
 
 	$scope.goToMainPage = function(){
 		$("#monthlySubscriptionsPage").fadeOut('slow', function(){});
@@ -255,21 +263,19 @@ var app = angular.module("SimCast", [])
 
 	$scope.animateSearchModal = function(){
 		$scope.searchEnded = false;
-		$("#mainPage").fadeOut('fast', function() {
-			$(".fill").css("display", "none");
-			$(".text").css("display", "none");
-			$(".loading-item").each(function(index, elem){
-				var data = $(this);
-				setTimeout( function () {
-					data.find(".text").css("display", "block");
-					data.find(".fill").css("display", "block");
-				},index*1000);
-			});
-			setTimeout(function(){
-				$scope.searchEnded = true;
-				$scope.$apply();
-			}, 10*970);
+		$(".fill").css("display", "none");
+		$(".text").css("display", "none");
+		$(".loading-item").each(function(index, elem){
+			var data = $(this);
+			setTimeout( function () {
+				data.find(".text").css("display", "block");
+				data.find(".fill").css("display", "block");
+			},index*1000);
 		});
+		setTimeout(function(){
+			$scope.searchEnded = true;
+			$scope.$apply();
+		}, 10*970);
 	}
 
 	$scope.showSearchResultPage = function(){
