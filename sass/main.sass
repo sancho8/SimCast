@@ -159,8 +159,12 @@ header
 .submit-report-button
   @extend .score-button
   background-color: #24C6DD
+  box-shadow: 0 4px 8px 0 rgba(36,198,221,0.32)
+  span 
+    margin: 0
   &:hover
     opacity: 0.8
+    box-shadow: 0 6px 10px 0 rgba(36,198,221,0.32)
 
 .green-button-lg
   @extend .score-button
@@ -293,10 +297,11 @@ header
 
 /* START Footer with waves section */
 
-footer
+.footer
   position: absolute
-  bottom: 0px
-  left: 0px
+  right: 0
+  bottom: 0
+  left: 0
 
 .wave 
   background: url(../img/wave.svg) repeat-x
@@ -349,6 +354,14 @@ footer
     opacity: 0
 
 #loginPage
+  height: 650px
+  .form-logo
+    display:block
+    margin-left: auto
+    margin-right: auto
+    width: 150px
+    padding-bottom: 64px
+    padding-top: 32px
   .ship 
     position: relative
     bottom: 200px
@@ -368,6 +381,7 @@ footer
     width: 318px
     .input-row
       padding-top: 32px
+      padding-bottom: 8px
       text-align: center
       a 
         text-decoration: none
@@ -388,15 +402,23 @@ footer
         outline: none
       button
         @extend .score-button-lg
-  .login-form
-    width: 318px
-    padding-top: 100px
-    .form-logo
-      display:block
+  .app-desc
+    width: 495px
+    .head
+      @extend h1
+      width: 458px
       margin-left: auto
       margin-right: auto
-      width: 150px
-      padding-bottom: 64px
+      text-align: center
+    .desc
+      color: #2B3D6B
+      font-family: Helvetica
+      font-size: 18px
+      text-align: center
+      padding-bottom: 16px
+  .login-form
+    width: 318px
+    margin-left: 80px
     .signing
       color: #2B3D6B
       font-family: Gilroy
@@ -407,7 +429,7 @@ footer
       padding-bottom: 16px
   .image-holder
     padding: 200px
-    padding-top: 100px
+    padding-top: 50px
     margin-left: auto
     margin-right: auto
     .ship
@@ -586,7 +608,7 @@ footer
   position: fixed
   z-index: 1
   top: 75px
-  left: 0px
+  left: 10px
   height: 289px
   width: 380px
   border-radius: 4px
@@ -607,8 +629,7 @@ footer
     border: 1px solid #D9DEE5
     border-radius: 4px
     overflow-y: scroll
-    padding: 10px
-    padding-top: 0
+    padding: 5px
     outline: none
     resize: none
   button
@@ -1196,7 +1217,7 @@ footer
         background-color: #FFFFFF
         box-shadow: none
         &:hover
-          box-shadow: 0 6px 10px 0 rgba(61,149,233,0.32)
+          box-shadow: 0 4px 8px 0 rgba(36,198,221,0.32)
           span
             color: #FFFFFF 
         span
@@ -1205,7 +1226,7 @@ footer
           background-color: #24C6DD
           color: #FFFFFF
       span
-        line-height: 41px
+        line-height: 41px !important
         letter-spacing: 1px
       &:hover
         opacity: 0.8
@@ -1241,6 +1262,10 @@ footer
   display: none
   padding-top: 50px
   height: 800px
+  .subscription-row
+    width: 1000px
+    margin-left: auto
+    margin-right: auto
   .padding
     padding-bottom: 400px
   .subscription
@@ -1277,6 +1302,7 @@ footer
     font-weight: 800
     line-height: 44px
     margin-top: 30px
+    padding-left: 50px
   button
     height: 41px
     margin-left: 5px
@@ -1384,11 +1410,13 @@ footer
   align-content: center
   background-color: rgba(255, 255, 255, 0)
   display: visible
+  overflow: hidden
   .modal-content
     padding: 0
     margin-top: 220px
     width: 1130px
     height: 420px
+    overflow: hidden
     border: none
     border-radius: 4px
     -webkit-box-shadow: 0 6px 24px 0 rgba(134,134,134,0.32)
@@ -1450,12 +1478,18 @@ footer
     button
       @extend .green-button-lg
       background-color: #24c6dd
+      box-shadow: 0 4px 8px 0 rgba(36,198,221,0.32)
       width: 210px
       height: 41px
       span
         letter-spacing: 1px
+      &:hover
+        box-shadow: 0 4px 8px 0 rgba(36,198,221,0.32)
     .ended
       background-color: #65a9e8
+      box-shadow: 0 4px 8px 0 rgba(61,149,233,0.32)
+      &:hover
+        box-shadow: 0 4px 8px 0 rgba(61,149,233,0.32)
   .modal-dialog
   .modal-backdrop
     margin-top: 80px
@@ -1564,9 +1598,9 @@ footer
         line-height: 41px
     .download
       background-color: #66A9E8
-      box-shadow: 0 4px 8px 0 rgba(134,134,134,0.32)
+      box-shadow: 0 4px 8px 0 rgba(61,149,233,0.32)
       &:hover
-        box-shadow: 0 8px 10px 0 rgba(134,134,134,0.32)
+        box-shadow: 0 6px 10px 0 rgba(61,149,233,0.32)
   .details
     padding: 24px
     border: 2px solid #24C6DD
