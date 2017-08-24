@@ -177,6 +177,10 @@
 
 	</div>
 
+	<div class="footer">
+		<div class="wave"></div>
+	</div>
+
 	<div id="NotificationModal" ng-show="showNotificationModal">
 		<div class="notification-content" ng-repeat="note in notifications">
 			<div class="row">
@@ -850,233 +854,233 @@
 				</div>
 			</div>
 		</div>
-
-		<div id="monthlySubscriptionsPage">
-			<div class="row">
-				<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
-					<button class="back-settings-btn" ng-click="backToSettingsPage('#monthlySubscriptionsPage')">
-						<img src="img/icons/back-icon.svg" alt="back to search page">
-						<span>BACK TO THE SETTINGS</span>
-					</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="head">
-					SimCast Monthly Subscriptions
-				</div>
-			</div>
-			<div class="row subscription-row">
-				<div>
-					<div align="center">
-						<div class="col-md-4 col-lg-4 subscription first">
-							<div class="ship-image">
-								<img src="img/ship-bronze.svg" alt="bronze ship">
-							</div>
-							<div class="subscription-name">
-								<div><img src="img/bronze-heading.svg" alt="bronze"></div>
-								<div><img src="img/wave-bronze.svg" alt="wave bronze"></div>
-							</div>
-							<div class="price">
-								$68.95
-							</div>
-							<div class="configuration">
-								2 users
-								<br/ >
-								100 product queries
-							</div>
-							<div class="button-holder">
-								<button ng-click="addSubscription('bronze');subsctiptionUpgraded()">
-									<span>BUY NOW</span>
-								</button>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-4 subscription second">
-							<div class="ship-image">
-								<img src="img/ship-silver.svg" alt="bronze ship">
-							</div>
-							<div class="subscription-name">
-								<div><img src="img/silver-heading.svg" alt="silver"></div>
-								<div><img src="img/wave-silver.svg" alt="wave silver"></div>
-							</div>
-							<div class="price">
-								$248.95
-							</div>
-							<div class="configuration">
-								10 users
-								<br/ >
-								500 product queries
-							</div>
-							<div class="button-holder">
-								<button ng-click="addSubscription('silver');subsctiptionUpgraded()">
-									<span>BUY NOW</span>
-								</button>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-4 subscription third">
-							<div class="ship-image">
-								<img src="img/ship-gold.svg" alt="gold ship">
-							</div>
-							<div class="subscription-name">
-								<div><img src="img/gold-heading.svg" alt="gold"></div>
-								<div><img src="img/wave-gold.svg" alt="wave gold"></div>
-							</div>
-							<div class="price">
-								Custom pricing
-							</div>
-							<div class="configuration">
-								Enterprise user
-								<br/ >
-							</div>
-							<div class="button-holder">
-								<button ng-click="addSubscription('gold');subsctiptionUpgraded()">
-									<span>CONTACT US</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div id="searchResultPage">
-			<div class="heading">
-				Score Page
-			</div>
-			<div class="row">
-				<div class="col-md-4 col-lg-4">
-					<button class="back-search-btn" ng-click="showMainPage('#searchResultPage')">
-						<img src="img/icons/back-icon.svg" alt="back to search page">
-						<span>BACK TO THE SEARCH PAGE</span>
-					</button>
-					<div class="details">
-						<div class="details-item">
-							<div class="head">Product</div>
-							<div class="content">
-								34" Class 21:9 UltraWide Full HD IPS Curved Gaming Monitor (34" Diagonal)
-							</div>
-							<div class="head">UPC Code</div>
-							<div class="content">
-								719192606715
-							</div>
-							<div class="head">Company</div>
-							<div class="content">
-								LG
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-5 col-lg-5">
-					<div class="speedometer">
-						<div>
-							<img src="img/speedometer.svg" alt="">
-							<div class="arrow">
-								<img src="img/speed-arrow.svg" alt="">
-							</div>
-						</div>
-						<div class="score-desc">
-							<div class="number">642</div>
-							<div> Total Score </div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-lg-3">
-					<div class="buttons">
-						<div>
-							<button class="download" >
-								<img src="img/icons/download-icon.svg" alt="download score">
-								<span>DOWNLOAD SCORE</span>
-							</button>
-						</div>
-						<div>
-							<button class="email" data-toggle="modal" data-target="#emailModal">
-								<img src="img/icons/email-icon.svg" alt="email score">
-								<span>EMAIL SCORE</span>
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="modal fade" id="emailModal" role="dialog">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="content-holder">
-								<div class="question">
-									<p>Send Result</p>
-								</div>
-								<div>
-									<input type="text" placeholder="Your Email">
-								</div>
-								<div>
-									<button data-toggle="modal" data-target="#emailModalOK" type="button" class="btn delete" data-dismiss="modal">Send</button>
-									<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="modal fade" id="emailModalOK" role="dialog">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="content-holder">
-								<div class="question">
-									<p>Email has been sent!</p>
-								</div>
-								<div>
-									<button ng-click="addUser()" type="button" class="btn delete" data-dismiss="modal">OK</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<div class="result-message green">
-				Good. Product may have better than average rate of sale
-			</div>
-			<div class="heading">
-				Individual Score Breakdown
-			</div>
-			<div class="scores">
-				<div class="score-item" ng-class="{'exclamation': scoreItem.score=='N/A'}" ng-repeat="scoreItem in scores">
-					<img ng-src="img/score-circle.svg" alt="score circle">
-					<div class="desc">
-						<span>{{scoreItem.score}}</span>
-						<br/>
-						{{scoreItem.name}}
-					</div>
-					<img class="exclamation-img" ng-src="img/exclamation.svg" alt="score circle" ng-click="showTooltip =! showTooltip">
-				</div>
-			</div>
-		</div>
-
 	</div>
 
-	<div id="loginPage" ng-init="showLoginPage(); isSignUp = !isSignUp">
-		<div class="wrapper">
-			<div class="form-logo">
-				<img src="img/header-logo.svg" alt="header">
+	<div id="monthlySubscriptionsPage">
+		<div class="row">
+			<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
+				<button class="back-settings-btn" ng-click="backToSettingsPage('#monthlySubscriptionsPage')">
+					<img src="img/icons/back-icon.svg" alt="back to search page">
+					<span>BACK TO THE SETTINGS</span>
+				</button>
 			</div>
-			<div class="row">
-				<div class="col-md-4 col-lg-4">
-					<div class="app-desc">
-						<div class="head">
-							SimCast Market Analytics
+		</div>
+		<div class="row">
+			<div class="head">
+				SimCast Monthly Subscriptions
+			</div>
+		</div>
+		<div class="row subscription-row">
+			<div>
+				<div align="center">
+					<div class="col-md-4 col-lg-4 subscription first">
+						<div class="ship-image">
+							<img src="img/ship-bronze.svg" alt="bronze ship">
 						</div>
-						<div class="desc">
-							We predict your future sales by crunching data from sites,
-							<br/>
-							<span>so you can avoid out-of-stocks or slow movers.</span>
+						<div class="subscription-name">
+							<div><img src="img/bronze-heading.svg" alt="bronze"></div>
+							<div><img src="img/wave-bronze.svg" alt="wave bronze"></div>
+						</div>
+						<div class="price">
+							$68.95
+						</div>
+						<div class="configuration">
+							2 users
+							<br/ >
+							100 product queries
+						</div>
+						<div class="button-holder">
+							<button ng-click="addSubscription('bronze');subsctiptionUpgraded()">
+								<span>BUY NOW</span>
+							</button>
 						</div>
 					</div>
-					<div class="login-form">
-						<div class="input-holder">
-							<div class="input-row">
-								<input type="text" placeholder="Email">
+					<div class="col-md-4 col-lg-4 subscription second">
+						<div class="ship-image">
+							<img src="img/ship-silver.svg" alt="bronze ship">
+						</div>
+						<div class="subscription-name">
+							<div><img src="img/silver-heading.svg" alt="silver"></div>
+							<div><img src="img/wave-silver.svg" alt="wave silver"></div>
+						</div>
+						<div class="price">
+							$248.95
+						</div>
+						<div class="configuration">
+							10 users
+							<br/ >
+							500 product queries
+						</div>
+						<div class="button-holder">
+							<button ng-click="addSubscription('silver');subsctiptionUpgraded()">
+								<span>BUY NOW</span>
+							</button>
+						</div>
+					</div>
+					<div class="col-md-4 col-lg-4 subscription third">
+						<div class="ship-image">
+							<img src="img/ship-gold.svg" alt="gold ship">
+						</div>
+						<div class="subscription-name">
+							<div><img src="img/gold-heading.svg" alt="gold"></div>
+							<div><img src="img/wave-gold.svg" alt="wave gold"></div>
+						</div>
+						<div class="price">
+							Custom pricing
+						</div>
+						<div class="configuration">
+							Enterprise user
+							<br/ >
+						</div>
+						<div class="button-holder">
+							<button ng-click="addSubscription('gold');subsctiptionUpgraded()">
+								<span>CONTACT US</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="searchResultPage">
+		<div class="heading">
+			Score Page
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-lg-4">
+				<button class="back-search-btn" ng-click="showMainPage('#searchResultPage')">
+					<img src="img/icons/back-icon.svg" alt="back to search page">
+					<span>BACK TO THE SEARCH PAGE</span>
+				</button>
+				<div class="details">
+					<div class="details-item">
+						<div class="head">Product</div>
+						<div class="content">
+							34" Class 21:9 UltraWide Full HD IPS Curved Gaming Monitor (34" Diagonal)
+						</div>
+						<div class="head">UPC Code</div>
+						<div class="content">
+							719192606715
+						</div>
+						<div class="head">Company</div>
+						<div class="content">
+							LG
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5 col-lg-5">
+				<div class="speedometer">
+					<div>
+						<img src="img/speedometer.svg" alt="">
+						<div class="arrow">
+							<img src="img/speed-arrow.svg" alt="">
+						</div>
+					</div>
+					<div class="score-desc">
+						<div class="number">642</div>
+						<div> Total Score </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-lg-3">
+				<div class="buttons">
+					<div>
+						<button class="download" >
+							<img src="img/icons/download-icon.svg" alt="download score">
+							<span>DOWNLOAD SCORE</span>
+						</button>
+					</div>
+					<div>
+						<button class="email" data-toggle="modal" data-target="#emailModal">
+							<img src="img/icons/email-icon.svg" alt="email score">
+							<span>EMAIL SCORE</span>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="emailModal" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="content-holder">
+							<div class="question">
+								<p>Send Result</p>
 							</div>
-							<div class="input-row">
-								<input type="text" placeholder="Password">
+							<div>
+								<input type="text" placeholder="Your Email">
 							</div>
+							<div>
+								<button data-toggle="modal" data-target="#emailModalOK" type="button" class="btn delete" data-dismiss="modal">Send</button>
+								<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="emailModalOK" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="content-holder">
+							<div class="question">
+								<p>Email has been sent!</p>
+							</div>
+							<div>
+								<button ng-click="addUser()" type="button" class="btn delete" data-dismiss="modal">OK</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="result-message green">
+			Good. Product may have better than average rate of sale
+		</div>
+		<div class="heading">
+			Individual Score Breakdown
+		</div>
+		<div class="scores">
+			<div class="score-item" ng-class="{'exclamation': scoreItem.score=='N/A'}" ng-repeat="scoreItem in scores">
+				<img ng-src="img/score-circle.svg" alt="score circle">
+				<div class="desc">
+					<span>{{scoreItem.score}}</span>
+					<br/>
+					{{scoreItem.name}}
+				</div>
+				<img class="exclamation-img" ng-src="img/exclamation.svg" alt="score circle" ng-click="showTooltip =! showTooltip">
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div id="loginPage" ng-init="showLoginPage(); isSignUp = !isSignUp">
+	<div class="wrapper">
+		<div class="form-logo">
+			<img src="img/header-logo.svg" alt="header">
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-lg-4">
+				<div class="app-desc">
+					<div class="head">
+						SimCast Market Analytics
+					</div>
+					<div class="desc">
+						We predict your future sales by crunching data from sites,
+						<br/>
+						<span>so you can avoid out-of-stocks or slow movers.</span>
+					</div>
+				</div>
+				<div class="login-form">
+					<div class="input-holder">
+						<div class="input-row">
+							<input type="text" placeholder="Email">
+						</div>
+						<div class="input-row">
+							<input type="text" placeholder="Password">
+						</div>
 						<!--<div class="input-row" ng-show="isSignUp">
 							<input type="text" placeholder="Your Phone Number (1-222-333-4444)">
 						</div>-->
@@ -1107,13 +1111,6 @@
 
 		</div>
 	</div>
-
-</div>
-
-</div>
-
-<div class="footer">
-	<div class="wave"></div>
 </div>
 
 <div class="hidden">
