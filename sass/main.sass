@@ -96,8 +96,10 @@ header
 .report
   margin-left: 50px
   position: relative
+  &:hover
+    opacity: 0.8
   span
-     margin-left: 12px
+    margin-left: 12px
   a
     text-decoration: none
     color: $basic-purple
@@ -108,6 +110,10 @@ header
     font-size: 16px
     line-height: 19px
     font-weight: normal
+
+.new-score
+  &:hover
+    background-color: #4DA1F0 
 
 .score-button 
   width: 119px
@@ -242,6 +248,8 @@ header
 .notification-box
   margin-right: 25px
   position: relative
+  &:hover
+    opacity: 0.8
   .notification-toggler
     width: 50px !important
     height: 30px !important
@@ -265,6 +273,14 @@ header
   a
     text-decoration: none
 
+.indicator
+  img
+    height: 12px
+    width: 12px
+    margin-bottom: 4px
+  .rotated
+    margin-bottom: 0px
+
 .greeting
   margin-left: 10px
   height: 19px
@@ -274,6 +290,8 @@ header
   font-size: 16px
   line-height: 19px
   font-weight: normal
+  &:hover
+    color: rgba(62,62,62,0.64)
 
 .container
   padding-top: 132px
@@ -1647,13 +1665,23 @@ header
     margin-bottom: 40px
     margin-left: auto
     margin-right: auto
-    border: 1px solid #6BBE7A
-    background-color: #e7fceb
     padding: 20px
     border-radius: 4px
     width: 600px
     text-align: center
     font-weight: bold
+    &.red
+      border: 1px solid #FF5753
+      background-color: #FFC3C2
+    &.yellow 
+      border: 1px solid #FFC200
+      background-color: #FBF9E3
+    &.green 
+      border: 1px solid #6BBE7A
+      background-color: #e7fceb
+    &.blue
+      border: 1px solid #66A9E8
+      background-color: #D6EBFF
   .speedometer
     padding-top: 20px
     content-align: center
@@ -1676,7 +1704,15 @@ header
         margin-bottom: -10px
         font-weight: bold
         font-size: 52px
-        color: #6BBE7A
+        &.red
+          color: #FF5353
+        &.yellow
+          color: #FFC200
+        &.green
+          color: #6BBE7A
+        &.blue
+          color: #66A9E8
+
 
   .heading
     @extend h1

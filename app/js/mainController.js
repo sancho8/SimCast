@@ -1,5 +1,23 @@
 var app = angular.module("SimCast", [])
 .controller("mainController", function($scope) {
+
+	$scope.searchScore = 730
+
+	$scope.getNumberClass = function(){
+		if($scope.searchScore < 500){
+			return 'red';
+		}
+		else if($scope.searchScore < 600){
+			return 'yellow';
+		}
+		else if($scope.searchScore < 700){
+			return 'green';
+		}
+		else{
+			return 'blue';
+		}
+	}
+
 	$scope.dataSources = ["Amazon", "Best Buy", "Facebook", "Pinterest", "Walmart", "YouTube"];
 	$scope.notifications = [
 	{

@@ -65,7 +65,7 @@
 						</div>
 					</div>
 					<div class="button-wrapper">
-						<button class="score-button" ng-click="goToMainPage()">
+						<button class="score-button new-score" ng-click="goToMainPage()">
 							<span>NEW SCORE</span>
 						</button>
 					</div>
@@ -88,7 +88,7 @@
 						<img height="33px" src="img/user-photo.png" alt="user photo">
 						<a href="" ng-click="showUserDropdownModal = !showUserDropdownModal"> 
 							<span class="greeting">Hello, Dillon</span>
-							<span><img height="8px" width="8px" src="img/icons/arrow-down.svg" alt="dropdown" ng-class="{'rotated' : showUserDropdownModal}"></span>
+							<span class="indicator"><img height="8px" width="8px" src="img/icons/arrow-down.svg" alt="dropdown" ng-class="{'rotated' : showUserDropdownModal}"></span>
 						</a>
 					</div>
 				</div>
@@ -161,12 +161,12 @@
 						<input type="text" name="ProductCompany" placeholder="Product Company">
 					</div>
 					<div>
-						<button data-toggle="modal" ng-click="animateSearchModal()" data-target="#searchModal" class="score-button-lg">
+						<button ng-click="showSearchResultPage()" class="score-button-lg">
 							<span>SCORE</span>
 						</button>
-					<!--<button ng-click="showSearchResultPage()" class="score-button-lg">
-						<span>SCORE</span>
-					</button>-->
+					<!--<button data-toggle="modal" ng-click="animateSearchModal()" data-target="#searchModal" class="score-button-lg">
+							<span>SCORE</span>
+						</button>-->
 				</div>
 				<div class="text-buttons">
 					<a href="" ng-click="showAdvancedFilters()" style="float:left">Advanced filters</a>
@@ -201,9 +201,7 @@
 			</div>
 		</div>
 		<div class="notification-wave">
-			<a href="">
-				<img src="img/icons/blue-wave-icon.svg" alt="wave icon">
-			</a>
+			<img src="img/icons/blue-wave-icon.svg" alt="wave icon">
 		</div>
 	</div>
 
@@ -435,8 +433,8 @@
 						<h3 ng-show="activeSection=='profile'">Edit your name, email, avatar</h3>
 						<h3 ng-show="activeSection=='password'">Change your password</h3>
 						<h3 ng-show="activeSection=='users'">Manage your users</h3>
-						<h3 ng-show="activeSection=='billing'">Your Billing history</h3>
-						<h3 ng-show="activeSection=='searches'">Your Searches Remaining</h3>
+						<h3 ng-show="activeSection=='billing'">Billing History</h3>
+						<h3 ng-show="activeSection=='searches'">Searches Remaining</h3>
 						<h3 ng-show="activeSection=='subscription'">Manage your subscription</h3>
 					</div>
 				</div>
@@ -496,7 +494,7 @@
 							<a href="">
 								<img src="img/icons/subscription-icon-white.svg" ng-show="activeSection=='subscription'" alt="subscription">
 								<img src="img/icons/subscription-icon.svg" ng-show="activeSection!='subscription'" alt="searches">
-								Your Subscription
+								Subscription
 							</a>
 						</li>
 					</ul>
@@ -705,7 +703,7 @@
 							</div>
 						</div>
 						<div class="heading">
-							You can purchase extra searches in this month
+							Purchase Extra Searches
 						</div>
 						<div class="purchase">
 							<button>
@@ -951,7 +949,7 @@
 			<div class="col-md-4 col-lg-4">
 				<button class="back-search-btn" ng-click="showMainPage('#searchResultPage')">
 					<img src="img/icons/back-icon.svg" alt="back to search page">
-					<span>BACK TO THE SEARCH PAGE</span>
+					<span>BACK TO SEARCH</span>
 				</button>
 				<div class="details">
 					<div class="details-item">
@@ -979,7 +977,7 @@
 						</div>
 					</div>
 					<div class="score-desc">
-						<div class="number">642</div>
+						<div class="number" ng-class="getNumberClass()">{{searchScore}}</div>
 						<div> Total Score </div>
 					</div>
 				</div>
@@ -1035,8 +1033,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="result-message green">
+		<div ng-show="searchScore < 500" class="result-message red">
+			Warning! Product may have serious sales problems.
+		</div>
+		<div ng-show="searchScore > 499 && searchScore < 600" class="result-message yellow">
+			Meh. Product may sell slowly; greater risk than average.
+		</div>
+		<div ng-show="searchScore > 599 && searchScore < 700" class="result-message green">
 			Good. Product may have better than average rate of sale
+		</div>
+		<div ng-show="searchScore > 699 && searchScore < 800" class="result-message blue">
+			Excellent. Product may be in high demand; don't let it go out of stock.
 		</div>
 		<div class="heading">
 			Individual Score Breakdown
@@ -1056,7 +1063,7 @@
 
 </div>
 
-<div id="loginPage" ng-init="showLoginPage(); isSignUp = !isSignUp">
+<div id="loginPage" ng-init="showLoginPage(); isSignUp = false">
 	<div class="wrapper">
 		<div class="form-logo">
 			<img src="img/header-logo.svg" alt="header">
@@ -1091,11 +1098,11 @@
 							<button><span>SIGN IN</span></button>
 						</div>
 						<div class="input-row" ng-show="isSignUp">
-							<a ng-click="isSignUp = !isSignUp" href="">Already signed up? Log in</a>
+							<a ng-click="isSignUp = !isSignUp" href="">Sign In</a>
 						</div>
 						<div class="input-row" ng-show="!isSignUp">
-							<a class="left" href="">Forgot your Password?</a>
-							<a class="right" href="" ng-click="isSignUp = !isSignUp">Don't Have an Account?</a>
+							<a class="left" href="">Forgot your password?</a>
+							<a class="right" href="" ng-click="isSignUp = !isSignUp">Sign Up</a>
 						</div>
 					</div>
 				</div>
