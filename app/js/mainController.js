@@ -1,5 +1,11 @@
 var app = angular.module("SimCast", [])
-.controller("mainController", function($scope) {
+.config(function ($httpProvider) {
+	$httpProvider.defaults.headers.common = {};
+	$httpProvider.defaults.headers.post = {};
+	$httpProvider.defaults.headers.put = {};
+	$httpProvider.defaults.headers.patch = {};
+})
+.controller("mainController", function($scope, $http) {
 
 	$scope.searchScore = 730
 
@@ -16,6 +22,47 @@ var app = angular.module("SimCast", [])
 		else{
 			return 'blue';
 		}
+	}
+
+	$scope.userEmail = "";
+	$scope.userPassword = "";
+
+	$scope.register = function(){
+		var postData = {
+			"email": $scope.userEmail,
+			"password": $scope.userPassword
+		};
+		console.log(postData);
+		$http({
+			method : "POST",
+			url : "https://simcast.herokuapp.com/register",
+			data : postData
+		}).then(function mySuccess(response) {
+			console.log(response);
+			$scope.showMainPage('#loginPage'); 
+			$scope.showHeader();
+		}, function myError(response) {
+			console.log(response);
+		});
+	}
+
+	$scope.login = function(){
+		var postData = {
+			"email": $scope.userEmail,
+			"password": $scope.userPassword
+		};
+		console.log(postData);
+		$http({
+			method : "POST",
+			url : "https://simcast.herokuapp.com/login",
+			data : postData
+		}).then(function mySuccess(response) {
+			console.log(response);
+			$scope.showMainPage('#loginPage'); 
+			$scope.showHeader();
+		}, function myError(response) {
+			console.log(response);
+		});
 	}
 
 	$scope.dataSources = ["Amazon", "Best Buy", "Facebook", "Pinterest", "Walmart", "YouTube"];
