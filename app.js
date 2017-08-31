@@ -14,9 +14,7 @@ http.createServer(function(req, res){
 var express = require('express');
 var app = express();
 var path = require('path');
-var proxy = require('express-http-proxy');
 
-app.use('/proxy', proxy('www.google.com'));
 app.use(express.static(path.join(__dirname, 'app')));
 app.use("/", express.static(__dirname));
 app.use("/", express.static(__dirname + '/img'));
