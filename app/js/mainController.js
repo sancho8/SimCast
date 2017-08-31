@@ -36,7 +36,10 @@ var app = angular.module("SimCast", [])
 		$http({
 			method : "POST",
 			url : "https://simcast.herokuapp.com/register",
-			data : postData
+			data : postData,
+			headers: {
+            	'Content-Type': 'application/json'
+        	}
 		}).then(function mySuccess(response) {
 			console.log(response);
 			$scope.showMainPage('#loginPage'); 
@@ -55,7 +58,10 @@ var app = angular.module("SimCast", [])
 		$http({
 			method : "POST",
 			url : "https://simcast.herokuapp.com/login",
-			data : postData
+			data : postData,
+			headers: {
+            	'Content-Type': 'application/json'
+        	}
 		}).then(function mySuccess(response) {
 			console.log(response);
 			$scope.showMainPage('#loginPage'); 
