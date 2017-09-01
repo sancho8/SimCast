@@ -1088,9 +1088,7 @@
 						<div class="input-row">
 							<input type="password" placeholder="Password" ng-model="userPassword">
 						</div>
-						<!--<div class="input-row" ng-show="isSignUp">
-							<input type="text" placeholder="Your Phone Number (1-222-333-4444)">
-						</div>-->
+						<div class="login-error-message">{{loginErrorMessage}}</div>
 						<div class="input-row" ng-show="isSignUp" ng-click="register()">
 							<button><span>SIGN UP</span></button>
 						</div>

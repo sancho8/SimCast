@@ -26,6 +26,8 @@ var app = angular.module("SimCast", [])
 
 	$scope.userEmail = "";
 	$scope.userPassword = "";
+	$scope.userData = {};
+	$scope.loginErrorMessage = "";
 
 	$scope.register = function(){
 		var postData = {
@@ -42,9 +44,11 @@ var app = angular.module("SimCast", [])
         	}
 		}).then(function mySuccess(response) {
 			console.log(response);
+			$scope.userData = response.data;
 			$scope.showMainPage('#loginPage'); 
 			$scope.showHeader();
 		}, function myError(response) {
+
 			console.log(response);
 		});
 	}
@@ -63,7 +67,8 @@ var app = angular.module("SimCast", [])
             	'Content-Type': 'application/json'
         	}
 		}).then(function mySuccess(response) {
-			console.log(response);
+			console.log(response); 
+			$scope.userData = response.data;
 			$scope.showMainPage('#loginPage'); 
 			$scope.showHeader();
 		}, function myError(response) {
