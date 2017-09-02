@@ -44,9 +44,13 @@
 
 </head>
 
-<body ng-controller="mainController">
+<body ng-controller="mainController" ng-init="checkIfLoggedIn()">
 
 	<div id="main-wrapper">
+
+		<div ng-view>
+
+		</div>
 		
 		<header class="navbar nav">
 			<div class="navbar-content">
@@ -99,7 +103,7 @@
 					<a href="" ng-click="showSettings(); showUserDropdownModal = false">Admin Settings</a>
 				</div>
 				<div>
-					<a href="" ng-click="showUserDropdownModal=false; showLoginPage()">Logout</a>
+					<a href="" ng-click="showUserDropdownModal=false; logout()">Logout</a>
 				</div>
 			</div>
 		</header>
@@ -1063,7 +1067,7 @@
 
 </div>
 
-<div id="loginPage" ng-init="showLoginPage(); isSignUp = false">
+<div id="loginPage" ng-init="isSignUp = false">
 	<div class="wrapper">
 		<div class="form-logo">
 			<img src="img/header-logo.svg" alt="header">
@@ -1130,6 +1134,7 @@
 
 	<!-- Load Scripts Start -->
 	<script type="text/javascript" src="js/angular/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-cookies/angular-cookies.min.js"></script>
 	<script type="text/javascript" src="js/mainController.js"></script>
 	<script>var scr = {"scripts":[
 		{"src" : "js/libs.js", "async" : false},

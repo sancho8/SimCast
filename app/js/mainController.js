@@ -1,11 +1,11 @@
-var app = angular.module("SimCast", [])
+var app = angular.module("SimCast", ['ngCookies'])
 .config(function ($httpProvider) {
 	$httpProvider.defaults.headers.common = {};
 	$httpProvider.defaults.headers.post = {};
 	$httpProvider.defaults.headers.put = {};
 	$httpProvider.defaults.headers.patch = {};
 })
-.controller("mainController", function($scope, $http) {
+.controller("mainController", function($scope, $http, $cookies) {
 
 	$scope.searchScore = 730
 
@@ -48,7 +48,6 @@ var app = angular.module("SimCast", [])
 			$scope.showMainPage('#loginPage'); 
 			$scope.showHeader();
 		}, function myError(response) {
-
 			console.log(response);
 		});
 	}
@@ -69,9 +68,12 @@ var app = angular.module("SimCast", [])
 		}).then(function mySuccess(response) {
 			console.log(response); 
 			$scope.userData = response.data;
+			$cookies.putObject('auth', response.data);
+			console.log($cookies.getObject('auth'));
 			$scope.showMainPage('#loginPage'); 
 			$scope.showHeader();
 		}, function myError(response) {
+			$scope.loginErrorMessage = "Incorrect login/password";
 			console.log(response);
 		});
 	}
@@ -208,6 +210,25 @@ var app = angular.module("SimCast", [])
 		});
 		$("#mainPage").fadeIn('slow', function() {
 		});
+	}
+
+	$scope.checkIfLoggedIn = function(){
+		if($cookies.getObject('auth') == undefined){
+			$scope.showLoginPage();
+		}
+		else{
+			$scope.userData = $cookies.getObject('auth');
+			console.log($scope.userData);
+			$("#loginPage").fadeOut("slow", function() {
+
+			});
+			$scope.showMainPage();
+		}
+	}
+
+	$scope.logout = function(){
+		$cookies.remove('auth');
+		$scope.showLoginPage();
 	}
 
 	$scope.showLoginPage = function(){
