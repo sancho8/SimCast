@@ -78,6 +78,67 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 		});
 	}
 
+	$scope.loadSavedSearches = function() {
+		var header = 'Basic ' + $scope.userData.token;
+		$http({
+			method : "GET",
+			url : "https://simcast.herokuapp.com/search",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response); 
+			$scope.savedSearches = response.data;
+			$scope.showSavedSearches();
+		}, function myError(response) {
+			console.log(response);
+		});
+	}
+
+	$scope.deleteAllSearches = function(){
+		alert("delete");
+		var header = 'Basic ' + $scope.userData.token;
+		$http({
+			method : "DELETE",
+			url : "https://simcast.herokuapp.com/search",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response); 
+			$scope.savedSearches = [];
+		}, function myError(response) {
+			console.log(response);
+		});
+	}
+
+
+	$scope.deleteSelectedSearches = function(){
+		/*$scope.savedSearches = $scope.savedSearches.filter(function(e){
+			return this.indexOf(e)<0;
+		}, $scope.selectedSearches);*/
+		var header = 'Basic ' + $scope.userData.token;
+		$http({
+			method : "DELETE",
+			url : "https://simcast.herokuapp.com/search/list",
+			data: $scope.selectedSearches,
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response); 
+			$scope.loadSavedSearches();
+		}, function myError(response) {
+			console.log(response);
+		});
+		console.log($scope.selectedSearches);
+		$scope.isSearchesSelected = false;
+		$scope.searchProp = undefined;
+	}
+
 	$scope.dataSources = ["Amazon", "Best Buy", "Facebook", "Pinterest", "Walmart", "YouTube"];
 	$scope.notifications = [
 	{
@@ -124,7 +185,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			$scope.selectedSearches.push(elem);
 		}
 		else{
-			$scope.selectedSearches.pop(elem);
+			$scope.selectedSearches.splice($scope.selectedSearches.indexOf(elem), 1);
 		}
 		if($scope.selectedSearches.length == 0){
 			$scope.isSearchesSelected = false;
@@ -531,14 +592,6 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 		}
 	};
 
-	$scope.deleteSelectedSearches = function(){
-		$scope.savedSearches = $scope.savedSearches.filter(function(e){
-			return this.indexOf(e)<0;
-		}, $scope.selectedSearches);
-		$scope.isSearchesSelected = false;
-		$scope.searchProp = undefined;
-	}
-
 	$scope.deleteSelectedUsers = function(){
 		$scope.users = $scope.users.filter(function(e){
 			return this.indexOf(e)<0;
@@ -573,117 +626,6 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			});
 		});
 	}
-
-	$scope.savedSearches = [
-	{
-		name: 'name1 Hey, welcome to SimCast 1.0. Let us know if you have any questions!',
-		upc: '123456123456',
-		company: 'company name',
-		date: "08.08",
-		checked: false
-	},
-	{
-		name: 'a',
-		upc: '12345',
-		company: 'company name',
-		date: "08.08",
-		checked: false
-	},
-	{
-		name: 'name3',
-		upc: '12345',
-		company: 'company name',
-		date: "08.08",
-		checked: false
-	},
-	{
-		name: 'c',
-		upc: '12345',
-		company: 'company name',
-		date: "09.08",
-		checked: false
-	},
-	{
-		name: 'name5',
-		upc: '12345',
-		company: '1company name',
-		date: "08.08",
-		checked: false
-	},
-	{
-		name: 'xvb',
-		upc: '12345',
-		company: 'company name1',
-		date: "08.08",
-		checked: false
-	},
-	{
-		name: 'name7',
-		upc: '12345',
-		company: 'company name',
-		date: "01.08",
-		checked: false
-	},
-	{
-		name: 'name8',
-		upc: '12345',
-		company: 'company name',
-		date: "08.08",
-		checked: false
-	},
-	{
-		name: 'name9',
-		upc: '12345',
-		company: 'company name',
-		date: "08.08",
-		checked: false
-	},
-	];
-
-	$scope.users = [
-	{
-		name: 'Dillon Roberts(Admin)',
-		lastActive: '07.23.17',
-		searchesNum: '32',
-		isAdmin: true,
-		checked: false
-	},
-	{
-		name: 'Julia Jones',
-		lastActive: '07.22.17',
-		searchesNum: '12',
-		isAdmin: false,
-		checked: false
-	},
-	{
-		name: 'Murray Stone',
-		lastActive: '06.13.17',
-		searchesNum: '65',
-		isAdmin: false,
-		checked: false
-	},
-	{
-		name: 'Julia Jones',
-		lastActive: '07.22.17',
-		searchesNum: '12',
-		isAdmin: false,
-		checked: false
-	},
-	{
-		name: 'Julia Jones',
-		lastActive: '07.22.17',
-		searchesNum: '12',
-		isAdmin: false,
-		checked: false
-	},
-	{
-		name: 'Julia Jones',
-		lastActive: '07.22.17',
-		searchesNum: '12',
-		isAdmin: false,
-		checked: false
-	},
-	];
 
 	$scope.loadItems = [
 	{

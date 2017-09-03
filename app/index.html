@@ -178,7 +178,7 @@
 					</div>
 					<div class="text-buttons">
 						<a href="" ng-click="showAdvancedFilters()" style="float:left">Advanced filters</a>
-						<a href="" ng-click="showSavedSearches()" style="float:right">Saved searches</a>
+						<a href="" ng-click="loadSavedSearches()" style="float:right">Saved searches</a>
 					</div>
 				</div>
 			</div>
@@ -402,10 +402,10 @@
 						<div class="modal-content">
 							<div class="content-holder">
 								<div class="question">
-									<p>Are you sure you want to delete all searches?</p>
+									<p>Are you sure you want to delete all searches? </p>
 								</div>
 								<div >
-									<button ng-click="allSelected = false;savedSearches=''" type="button" class="btn delete" data-dismiss="modal">Delete</button>
+									<button ng-click="deleteAllSearches();allSelected = false;" type="button" class="btn delete" data-dismiss="modal">Delete</button>
 									<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Close</button>
 								</div>
 							</div>
