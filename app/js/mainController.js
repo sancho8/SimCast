@@ -1,4 +1,4 @@
-var app = angular.module("SimCast", ['ngCookies'])
+var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 .config(function ($httpProvider) {
 	$httpProvider.defaults.headers.common = {};
 	$httpProvider.defaults.headers.post = {};
@@ -10,13 +10,13 @@ var app = angular.module("SimCast", ['ngCookies'])
 	$scope.searchScore = 730
 
 	$scope.getNumberClass = function(){
-		if($scope.searchScore < 500){
+		if($scope.searchResultData.score < 500){
 			return 'red';
 		}
-		else if($scope.searchScore < 600){
+		else if($scope.searchResultData.score < 600){
 			return 'yellow';
 		}
-		else if($scope.searchScore < 700){
+		else if($scope.searchResultData.score < 700){
 			return 'green';
 		}
 		else{
@@ -40,8 +40,8 @@ var app = angular.module("SimCast", ['ngCookies'])
 			url : "https://simcast.herokuapp.com/register",
 			data : postData,
 			headers: {
-            	'Content-Type': 'application/json'
-        	}
+				'Content-Type': 'application/json'
+			}
 		}).then(function mySuccess(response) {
 			console.log(response);
 			$scope.userData = response.data;
@@ -63,8 +63,8 @@ var app = angular.module("SimCast", ['ngCookies'])
 			url : "https://simcast.herokuapp.com/login",
 			data : postData,
 			headers: {
-            	'Content-Type': 'application/json'
-        	}
+				'Content-Type': 'application/json'
+			}
 		}).then(function mySuccess(response) {
 			console.log(response); 
 			$scope.userData = response.data;
@@ -156,6 +156,8 @@ var app = angular.module("SimCast", ['ngCookies'])
 
 			});
 		});
+		$scope.searchErrorMessage = "";
+		$scope.searchData = {};
 	}
 
 	$scope.slideImage = function(imgSelector){
@@ -210,6 +212,8 @@ var app = angular.module("SimCast", ['ngCookies'])
 		});
 		$("#mainPage").fadeIn('slow', function() {
 		});
+		$scope.searchErrorMessage = "";
+		$scope.searchData = {};
 	}
 
 	$scope.checkIfLoggedIn = function(){
@@ -229,6 +233,193 @@ var app = angular.module("SimCast", ['ngCookies'])
 	$scope.logout = function(){
 		$cookies.remove('auth');
 		$scope.showLoginPage();
+	}
+
+	$scope.initProfileForm = function(){
+		$scope.editUser = {};
+		$scope.editUser.email = $scope.userData.email; 
+		$scope.editUser.firstName = $scope.userData.firstName; 
+		$scope.editUser.lastName = $scope.userData.lastName; 
+	}
+
+	$scope.initPasswordForm = function(){
+		$scope.passwordErrorMessage = "";
+		$scope.passwordData = {};
+	}
+
+	$scope.updatePassword = function(){
+		$scope.passwordErrorMessage = "";
+		if($scope.passwordData.newPassword !== $scope.passwordData.confirmPassword){
+			$scope.passwordErrorMessage = "Passwords doesn't match";
+			return;
+		}
+		if($scope.passwordData.newPassword === $scope.passwordData.oldPassword){
+			$scope.passwordErrorMessage = "New password cannot be same as current password";
+			return;
+		}
+		var postData = {
+			"currentPassword": $scope.passwordData.oldPassword,
+			"newPassword": $scope.passwordData.newPassword,
+		};
+		var header = 'Basic ' + $scope.userData.token;
+		console.log(postData);
+		$http({
+			method : "Put",
+			url : "https://simcast.herokuapp.com/userUpdatePassword",
+			data : postData,
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response);
+		}, function myError(response) {
+			$scope.passwordErrorMessage = "Passwords incorrect";
+			console.log(response);
+		});
+	}
+
+	$scope.updateUser = function(){
+		var postData = {
+			"email": $scope.editUser.email,
+			"firstName": $scope.editUser.firstName,
+			"lastName": $scope.editUser.lastName
+		};
+		var header = 'Basic ' + $scope.userData.token;
+		console.log(postData);
+		$http({
+			method : "Put",
+			url : "https://simcast.herokuapp.com/userUpdate",
+			data : postData,
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response);
+		}, function myError(response) {
+			console.log(response);
+		});
+	}
+
+
+	$scope.filtersList = [
+	{value: "AS", text: 'Amazon'},
+	{value: "BS", text: 'Best Buy'},
+	{value: "FS", text: 'Facebook'},
+	{value: "PS", text: 'Pinterest'},
+	{value: "WS", text: 'Walmart'},
+	{value: "YS", text: 'YouTube'},
+	];
+
+	$scope.selectedFilters = $scope.filtersList.slice();
+
+	$scope.savedFilters = true;
+
+	$scope.searchData = {};
+
+	$scope.searchResultData = {};
+
+	$scope.userImage = "";
+
+	$scope.toggleSelectedFilter = function(item){
+		var index = $scope.selectedFilters.indexOf(item);
+
+		if (index === -1) {
+			$scope.selectedFilters.push(item);
+		} else {
+			$scope.selectedFilters.splice(index, 1);
+		}
+		console.log($scope.selectedFilters);
+	}
+
+	$scope.executeSearch = function(){
+		if($scope.searchData.upc == "" || $scope.searchData.upc == undefined){
+			$scope.searchErrorMessage = "Please enter UPC Code";
+			return;
+		}
+		if($scope.searchData.company == "" || $scope.searchData.company == undefined){
+			$scope.searchErrorMessage = "Please enter Product Company";
+			return;
+		}
+		var postData = {
+			upc: $scope.searchData.upc,
+			company: $scope.searchData.company,
+			save: $scope.savedFilters,
+			scoring: $scope.selectedFilters.map(function(item) {
+				return item.value;
+			})
+		}
+		var header = 'Basic ' + $scope.userData.token;
+		$http({
+			method : "Get",
+			url : "https://simcast.herokuapp.com/scoring",
+			params : postData,
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response);
+			$scope.searchResultData = response.data;
+			$scope.transformSearchResultDetails();
+			$scope.showSearchResultPage();
+		}, function myError(response) {
+			console.log(response);
+		});
+		console.log(postData);
+	}
+
+	$scope.transformSearchResultDetails = function(){
+		var details = $scope.searchResultData.details;
+		$scope.searchResultScores = [];
+		$scope.searchResultScores.push({
+			name: "Amazon",
+			score: details.AS !== undefined ? details.AS : "N/A"
+		});
+		$scope.searchResultScores.push({
+			name: "BestBuy",
+			score: details.BS !== undefined ? details.BS : "N/A"
+		});
+		$scope.searchResultScores.push({
+			name: "Facebook",
+			score: details.FS !== undefined ? details.FS : "N/A"
+		});
+		$scope.searchResultScores.push({
+			name: "Pinterest",
+			score: details.PS !== undefined ? details.PS : "N/A"
+		});
+		$scope.searchResultScores.push({
+			name: "Walmart",
+			score: details.WS !== undefined ? details.WS : "N/A"
+		});
+		$scope.searchResultScores.push({
+			name: "YouTube",
+			score: details.YS !== undefined ? details.YS : "N/A"
+		});
+		console.log($scope.searchResultScores);
+	}
+
+	$scope.getUserImage = function(){
+		var postData = {
+			email: $scope.userData.email
+		}
+		var header = 'Basic ' + $scope.userData.token;
+		console.log(postData);
+		$http({
+			method : "GET",
+			url : "https://simcast.herokuapp.com/logo",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			},
+			params: {email: $scope.userData.email}
+		}).then(function mySuccess(response) {
+			$scope.userImage = response.data;
+			console.log(response);
+		}, function myError(response) {
+			console.log(response);
+		});
 	}
 
 	$scope.showLoginPage = function(){
@@ -532,31 +723,4 @@ var app = angular.module("SimCast", ['ngCookies'])
 		secondLine: "Score"
 	}
 	];
-
-	$scope.scores = [
-	{
-		name: "Amazon",
-		score: "644"
-	},
-	{
-		name: "BestBuy",
-		score: "639"
-	},
-	{
-		name: "Facebook",
-		score: "648"
-	},
-	{
-		name: "Pinterest",
-		score: "630"
-	},
-	{
-		name: "Walmart",
-		score: "642"
-	},
-	{
-		name: "YouTube",
-		score: "N/A"
-	}
-	]
 });
