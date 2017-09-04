@@ -395,6 +395,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 	}
 
 	$scope.executeSearch = function(){
+		$scope.animateSearchModal();
 		if($scope.searchData.upc == "" || $scope.searchData.upc == undefined){
 			$scope.searchErrorMessage = "Please enter UPC Code";
 			return;
@@ -424,7 +425,6 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			console.log(response);
 			$scope.searchResultData = response.data;
 			$scope.transformSearchResultDetails();
-			$scope.showSearchResultPage();
 		}, function myError(response) {
 			console.log(response);
 		});
