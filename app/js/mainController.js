@@ -382,7 +382,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 
 	$scope.searchResultData = {};
 
-	$scope.userImage = "";
+	$scope.userImage = '';
 
 	$scope.toggleSelectedFilter = function(item){
 		var index = $scope.selectedFilters.indexOf(item);
@@ -475,7 +475,6 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			}
 			console.log($scope.rotateAngle);
 			$scope.transformSearchResultDetails();
-			$scope.showSearchResultPage();
 		}, function myError(response) {
 			console.log(response);
 		});
@@ -525,15 +524,64 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 				'Content-Type': 'application/json',
 				'Authorization': header
 			},
+			responseType: 'blob',
 			params: {email: $scope.userData.email}
 		}).then(function mySuccess(response) {
-			 var b64imgData = response.data; //Binary to ASCII, where it probably stands for
-			 $scope.userImage = "data:image/png;base64," + b64imgData;
-			 console.log(b64imgData);
-			 console.log($scope.userImage);
-			}, function myError(response) {
-				console.log(response);
-			});
+			$scope.blob = response.data;
+			$scope.userImage = URL.createObjectURL($scope.blob);
+			console.log($scope.userImage);
+		}, function myError(response) {
+			console.log(response);
+		});
+	}
+
+	$scope.deleteUserImage = function(){
+		var header = 'Basic ' + $scope.userData.token;
+		$http({
+			method : "DELETE",
+			url : "https://simcast.herokuapp.com/logo/delete",
+			headers: {
+				'Content-Type': 'apllication/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response);
+		}, function myError(response) {
+			console.log(response);
+		});
+	}
+
+	$scope.uploadedIcon = "";
+
+	$scope.uploadUserImage = function(){
+		document.getElementById('uploadIconBtn').click();
+		$scope.updateUserImage();
+	}
+
+	$scope.updateUserImage = function(){
+		var f = document.getElementById('uploadIconBtn').files[0];
+		var fd = new FormData();
+		fd.append('file', f);
+		console.log(f);
+		var postData = {
+			"email": $scope.editUser.email,
+			"file": fd
+		};
+		var header = 'Basic ' + $scope.userData.token;
+		console.log(postData);
+		$http({
+			method : "POST",
+			url : "https://simcast.herokuapp.com/upload/logo",
+			data : postData,
+			headers: {
+				'Content-Type': 'multipart/form-data',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response);
+		}, function myError(response) {
+			console.log(response);
+		});
 	}
 
 	$scope.showLoginPage = function(){
@@ -613,6 +661,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 				'Authorization': header
 			}
 		}).then(function mySuccess(response) {
+			$scope.users = response.data;
 			console.log(response);
 		}, function myError(response) {
 			console.log(response);

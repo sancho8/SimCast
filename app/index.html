@@ -89,7 +89,7 @@
 						</a>
 					</div>
 					<div class="user-box">
-						<img height="33px" src="img/user-photo.png" alt="user photo">
+						<img height="33px" ng-show="userImage != ''" ng-src="{{userImage}}" alt="">
 						<a href="" ng-click="showUserDropdownModal = !showUserDropdownModal"> 
 							<span class="greeting">Hello, <span ng-show="userData.firstName==''">User</span>{{userData.firstName}}</span>
 							<span class="indicator"><img height="8px" width="8px" src="img/icons/arrow-down.svg" alt="dropdown" ng-class="{'rotated' : showUserDropdownModal}"></span>
@@ -169,12 +169,12 @@
 							{{searchErrorMessage}}
 						</div>
 						<div>
-							<button ng-click="executeSearch();" class="score-button-lg">
-								<span>SCORE</span>
-							</button>
-							<!--<button data-toggle="modal" ng-click="executeSearch()" data-target="#searchModal" class="score-button-lg">
+							<!--<button ng-click="executeSearch();" class="score-button-lg">
 								<span>SCORE</span>
 							</button>-->
+							<button data-toggle="modal" ng-click="executeSearch()" data-target="#searchModal" class="score-button-lg">
+								<span>SCORE</span>
+							</button>
 						</div>
 						<div class="text-buttons">
 							<a href="" ng-click="showAdvancedFilters()" style="float:left">Advanced filters</a>
@@ -511,9 +511,10 @@
 						<div class="col-md-8 col-lg-8 col-md-offset-1 col-lg-offset-1 settings-frame">
 							<div class="profile-frame slowDown" ng-if="activeSection=='profile'">
 								<div class="profile-top-section" ng-init="getUserImage()">
-									<img src="{{userImage}}" alt="user photo">
-									<button class="btn upload-button" ng-click="getUserImage()">Upload New Photo</button>
-									<button class="btn delete-photo">Delete</button>
+									<img ng-show="userImage != ''" ng-src="{{userImage}}" alt="">
+									<button class="btn upload-button" ng-click="uploadUserImage()">Upload New Photo</button>
+									<input type="file" ng-model="uploadedIcon" id="uploadIconBtn" name="file" style="display: none"/>
+									<button class="btn delete-photo" ng-click="deleteUserImage()">Delete</button>
 								</div>
 								<div class="settings-form">
 									<div>
@@ -647,7 +648,7 @@
 														</a>
 													</td>
 													<td class="username">
-														<span>{{s.name}}</span>
+														<span>{{s.firstName}} {{s.lastName}}</span>
 													</td>
 													<td class="lastActive">{{s.lastActive}}</td>
 													<td class="searchesNum">{{s.searchesNum}}</td>
