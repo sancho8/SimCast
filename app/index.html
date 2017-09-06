@@ -169,12 +169,12 @@
 							{{searchErrorMessage}}
 						</div>
 						<div>
-							<!--<button ng-click="executeSearch();" class="score-button-lg">
-								<span>SCORE</span>
-							</button>-->
-							<button data-toggle="modal" ng-click="executeSearch()" data-target="#searchModal" class="score-button-lg">
+							<button ng-click="executeSearch();" class="score-button-lg">
 								<span>SCORE</span>
 							</button>
+							<!--<button data-toggle="modal" ng-click="executeSearch()" data-target="#searchModal" class="score-button-lg">
+								<span>SCORE</span>
+							</button>-->
 						</div>
 						<div class="text-buttons">
 							<a href="" ng-click="showAdvancedFilters()" style="float:left">Advanced filters</a>
@@ -477,7 +477,7 @@
 										Password
 									</a>
 								</li>
-								<li ng-click="activeSection = 'users'" ng-class="{'active' : activeSection == 'users'}">
+								<li ng-click="getUsers();activeSection = 'users'" ng-class="{'active' : activeSection == 'users'}">
 									<a href="">
 										<img src="img/icons/users-icon-white.svg" ng-show="activeSection=='users'" alt="users">
 										<img src="img/icons/users-icon.svg" ng-show="activeSection!='users'" alt="users">
@@ -511,7 +511,7 @@
 						<div class="col-md-8 col-lg-8 col-md-offset-1 col-lg-offset-1 settings-frame">
 							<div class="profile-frame slowDown" ng-if="activeSection=='profile'">
 								<div class="profile-top-section" ng-init="getUserImage()">
-									<img ng-src="{{userImage}}" alt="user photo">
+									<img src="{{userImage}}" alt="user photo">
 									<button class="btn upload-button" ng-click="getUserImage()">Upload New Photo</button>
 									<button class="btn delete-photo">Delete</button>
 								</div>
@@ -637,7 +637,7 @@
 													<td></td>
 												</tr>
 												<span class="no-elements" ng-if="users.length == 0">
-													You don't have any saved searches.
+													There are no users yet.
 												</span>
 												<tr ng-repeat="s in users | orderBy : searchPropUsers | filter : findPropUsers" ng-click="selected = !selected; checkSelectedUsers(selected, s)" ng-class="{ 'selected' : selected || allUsersSelected && s.isAdmin != true}">
 													<td class="checkbox">
@@ -983,7 +983,7 @@
 						<div class="speedometer">
 							<div>
 								<img src="img/speedometer.svg" alt="">
-								<div class="arrow">
+								<div class="arrow"  ng-style="{'transform': rotateAngle}">
 									<img src="img/speed-arrow.svg" alt="">
 								</div>
 							</div>
@@ -998,13 +998,14 @@
 					<div class="col-md-3 col-lg-3">
 						<div class="buttons">
 							<div>
-								<button class="download" >
+								<button class="download" ng-click="getPDFReport()">
 									<img src="img/icons/download-icon.svg" alt="download score">
 									<span>DOWNLOAD SCORE</span>
 								</button>
 							</div>
+							 <a ng-href="{{ fileUrl }}" style="display: none" id="downloadPDF" download="SimcastReport.pdf">download</a>
 							<div>
-								<button class="email" data-toggle="modal" data-target="#emailModal">
+								<button class="email" ng-click="getEmailReport()" data-toggle="modal" data-target="#emailModalOK">
 									<img src="img/icons/email-icon.svg" alt="email score">
 									<span>EMAIL SCORE</span>
 								</button>

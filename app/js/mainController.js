@@ -1,11 +1,12 @@
 var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
-.config(function ($httpProvider) {
+.config(function ($httpProvider, $compileProvider) {
+	$compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/);
 	$httpProvider.defaults.headers.common = {};
 	$httpProvider.defaults.headers.post = {};
 	$httpProvider.defaults.headers.put = {};
 	$httpProvider.defaults.headers.patch = {};
 })
-.controller("mainController", function($scope, $http, $cookies) {
+.controller("mainController", function($scope, $http, $cookies, $window) {
 
 	$scope.searchScore = 730
 
@@ -394,6 +395,47 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 		console.log($scope.selectedFilters);
 	}
 
+	$scope.getPDFReport = function(){
+		var header = 'Basic ' + $scope.userData.token;
+		$http({
+			method : "Get",
+			url : "https://simcast.herokuapp.com/report/pdf",
+			responseType: "blob",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			var data = response.data,
+			blob = new Blob([data], { type: 'application/pdf' }),
+			url = $window.URL || $window.webkitURL;
+			$scope.fileUrl = url.createObjectURL(blob);
+			console.log(response);
+		}, function myError(response) {
+			console.log(response);
+		}).then(function customClick(){
+			setTimeout(function() {
+				document.getElementById('downloadPDF').click();
+			}, 500);
+		});
+	}
+
+	$scope.getEmailReport = function(){
+		var header = 'Basic ' + $scope.userData.token;
+		$http({
+			method : "Get",
+			url : "https://simcast.herokuapp.com/report/email",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response);
+		}, function myError(response) {
+			console.log(response);
+		});
+	}
+
 	$scope.executeSearch = function(){
 		$scope.animateSearchModal();
 		if($scope.searchData.upc == "" || $scope.searchData.upc == undefined){
@@ -424,7 +466,16 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 		}).then(function mySuccess(response) {
 			console.log(response);
 			$scope.searchResultData = response.data;
+
+			if($scope.searchResultData.score >= 600){
+				$scope.rotateAngle = "rotate(" + (($scope.searchResultData.score-600) * 0.6)  + "deg)";
+			}
+			if($scope.searchResultData.score < 600){
+				$scope.rotateAngle = "rotate(" + (($scope.searchResultData.score-600) * 0.6)  + "deg)";
+			}
+			console.log($scope.rotateAngle);
 			$scope.transformSearchResultDetails();
+			$scope.showSearchResultPage();
 		}, function myError(response) {
 			console.log(response);
 		});
@@ -476,11 +527,13 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			},
 			params: {email: $scope.userData.email}
 		}).then(function mySuccess(response) {
-			$scope.userImage = response.data;
-			console.log(response);
-		}, function myError(response) {
-			console.log(response);
-		});
+			 var b64imgData = response.data; //Binary to ASCII, where it probably stands for
+			 $scope.userImage = "data:image/png;base64," + b64imgData;
+			 console.log(b64imgData);
+			 console.log($scope.userImage);
+			}, function myError(response) {
+				console.log(response);
+			});
 	}
 
 	$scope.showLoginPage = function(){
@@ -545,6 +598,24 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			$("#settingsPage").fadeIn('400', function() {
 
 			});
+		});
+	}
+
+	$scope.rotateAngle = "rotate(-100deg)";
+
+	$scope.getUsers = function(){
+		var header = 'Basic ' + $scope.userData.token;
+		$http({
+			method : "Get",
+			url : "https://simcast.herokuapp.com/users",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': header
+			}
+		}).then(function mySuccess(response) {
+			console.log(response);
+		}, function myError(response) {
+			console.log(response);
 		});
 	}
 
