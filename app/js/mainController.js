@@ -6,6 +6,51 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 	$httpProvider.defaults.headers.put = {};
 	$httpProvider.defaults.headers.patch = {};
 })
+.directive('doubleClick', function($timeout, _) {
+
+  var CLICK_DELAY = 300
+  var $ = angular.element
+
+  return {
+    priority: 1, // run before event directives
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      var clickCount = 0
+      var clickTimeout
+
+      function doubleClick(e, item) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        $timeout.cancel(clickTimeout)
+        clickCount = 0
+        setSearchDataFromSavedSearches(item);
+        scope.$apply(function() { scope.$eval(attrs.doubleClick) })
+      }
+
+      function singleClick(clonedEvent) {
+        clickCount = 0
+        if (attrs.ngClick) scope.$apply(function() { scope.$eval(attrs.ngClick) })
+        if (clonedEvent) element.trigger(clonedEvent)
+      }
+
+      function delaySingleClick(e) {
+        var clonedEvent = $.Event('click', e)
+        clonedEvent._delayedSingleClick = true
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        clickTimeout = $timeout(singleClick.bind(null, clonedEvent), CLICK_DELAY)
+      }
+
+      element.bind('click', function(e) {
+        if (e._delayedSingleClick) return
+        if (clickCount++) doubleClick(e)
+        else delaySingleClick(e)
+      })
+
+    }
+  }
+
+})
 .controller("mainController", function($scope, $http, $cookies, $window) {
 
 	$scope.searchScore = 730
@@ -77,6 +122,13 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			$scope.loginErrorMessage = "Incorrect login/password";
 			console.log(response);
 		});
+	}
+
+	$scope.setSearchDataFromSavedSearches = function(item){
+		$scope.searchData.upc = item.upc;
+		$scope.searchData.company = item.company;
+		$scope.hideSavedSearches();
+		console.log(item);
 	}
 
 	$scope.loadSavedSearches = function() {
@@ -555,17 +607,13 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 
 	$scope.uploadUserImage = function(){
 		document.getElementById('uploadIconBtn').click();
-		$scope.updateUserImage();
 	}
 
 	$scope.updateUserImage = function(){
 		var f = document.getElementById('uploadIconBtn').files[0];
-		var fd = new FormData();
-		fd.append('file', f);
-		console.log(f);
 		var postData = {
 			"email": $scope.editUser.email,
-			"file": fd
+			"file": f
 		};
 		var header = 'Basic ' + $scope.userData.token;
 		console.log(postData);

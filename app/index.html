@@ -378,7 +378,7 @@
 								<span class="no-elements" ng-if="savedSearches.length == 0">
 									You don't have any saved searches.
 								</span>
-								<tr ng-repeat="s in savedSearches | orderBy : searchProp | filter : findProp" ng-click="selected = !selected; checkSelectedSearches(selected, s)" ng-class="{ 'selected' : selected || allSelected}">
+								<tr ng-repeat="s in savedSearches | orderBy : searchProp | filter : findProp" ng-click="selected = !selected; checkSelectedSearches(selected, s)" ng-dblclick="setSearchDataFromSavedSearches(s)" ng-class="{ 'selected' : selected || allSelected}">
 									<td class="checkbox">
 										<a href="">
 											<img ng-show="selected || allSelected" src="img/icons/check-enabled-white-icon.svg" alt="checked">
@@ -513,6 +513,7 @@
 								<div class="profile-top-section" ng-init="getUserImage()">
 									<img ng-show="userImage != ''" ng-src="{{userImage}}" alt="">
 									<button class="btn upload-button" ng-click="uploadUserImage()">Upload New Photo</button>
+									<button ng-click="updateUserImage()">Add</button>
 									<input type="file" ng-model="uploadedIcon" id="uploadIconBtn" name="file" style="display: none"/>
 									<button class="btn delete-photo" ng-click="deleteUserImage()">Delete</button>
 								</div>
