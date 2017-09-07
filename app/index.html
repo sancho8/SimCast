@@ -511,9 +511,8 @@
 						<div class="col-md-8 col-lg-8 col-md-offset-1 col-lg-offset-1 settings-frame">
 							<div class="profile-frame slowDown" ng-if="activeSection=='profile'">
 								<div class="profile-top-section" ng-init="getUserImage()">
-									<img ng-show="userImage != ''" ng-src="{{userImage}}" alt="">
+									<img ng-if="uploadedIcon == ''" ng-show="userImage != ''" ng-src="{{userImage}}" alt="">
 									<button class="btn upload-button" ng-click="uploadUserImage()">Upload New Photo</button>
-									<button ng-click="updateUserImage()">Add</button>
 									<input type="file" ng-model="uploadedIcon" id="uploadIconBtn" name="file" style="display: none"/>
 									<button class="btn delete-photo" ng-click="deleteUserImage()">Delete</button>
 								</div>
@@ -528,7 +527,7 @@
 										<input type="email" class="settings-form-input" ng-model="editUser.email" placeholder="Email">
 									</div>
 									<div>
-										<button class="save-filters-button" ng-click="updateUser()"><span>SAVE</span></button>
+										<button class="save-filters-button" ng-click="updateUser();updateUserImage()"><span>SAVE</span></button>
 									</div>
 								</div>
 							</div>

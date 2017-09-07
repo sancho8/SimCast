@@ -8,49 +8,49 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 })
 .directive('doubleClick', function($timeout, _) {
 
-  var CLICK_DELAY = 300
-  var $ = angular.element
+	var CLICK_DELAY = 300
+	var $ = angular.element
 
-  return {
+	return {
     priority: 1, // run before event directives
     restrict: 'A',
     link: function(scope, element, attrs) {
-      var clickCount = 0
-      var clickTimeout
+    	var clickCount = 0
+    	var clickTimeout
 
-      function doubleClick(e, item) {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        $timeout.cancel(clickTimeout)
-        clickCount = 0
-        setSearchDataFromSavedSearches(item);
-        scope.$apply(function() { scope.$eval(attrs.doubleClick) })
-      }
+    	function doubleClick(e, item) {
+    		e.preventDefault()
+    		e.stopImmediatePropagation()
+    		$timeout.cancel(clickTimeout)
+    		clickCount = 0
+    		setSearchDataFromSavedSearches(item);
+    		scope.$apply(function() { scope.$eval(attrs.doubleClick) })
+    	}
 
-      function singleClick(clonedEvent) {
-        clickCount = 0
-        if (attrs.ngClick) scope.$apply(function() { scope.$eval(attrs.ngClick) })
-        if (clonedEvent) element.trigger(clonedEvent)
-      }
+    	function singleClick(clonedEvent) {
+    		clickCount = 0
+    		if (attrs.ngClick) scope.$apply(function() { scope.$eval(attrs.ngClick) })
+    			if (clonedEvent) element.trigger(clonedEvent)
+    			}
 
-      function delaySingleClick(e) {
-        var clonedEvent = $.Event('click', e)
-        clonedEvent._delayedSingleClick = true
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        clickTimeout = $timeout(singleClick.bind(null, clonedEvent), CLICK_DELAY)
-      }
+    			function delaySingleClick(e) {
+    				var clonedEvent = $.Event('click', e)
+    				clonedEvent._delayedSingleClick = true
+    				e.preventDefault()
+    				e.stopImmediatePropagation()
+    				clickTimeout = $timeout(singleClick.bind(null, clonedEvent), CLICK_DELAY)
+    			}
 
-      element.bind('click', function(e) {
-        if (e._delayedSingleClick) return
-        if (clickCount++) doubleClick(e)
-        else delaySingleClick(e)
-      })
+    			element.bind('click', function(e) {
+    				if (e._delayedSingleClick) return
+    					if (clickCount++) doubleClick(e)
+    						else delaySingleClick(e)
+    					})
 
-    }
-  }
+    		}
+    	}
 
-})
+    })
 .controller("mainController", function($scope, $http, $cookies, $window) {
 
 	$scope.searchScore = 730
@@ -103,7 +103,6 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			"email": $scope.userEmail,
 			"password": $scope.userPassword
 		};
-		console.log(postData);
 		$http({
 			method : "POST",
 			url : "https://simcast.herokuapp.com/login",
@@ -590,7 +589,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 	$scope.deleteUserImage = function(){
 		var header = 'Basic ' + $scope.userData.token;
 		$http({
-			method : "DELETE",
+			method : "PUT",
 			url : "https://simcast.herokuapp.com/logo/delete",
 			headers: {
 				'Content-Type': 'apllication/json',
@@ -598,6 +597,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			}
 		}).then(function mySuccess(response) {
 			console.log(response);
+			$window.location.reload();
 		}, function myError(response) {
 			console.log(response);
 		});
@@ -615,17 +615,23 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			"email": $scope.editUser.email,
 			"file": f
 		};
+		var form_data = new FormData();
+
+		for ( var key in postData ) {
+			form_data.append(key, postData[key]);
+		}
+
 		var header = 'Basic ' + $scope.userData.token;
 		console.log(postData);
 		$http({
 			method : "POST",
 			url : "https://simcast.herokuapp.com/upload/logo",
-			data : postData,
+			data : form_data,
 			headers: {
-				'Content-Type': 'multipart/form-data',
 				'Authorization': header
 			}
 		}).then(function mySuccess(response) {
+			$window.location.reload();
 			console.log(response);
 		}, function myError(response) {
 			console.log(response);
