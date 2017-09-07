@@ -258,6 +258,11 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 
 			});
 		});
+		$("#searchResultPage").fadeOut('slow', function() {
+			$("#settingsPage").fadeIn('slow', function() {
+
+			});
+		});
 		$("#savedSearchesModal").fadeOut('0', function() {
 			
 		});
@@ -696,6 +701,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 	}
 
 	$scope.backToSettingsPage = function(hidePageId){
+		$("#searchResultPage").fadeOut('slow', function(){});
 		$(hidePageId).fadeOut('400', function() {
 			$("#settingsPage").fadeIn('400', function() {
 

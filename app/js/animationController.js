@@ -15,6 +15,8 @@ openModalBtn.onclick = function() {
 
 $(document).ready(function(){
 
+  //$("#saved-searches-table").mousedown(function(){ return false; });
+
   $("body").on("click","#deleteAllSearchesModalBtn",function(){
 
           //$("#deleteAllSearchesModal").modal("show");
