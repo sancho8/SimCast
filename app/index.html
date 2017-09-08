@@ -42,9 +42,45 @@
 		<link rel="stylesheet" href="css/main.min.css">
 	</noscript>
 
+	<script type="text/javascript" src="libs/jquery/jquery-1.11.2.min.js"></script>
+
+	<script type="text/javascript">
+		$(window).load(function () {
+			$('#loading').hide();
+			$('#main-wrapper').show();
+		});
+	</script>
+
+	<style type="text/css">
+		#main-wrapper{
+			display: none;
+		}
+		#loading {
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+			text-align: center;
+		}
+		#monthlySubscriptionPage{
+			display: none;
+		}
+		#loading img
+		{
+			padding-top: 20%;
+			vertical-align: center;
+		}
+	</style>
 </head>
 
 <body ng-controller="mainController" ng-init="checkIfLoggedIn()">
+
+	<div id="loading">
+		<img src="img/Rolling.svg" alt="Loading..." />
+	</div>
+
 
 	<div id="main-wrapper">
 
@@ -172,9 +208,11 @@
 							<!--<button ng-click="executeSearch();" class="score-button-lg">
 								<span>SCORE</span>
 							</button>-->
-							<button data-toggle="modal" ng-click="executeSearch()" data-target="#searchModal" class="score-button-lg">
+							<button ng-click="executeSearch()" class="score-button-lg">
 								<span>SCORE</span>
 							</button>
+							<button id="animation" data-toggle="modal" data-target="#searchModal" style="display: none"></button>
+							<button id="formError" data-toggle="modal" data-target="#formError" style="display: none"></button>
 						</div>
 						<div class="text-buttons">
 							<a href="" ng-click="showAdvancedFilters()" style="float:left">Advanced filters</a>
@@ -547,6 +585,8 @@
 									</div>
 									<div>
 										<button class="save-filters-button" ng-click="updatePassword()"><span>SAVE</span></button>
+
+										<button id="togglePasswordUpdateModal" data-toddle="modal" data-target="#passwordUpdatedModal" style="display: none"></button>
 									</div>
 								</div>
 							</div>
@@ -860,6 +900,22 @@
 									</div>
 
 								</div>
+
+								<div class="modal fade" id="passwordUpdatedModal" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="content-holder">
+												<div class="question">
+													<p>Your password has been updated</p>
+												</div>
+												<div >
+													<button type="button" class="btn cancel" data-dismiss="modal">OK</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -1004,9 +1060,9 @@
 									<span>DOWNLOAD SCORE</span>
 								</button>
 							</div>
-							 <a ng-href="{{ fileUrl }}" style="display: none" id="downloadPDF" download="SimcastReport.pdf">download</a>
+							<a ng-href="{{ fileUrl }}" style="display: none" id="downloadPDF" download="SimcastReport.pdf">download</a>
 							<div>
-								<button class="email" ng-click="getEmailReport()" data-toggle="modal" data-target="#emailModalOK">
+								<button class="email" data-toggle="modal" data-target="#emailModal">
 									<img src="img/icons/email-icon.svg" alt="email score">
 									<span>EMAIL SCORE</span>
 								</button>
@@ -1022,10 +1078,10 @@
 										<p>Send Result</p>
 									</div>
 									<div>
-										<input type="text" placeholder="Your Email">
+										<input type="text" ng-model="emailReportAddress" placeholder="Your Email">
 									</div>
 									<div>
-										<button data-toggle="modal" data-target="#emailModalOK" type="button" class="btn delete" data-dismiss="modal">Send</button>
+										<button data-toggle="modal"  ng-click="getEmailReport()" data-target="#emailModalOK" type="button" class="btn delete" data-dismiss="modal">Send</button>
 										<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
 									</div>
 								</div>
@@ -1153,7 +1209,6 @@
 		{"src" : "js/common.js", "async" : false}
 		]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
 	</script>
-	<script type="text/javascript" src="libs/jquery/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/animationController.js"></script>
 	<!-- Load Scripts End -->

@@ -366,7 +366,12 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 	}
 
 	$scope.updatePassword = function(){
+		document.getElementById("togglePasswordUpdateModal").click();
 		$scope.passwordErrorMessage = "";
+		if($scope.passwordData.oldPassword == "" || $scope.passwordData.oldPassword == undefined){
+			$scope.passwordErrorMessage = "Please enter old password";
+			return;
+		}
 		if($scope.passwordData.newPassword !== $scope.passwordData.confirmPassword){
 			$scope.passwordErrorMessage = "Passwords doesn't match";
 			return;
@@ -392,7 +397,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 		}).then(function mySuccess(response) {
 			console.log(response);
 		}, function myError(response) {
-			$scope.passwordErrorMessage = "Passwords incorrect";
+			$scope.passwordErrorMessage = "Passwords are incorrect";
 			console.log(response);
 		});
 	}
@@ -476,11 +481,17 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 		});
 	}
 
+	$scope.emailReportAddress = undefined;
+
 	$scope.getEmailReport = function(){
 		var header = 'Basic ' + $scope.userData.token;
+		var postData = {
+			email: $scope.emailReportAddress
+		}
 		$http({
 			method : "Get",
 			url : "https://simcast.herokuapp.com/report/email",
+			params : postData,
 			headers: {
 				'Content-Type': 'application/json',
 				'Authorization': header
@@ -493,7 +504,6 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 	}
 
 	$scope.executeSearch = function(){
-		$scope.animateSearchModal();
 		if($scope.searchData.upc == "" || $scope.searchData.upc == undefined){
 			$scope.searchErrorMessage = "Please enter UPC Code";
 			return;
@@ -502,6 +512,8 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			$scope.searchErrorMessage = "Please enter Product Company";
 			return;
 		}
+		$scope.animateSearchModal();
+		document.getElementById("animation").click();
 		var postData = {
 			upc: $scope.searchData.upc,
 			company: $scope.searchData.company,

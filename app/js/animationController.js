@@ -13,6 +13,11 @@ openModalBtn.onclick = function() {
 	modal.style.display = "block";
 }*/
 
+$(window).load(function () {
+  $('#loading').hide();
+  $('#main-wrapper').show();
+});
+
 $(document).ready(function(){
 
   //$("#saved-searches-table").mousedown(function(){ return false; });
