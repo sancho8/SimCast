@@ -115,6 +115,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			$scope.userData = response.data;
 			$cookies.putObject('auth', response.data);
 			console.log($cookies.getObject('auth'));
+			$scope.getUserImage();
 			$scope.showMainPage('#loginPage'); 
 			$scope.showHeader();
 		}, function myError(response) {
@@ -248,17 +249,17 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 	};
 
 	$scope.showSettings = function(){
-		$("#mainPage").fadeOut('slow', function() {
+		$("#mainPage").fadeOut('0', function() {
 			$("#settingsPage").fadeIn('slow', function() {
 
 			});
 		});
-		$("#mainPage").fadeOut('slow', function() {
+		$("#mainPage").fadeOut('0', function() {
 			$("#settingsPage").fadeIn('slow', function() {
 
 			});
 		});
-		$("#searchResultPage").fadeOut('slow', function() {
+		$("#searchResultPage").fadeOut('0', function() {
 			$("#settingsPage").fadeIn('slow', function() {
 
 			});
@@ -299,6 +300,10 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			$scope.showNotificationModal = false;
 		}
 	});
+
+	$scope.reloadLocation = function(){
+		$window.location.reload();
+	}
 
 	$scope.$watch('showReportModal', function() {
 		if($scope.showReportModal){
@@ -350,6 +355,10 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 
 	$scope.logout = function(){
 		$cookies.remove('auth');
+		$scope.userEmail = "";
+		$scope.userPassword = "";
+		$scope.loginErrorMessage = "";
+		$scope.activeSection='profile'; // settings menu active section by default
 		$scope.showLoginPage();
 	}
 
@@ -366,7 +375,6 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 	}
 
 	$scope.updatePassword = function(){
-		document.getElementById("togglePasswordUpdateModal").click();
 		$scope.passwordErrorMessage = "";
 		if($scope.passwordData.oldPassword == "" || $scope.passwordData.oldPassword == undefined){
 			$scope.passwordErrorMessage = "Please enter old password";
@@ -395,6 +403,9 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 				'Authorization': header
 			}
 		}).then(function mySuccess(response) {
+			document.getElementById("togglePasswordUpdateModal").click(); //click on hidden button to open modal
+			$scope.passwordData = {};
+			$scope.passwordErrorMessage = "";
 			console.log(response);
 		}, function myError(response) {
 			$scope.passwordErrorMessage = "Passwords are incorrect";
@@ -614,7 +625,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 			}
 		}).then(function mySuccess(response) {
 			console.log(response);
-			$window.location.reload();
+			$scope.userImage = "";
 		}, function myError(response) {
 			console.log(response);
 		});
@@ -648,7 +659,7 @@ var app = angular.module("SimCast", ['ngCookies', 'checklist-model'])
 				'Authorization': header
 			}
 		}).then(function mySuccess(response) {
-			$window.location.reload();
+			$scope.getUserImage();
 			console.log(response);
 		}, function myError(response) {
 			console.log(response);

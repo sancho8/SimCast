@@ -18,13 +18,31 @@
 
 	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
+	<!-- Header CSS (First Sections of Website: paste after release from header.min.css here) -->
+	<style type="text/css">
+
+		#main-wrapper {
+			display: none;
+		}
+
+		#loading {
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		#loading div {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+	</style>
+
 	<link rel="stylesheet" type="text/css" href="fonts/Gilroy/gilroy.css">
 
 	<!-- Bootstrap v3.3.4 Grid Styles -->
 	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
-
-	<!-- Header CSS (First Sections of Website: paste after release from header.min.css here) -->
-	<style></style>
 
 	<!-- Load CSS, CSS Localstorage & WebFonts Main Function -->
 	<script>!function(e){"use strict";function t(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function n(t,n){return e.localStorage&&localStorage[t+"_content"]&&localStorage[t+"_file"]===n}function a(t,a){if(e.localStorage&&e.XMLHttpRequest)n(t,a)?o(localStorage[t+"_content"]):l(t,a);else{var s=r.createElement("link");s.href=a,s.id=t,s.rel="stylesheet",s.type="text/css",r.getElementsByTagName("head")[0].appendChild(s),r.cookie=t}}function l(e,t){var n=new XMLHttpRequest;n.open("GET",t,!0),n.onreadystatechange=function(){4===n.readyState&&200===n.status&&(o(n.responseText),localStorage[e+"_content"]=n.responseText,localStorage[e+"_file"]=t)},n.send()}function o(e){var t=r.createElement("style");t.setAttribute("type","text/css"),r.getElementsByTagName("head")[0].appendChild(t),t.styleSheet?t.styleSheet.cssText=e:t.innerHTML=e}var r=e.document;e.loadCSS=function(e,t,n){var a,l=r.createElement("link");if(t)a=t;else{var o;o=r.querySelectorAll?r.querySelectorAll("style,link[rel=stylesheet],script"):(r.body||r.getElementsByTagName("head")[0]).childNodes,a=o[o.length-1]}var s=r.styleSheets;l.rel="stylesheet",l.href=e,l.media="only x",a.parentNode.insertBefore(l,t?a:a.nextSibling);var c=function(e){for(var t=l.href,n=s.length;n--;)if(s[n].href===t)return e();setTimeout(function(){c(e)})};return l.onloadcssdefined=c,c(function(){l.media=n||"all"}),l},e.loadLocalStorageCSS=function(l,o){n(l,o)||r.cookie.indexOf(l)>-1?a(l,o):t(e,"load",function(){a(l,o)})}}(this);</script>
@@ -43,46 +61,27 @@
 	</noscript>
 
 	<script type="text/javascript" src="libs/jquery/jquery-1.11.2.min.js"></script>
-
+	
 	<script type="text/javascript">
 		$(window).load(function () {
-			$('#loading').hide();
-			$('#main-wrapper').show();
+			setTimeout(function() {
+				$('#loading').hide();
+				$('#main-wrapper').show();
+			}, 1000);
 		});
 	</script>
-
-	<style type="text/css">
-		#main-wrapper{
-			display: none;
-		}
-		#loading {
-			position: fixed;
-			left: 0px;
-			top: 0px;
-			width: 100%;
-			height: 100%;
-			z-index: 9999;
-			text-align: center;
-		}
-		#monthlySubscriptionPage{
-			display: none;
-		}
-		#loading img
-		{
-			padding-top: 20%;
-			vertical-align: center;
-		}
-	</style>
 </head>
 
 <body ng-controller="mainController" ng-init="checkIfLoggedIn()">
 
 	<div id="loading">
-		<img src="img/Rolling.svg" alt="Loading..." />
+		<div>
+			<img src="img/Spinner.svg" alt="Loading..." />
+		</div>
 	</div>
 
 
-	<div id="main-wrapper">
+	<div id="main-wrapper" ng-init="getUserImage()">
 
 		<div ng-view>
 
@@ -500,8 +499,8 @@
 								<img src="img/icons/back-icon.svg" alt="back to search page">
 								<span>BACK TO THE SEARCH PAGE</span>
 							</button>
-							<ul class="settings-menu" ng-init="activeSection = 'profile'">
-								<li ng-click="activeSection = 'profile'; initProfileForm()" ng-class="{'active' : activeSection == 'profile'}">
+							<ul class="settings-menu" ng-init="activeSection = 'profile'; initProfileForm()">
+								<li ng-click="activeSection = 'profile'" ng-class="{'active' : activeSection == 'profile'}">
 									<a href="">
 										<img src="img/icons/profile-icon-white.svg" ng-show="activeSection=='profile'" alt="profile">
 										<img src="img/icons/profile-icon.svg" ng-show="activeSection!='profile'" alt="profile">
@@ -548,11 +547,11 @@
 
 						<div class="col-md-8 col-lg-8 col-md-offset-1 col-lg-offset-1 settings-frame">
 							<div class="profile-frame slowDown" ng-if="activeSection=='profile'">
-								<div class="profile-top-section" ng-init="getUserImage()">
-									<img ng-if="uploadedIcon == ''" ng-show="userImage != ''" ng-src="{{userImage}}" alt="">
+								<div class="profile-top-section">
+									<img ng-show="userImage != ''" ng-src="{{userImage}}" alt="">
 									<button class="btn upload-button" ng-click="uploadUserImage()">Upload New Photo</button>
 									<input type="file" ng-model="uploadedIcon" id="uploadIconBtn" name="file" style="display: none"/>
-									<button class="btn delete-photo" ng-click="deleteUserImage()">Delete</button>
+									<button class="btn delete-photo" data-toggle="modal" data-target="#photoDeletedModal" ng-click="deleteUserImage()">Delete</button>
 								</div>
 								<div class="settings-form">
 									<div>
@@ -565,12 +564,60 @@
 										<input type="email" class="settings-form-input" ng-model="editUser.email" placeholder="Email">
 									</div>
 									<div>
-										<button class="save-filters-button" ng-click="updateUser();updateUserImage()"><span>SAVE</span></button>
+										<button class="save-filters-button" data-toggle="modal" data-target="#dataSavedModal" ng-click="updateUser();updateUserImage()"><span>SAVE</span></button>
 									</div>
 								</div>
+
+								<div class="modal fade" id="photoDeletedModal" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="content-holder">
+												<div class="question">
+													<p>Successfully Deleted</p>
+												</div>
+												<div >
+													<button type="button" class="btn cancel" data-dismiss="modal">OK</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="modal fade" id="dataSavedModal" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="content-holder">
+												<div class="question">
+													<p>Your profile has been updated!</p>
+												</div>
+												<div >
+													<button type="button" class="btn cancel" data-dismiss="modal">OK</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
 							</div>
+
 							<div class="password-frame slowDown" ng-if="activeSection=='password'">
 								<div class="settings-form">
+
+									<div class="modal fade" id="passwordUpdatedModal" role="dialog">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="content-holder">
+													<div class="question">
+														<p>Your password has been updated</p>
+													</div>
+													<div >
+														<button type="button" class="btn cancel" data-dismiss="modal">OK</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
 									<div class="top">
 										<input type="password" class="settings-form-input" ng-model="passwordData.oldPassword" placeholder="Current Password">
 									</div>
@@ -586,10 +633,29 @@
 									<div>
 										<button class="save-filters-button" ng-click="updatePassword()"><span>SAVE</span></button>
 
-										<button id="togglePasswordUpdateModal" data-toddle="modal" data-target="#passwordUpdatedModal" style="display: none"></button>
+										<button id="togglePasswordUpdateModal" data-toggle="modal" style="display: none" data-target="#passwordUpdatedModal">Click</button>
+									</div>
+
+								</div>
+
+								<div class="modal fade" id="passwordUpdatedModal" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="content-holder">
+												<div class="question">
+													<p>Password has been changed!</p>
+												</div>
+												<div >
+													<button ng-click="reloadLocation()" type="button" class="btn cancel" data-dismiss="modal">OK</button>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
+
 							</div>
+
+
 							<div class="users-frame slowDown" ng-if="activeSection=='users'">
 								<div class="toolbar">
 									<div class="search">
@@ -741,12 +807,12 @@
 							</div>
 							<div class="searches-frame slowDown" ng-if="activeSection=='searches'">
 								<div class="heading">
-									You have 323 searches left
+									You have {{userData.leftSearches}} searches left
 								</div>
 								<div class="row">
 									<div class="progress-bar-holder col-md-10 col-lg-10">
 										<span class="left">0 searches</span>
-										<span class="right">500 searches</span>
+										<span class="right">{{userData.limit}} searches</span>
 										<br />
 										<div class="progress">
 											<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
@@ -900,293 +966,158 @@
 									</div>
 
 								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-								<div class="modal fade" id="passwordUpdatedModal" role="dialog">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="content-holder">
-												<div class="question">
-													<p>Your password has been updated</p>
-												</div>
-												<div >
-													<button type="button" class="btn cancel" data-dismiss="modal">OK</button>
-												</div>
-											</div>
+				<div id="monthlySubscriptionsPage">
+					<div class="row">
+						<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
+							<button class="back-settings-btn" ng-click="backToSettingsPage('#monthlySubscriptionsPage')">
+								<img src="img/icons/back-icon.svg" alt="back to search page">
+								<span>BACK TO THE SETTINGS</span>
+							</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="head">
+							SimCast Monthly Subscriptions
+						</div>
+					</div>
+					<div class="row subscription-row">
+						<div>
+							<div align="center">
+								<div class="col-md-4 col-lg-4 subscription first">
+									<div class="ship-image">
+										<img src="img/ship-bronze.svg" alt="bronze ship">
+									</div>
+									<div class="subscription-name">
+										<div><img src="img/bronze-heading.svg" alt="bronze"></div>
+										<div><img src="img/wave-bronze.svg" alt="wave bronze"></div>
+									</div>
+									<div class="price">
+										$68.95
+									</div>
+									<div class="configuration">
+										2 users
+										<br/ >
+										100 product queries
+									</div>
+									<div class="button-holder">
+										<button ng-click="addSubscription('bronze');subsctiptionUpgraded()">
+											<span>BUY NOW</span>
+										</button>
+									</div>
+								</div>
+								<div class="col-md-4 col-lg-4 subscription second">
+									<div class="ship-image">
+										<img src="img/ship-silver.svg" alt="bronze ship">
+									</div>
+									<div class="subscription-name">
+										<div><img src="img/silver-heading.svg" alt="silver"></div>
+										<div><img src="img/wave-silver.svg" alt="wave silver"></div>
+									</div>
+									<div class="price">
+										$248.95
+									</div>
+									<div class="configuration">
+										10 users
+										<br/ >
+										500 product queries
+									</div>
+									<div class="button-holder">
+										<button ng-click="addSubscription('silver');subsctiptionUpgraded()">
+											<span>BUY NOW</span>
+										</button>
+									</div>
+								</div>
+								<div class="col-md-4 col-lg-4 subscription third">
+									<div class="ship-image">
+										<img src="img/ship-gold.svg" alt="gold ship">
+									</div>
+									<div class="subscription-name">
+										<div><img src="img/gold-heading.svg" alt="gold"></div>
+										<div><img src="img/wave-gold.svg" alt="wave gold"></div>
+									</div>
+									<div class="price">
+										Custom pricing
+									</div>
+									<div class="configuration">
+										Enterprise user
+										<br/ >
+									</div>
+									<div class="button-holder">
+										<button ng-click="addSubscription('gold');subsctiptionUpgraded()">
+											<span>CONTACT US</span>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div id="loginPage" ng-init="isSignUp = false">
+					<div class="wrapper">
+						<div class="form-logo">
+							<img src="img/header-logo.svg" alt="header">
+						</div>
+						<div class="row">
+							<div class="col-md-4 col-lg-4">
+								<div class="app-desc">
+									<div class="head">
+										SimCast Market Analytics
+									</div>
+									<div class="desc">
+										We predict your future sales by crunching data from sites,
+										<br/>
+										<span>so you can avoid out-of-stocks or slow movers.</span>
+									</div>
+								</div>
+								<div class="login-form">
+									<div class="input-holder">
+										<div class="input-row">
+											<input type="text" placeholder="Email" ng-model="userEmail">
+										</div>
+										<div class="input-row">
+											<input type="password" placeholder="Password" ng-model="userPassword">
+										</div>
+										<div ng-show="loginErrorMessage != ''" class="login-error-message">{{loginErrorMessage}}</div>
+										<div class="input-row" ng-show="isSignUp" ng-click="register()">
+											<button><span>SIGN UP</span></button>
+										</div>
+										<div class="input-row" ng-show="!isSignUp" ng-click="login()">
+											<button><span>SIGN IN</span></button>
+										</div>
+										<div class="input-row" ng-show="isSignUp">
+											<a ng-click="isSignUp = !isSignUp" href="">Sign In</a>
+										</div>
+										<div class="input-row" ng-show="!isSignUp">
+											<a class="left" href="">Forgot your password?</a>
+											<a class="right" href="" ng-click="isSignUp = !isSignUp">Sign Up</a>
 										</div>
 									</div>
 								</div>
+							</div>
 
+							<div class="col-md-6 col-lg-6 col-md-offset-1 col-lg-offset-1">
+								<div class="image-holder">
+									<img src="img/login-bg.svg" alt="login background">
+									<img class="ship" ng-class="{'slide' : isSignUp}" src="img/login-ship.svg" alt="ship">
+									<img class="ship second" ng-class="{'slide' : !isSignUp}" src="img/sign-up-ship.svg" alt="ship">
+								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div id="monthlySubscriptionsPage">
-				<div class="row">
-					<div class="col-md-3 col-lg-3 col-md-offset-1 col-lg-offset-1">
-						<button class="back-settings-btn" ng-click="backToSettingsPage('#monthlySubscriptionsPage')">
-							<img src="img/icons/back-icon.svg" alt="back to search page">
-							<span>BACK TO THE SETTINGS</span>
-						</button>
-					</div>
-				</div>
-				<div class="row">
-					<div class="head">
-						SimCast Monthly Subscriptions
-					</div>
-				</div>
-				<div class="row subscription-row">
-					<div>
-						<div align="center">
-							<div class="col-md-4 col-lg-4 subscription first">
-								<div class="ship-image">
-									<img src="img/ship-bronze.svg" alt="bronze ship">
-								</div>
-								<div class="subscription-name">
-									<div><img src="img/bronze-heading.svg" alt="bronze"></div>
-									<div><img src="img/wave-bronze.svg" alt="wave bronze"></div>
-								</div>
-								<div class="price">
-									$68.95
-								</div>
-								<div class="configuration">
-									2 users
-									<br/ >
-									100 product queries
-								</div>
-								<div class="button-holder">
-									<button ng-click="addSubscription('bronze');subsctiptionUpgraded()">
-										<span>BUY NOW</span>
-									</button>
-								</div>
-							</div>
-							<div class="col-md-4 col-lg-4 subscription second">
-								<div class="ship-image">
-									<img src="img/ship-silver.svg" alt="bronze ship">
-								</div>
-								<div class="subscription-name">
-									<div><img src="img/silver-heading.svg" alt="silver"></div>
-									<div><img src="img/wave-silver.svg" alt="wave silver"></div>
-								</div>
-								<div class="price">
-									$248.95
-								</div>
-								<div class="configuration">
-									10 users
-									<br/ >
-									500 product queries
-								</div>
-								<div class="button-holder">
-									<button ng-click="addSubscription('silver');subsctiptionUpgraded()">
-										<span>BUY NOW</span>
-									</button>
-								</div>
-							</div>
-							<div class="col-md-4 col-lg-4 subscription third">
-								<div class="ship-image">
-									<img src="img/ship-gold.svg" alt="gold ship">
-								</div>
-								<div class="subscription-name">
-									<div><img src="img/gold-heading.svg" alt="gold"></div>
-									<div><img src="img/wave-gold.svg" alt="wave gold"></div>
-								</div>
-								<div class="price">
-									Custom pricing
-								</div>
-								<div class="configuration">
-									Enterprise user
-									<br/ >
-								</div>
-								<div class="button-holder">
-									<button ng-click="addSubscription('gold');subsctiptionUpgraded()">
-										<span>CONTACT US</span>
-									</button>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div id="searchResultPage">
-				<div class="heading">
-					Score Page
-				</div>
-				<div class="row">
-					<div class="col-md-4 col-lg-4">
-						<button class="back-search-btn" ng-click="showMainPage('#searchResultPage')">
-							<img src="img/icons/back-icon.svg" alt="back to search page">
-							<span>BACK TO SEARCH</span>
-						</button>
-						<div class="details">
-							<div class="details-item">
-								<div class="head">Product</div>
-								<div class="content">
-									{{searchResultData.title}}
-								</div>
-								<div class="head">UPC Code</div>
-								<div class="content">
-									{{searchData.upc}}
-								</div>
-								<div class="head">Company</div>
-								<div class="content">
-									{{searchData.company}}
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-5 col-lg-5">
-						<div class="speedometer">
-							<div>
-								<img src="img/speedometer.svg" alt="">
-								<div class="arrow"  ng-style="{'transform': rotateAngle}">
-									<img src="img/speed-arrow.svg" alt="">
-								</div>
-							</div>
-							<div class="score-desc">
-								<div class="number" ng-class="getNumberClass()">
-									{{searchResultData.score | number:0}}
-								</div>
-								<div> Total Score </div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-lg-3">
-						<div class="buttons">
-							<div>
-								<button class="download" ng-click="getPDFReport()">
-									<img src="img/icons/download-icon.svg" alt="download score">
-									<span>DOWNLOAD SCORE</span>
-								</button>
-							</div>
-							<a ng-href="{{ fileUrl }}" style="display: none" id="downloadPDF" download="SimcastReport.pdf">download</a>
-							<div>
-								<button class="email" data-toggle="modal" data-target="#emailModal">
-									<img src="img/icons/email-icon.svg" alt="email score">
-									<span>EMAIL SCORE</span>
-								</button>
-							</div>
-						</div>
-					</div>
 
-					<div class="modal fade" id="emailModal" role="dialog">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="content-holder">
-									<div class="question">
-										<p>Send Result</p>
-									</div>
-									<div>
-										<input type="text" ng-model="emailReportAddress" placeholder="Your Email">
-									</div>
-									<div>
-										<button data-toggle="modal"  ng-click="getEmailReport()" data-target="#emailModalOK" type="button" class="btn delete" data-dismiss="modal">Send</button>
-										<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 
-					<div class="modal fade" id="emailModalOK" role="dialog">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="content-holder">
-									<div class="question">
-										<p>Email has been sent!</p>
-									</div>
-									<div>
-										<button ng-click="addUser()" type="button" class="btn delete" data-dismiss="modal">OK</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div ng-show="searchResultData.score < 500" class="result-message red">
-					Warning! Product may have serious sales problems.
-				</div>
-				<div ng-show="searchResultData.score > 499 && searchResultData.score < 600" class="result-message yellow">
-					Meh. Product may sell slowly; greater risk than average.
-				</div>
-				<div ng-show="searchResultData.score > 599 && searchResultData.score < 700" class="result-message green">
-					Good. Product may have better than average rate of sale
-				</div>
-				<div ng-show="searchResultData.score > 699 && searchResultData.score < 800" class="result-message blue">
-					Excellent. Product may be in high demand; don't let it go out of stock.
-				</div>
-				<div class="heading">
-					Individual Score Breakdown
-				</div>
-				<div class="scores">
-					<div class="score-item" ng-class="{'exclamation': scoreItem.score=='N/A'}" ng-repeat="scoreItem in searchResultScores">
-						<img ng-src="img/score-circle.svg" alt="score circle">
-						<div class="desc">
-							<span>{{scoreItem.score}}</span>
-							<br/>
-							{{scoreItem.name}}
-						</div>
-						<img class="exclamation-img" ng-src="img/exclamation.svg" alt="score circle" ng-click="showTooltip =! showTooltip">
-					</div>
-				</div>
-			</div>
+			</div> <!-- end main wrapper -->
 
-		</div>
-
-		<div id="loginPage" ng-init="isSignUp = false">
-			<div class="wrapper">
-				<div class="form-logo">
-					<img src="img/header-logo.svg" alt="header">
-				</div>
-				<div class="row">
-					<div class="col-md-4 col-lg-4">
-						<div class="app-desc">
-							<div class="head">
-								SimCast Market Analytics
-							</div>
-							<div class="desc">
-								We predict your future sales by crunching data from sites,
-								<br/>
-								<span>so you can avoid out-of-stocks or slow movers.</span>
-							</div>
-						</div>
-						<div class="login-form">
-							<div class="input-holder">
-								<div class="input-row">
-									<input type="text" placeholder="Email" ng-model="userEmail">
-								</div>
-								<div class="input-row">
-									<input type="password" placeholder="Password" ng-model="userPassword">
-								</div>
-								<div class="login-error-message">{{loginErrorMessage}}</div>
-								<div class="input-row" ng-show="isSignUp" ng-click="register()">
-									<button><span>SIGN UP</span></button>
-								</div>
-								<div class="input-row" ng-show="!isSignUp" ng-click="login()">
-									<button><span>SIGN IN</span></button>
-								</div>
-								<div class="input-row" ng-show="isSignUp">
-									<a ng-click="isSignUp = !isSignUp" href="">Sign In</a>
-								</div>
-								<div class="input-row" ng-show="!isSignUp">
-									<a class="left" href="">Forgot your password?</a>
-									<a class="right" href="" ng-click="isSignUp = !isSignUp">Sign Up</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-lg-6 col-md-offset-1 col-lg-offset-1">
-						<div class="image-holder">
-							<img src="img/login-bg.svg" alt="login background">
-							<img class="ship" ng-class="{'slide' : isSignUp}" src="img/login-ship.svg" alt="ship">
-							<img class="ship second" ng-class="{'slide' : !isSignUp}" src="img/sign-up-ship.svg" alt="ship">
-						</div>
-					</div>
-
-				</div>
-			</div>
 		</div>
 
 		<div class="hidden">

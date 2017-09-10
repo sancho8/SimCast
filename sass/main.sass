@@ -937,6 +937,23 @@ header
 
 /* START Settings page section */
 
+#passwordUpdatedModal
+  @extend #deleteSelectedUsersModal
+  overflow: hidden
+  .modal-backdrop
+  .modal-content
+    padding-top: 15px
+    border: 5px solid #F0F0F0
+    margin: 0 !important
+    width: 300px
+
+#photoDeletedModal
+  @extend #passwordUpdatedModal
+  .modal-content
+    padding-top: 50px
+
+#dataSavedModal
+  @extend #photoDeletedModal
 
 #mainPage
   z-index: 1
@@ -1071,6 +1088,7 @@ header
         img
           width: 100px
           height: 100px
+          margin-right: 24px
       .delete-photo
         border: 1px solid #24C6DD
         border-radius: 4px
@@ -1092,7 +1110,6 @@ header
         color: #FFFFFF
         background-color: #24C6DD
         font-size: 15px
-        margin-left: 24px
         animation: btnHoverBack 0.2s 
         transform: translate3d(0, 0, 0)
         &:hover 
