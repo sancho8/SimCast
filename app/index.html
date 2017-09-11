@@ -29,6 +29,7 @@
 			width: 100%;
 			height: 100%;
 			position: relative;
+			display: none;
 		}
 		#loading div {
 			position: absolute;
@@ -74,6 +75,12 @@
 
 <body ng-controller="mainController" ng-init="checkIfLoggedIn()">
 
+
+	<style type="text/css">
+		#loading{
+			display: block;
+		}
+	</style>
 	<div id="loading">
 		<div>
 			<img src="img/Spinner.svg" alt="Loading..." />
@@ -967,6 +974,127 @@
 
 								</div>
 							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="searchResultPage">
+					<div class="heading">
+						Score Page
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-lg-4">
+							<button class="back-search-btn" ng-click="showMainPage('#searchResultPage')">
+								<img src="img/icons/back-icon.svg" alt="back to search page">
+								<span>BACK TO SEARCH</span>
+							</button>
+							<div class="details">
+								<div class="details-item">
+									<div class="head">Product</div>
+									<div class="content">
+										{{searchResultData.title}}
+									</div>
+									<div class="head">UPC Code</div>
+									<div class="content">
+										{{searchData.upc}}
+									</div>
+									<div class="head">Company</div>
+									<div class="content">
+										{{searchData.company}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-5 col-lg-5">
+							<div class="speedometer">
+								<div>
+									<img src="img/speedometer.svg" alt="">
+									<div class="arrow"  ng-style="{'transform': rotateAngle}">
+										<img src="img/speed-arrow.svg" alt="">
+									</div>
+								</div>
+								<div class="score-desc">
+									<div class="number" ng-class="getNumberClass()">
+										{{searchResultData.score | number:0}}
+									</div>
+									<div> Total Score </div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-lg-3">
+							<div class="buttons">
+								<div>
+									<button class="download" ng-click="getPDFReport()">
+										<img src="img/icons/download-icon.svg" alt="download score">
+										<span>DOWNLOAD SCORE</span>
+									</button>
+								</div>
+								<a ng-href="{{ fileUrl }}" style="display: none" id="downloadPDF" download="SimcastReport.pdf">download</a>
+								<div>
+									<button class="email" data-toggle="modal" data-target="#emailModal">
+										<img src="img/icons/email-icon.svg" alt="email score">
+										<span>EMAIL SCORE</span>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="emailModal" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="content-holder">
+										<div class="question">
+											<p>Send Result</p>
+										</div>
+										<div>
+											<input type="text" ng-model="emailReportAddress" placeholder="Your Email">
+										</div>
+										<div>
+											<button data-toggle="modal"  ng-click="getEmailReport()" data-target="#emailModalOK" type="button" class="btn delete" data-dismiss="modal">Send</button>
+											<button ng-click="allSelected = false" type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="emailModalOK" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="content-holder">
+										<div class="question">
+											<p>Email has been sent!</p>
+										</div>
+										<div>
+											<button ng-click="addUser()" type="button" class="btn delete" data-dismiss="modal">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div ng-show="searchResultData.score < 500" class="result-message red">
+						Warning! Product may have serious sales problems.
+					</div>
+					<div ng-show="searchResultData.score > 499 && searchResultData.score < 600" class="result-message yellow">
+						Meh. Product may sell slowly; greater risk than average.
+					</div>
+					<div ng-show="searchResultData.score > 599 && searchResultData.score < 700" class="result-message green">
+						Good. Product may have better than average rate of sale
+					</div>
+					<div ng-show="searchResultData.score > 699 && searchResultData.score < 800" class="result-message blue">
+						Excellent. Product may be in high demand; don't let it go out of stock.
+					</div>
+					<div class="heading">
+						Individual Score Breakdown
+					</div>
+					<div class="scores">
+						<div class="score-item" ng-class="{'exclamation': scoreItem.score=='N/A'}" ng-repeat="scoreItem in searchResultScores">
+							<img ng-src="img/score-circle.svg" alt="score circle">
+							<div class="desc">
+								<span>{{scoreItem.score}}</span>
+								<br/>
+								{{scoreItem.name}}
+							</div>
+							<img class="exclamation-img" ng-src="img/exclamation.svg" alt="score circle" ng-click="showTooltip =! showTooltip">
 						</div>
 					</div>
 				</div>
